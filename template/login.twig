@@ -1,0 +1,35 @@
+{% extends "layout.twig" %}
+
+{% block title %} <title>Se connecter</title> {% endblock %}
+
+{% block content %}
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+                <div class="card card-signin my-5">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">Se connecter</h5>
+                        <form class="form-signin" method="post" action="index.php?url=securityLogin">
+                            <div class="form-label-group">
+                                <label for="email">Adresse mail</label>
+                                <input type="email" id="email" name="email" class="form-control" placeholder="Adresse mail" required autofocus>
+                            </div>
+
+                            <div class="form-label-group">
+                                <label for="password">Mot de passe</label>
+                                <input type="password" id="password" name="password" class="form-control" placeholder="Mot de passe" required>
+                            </div>
+
+                            <p class="d-block text-center" id="error-connexion"> {{ message != '' ? message : '' }} </p>
+
+                            <button class="btn btn-lg btn-primary btn-block" type="submit">Connexion</button>
+                            <!--<a class="d-block text-center mt-2 " href="index.php?url=register">S'inscrire</a>-->
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}	
