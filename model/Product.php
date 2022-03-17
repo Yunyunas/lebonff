@@ -66,7 +66,6 @@ class Product
         return $this->urlPicture;
     }
     
-    
     public function getPrice(): int
     {
         return $this->price;

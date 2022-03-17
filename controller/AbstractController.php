@@ -9,6 +9,7 @@ abstract class AbstractController
     private $page;
     private $loader;
     private $twig;
+    private array $params;
 
     public function __construct()
     {
@@ -16,10 +17,10 @@ abstract class AbstractController
     }
     
     
-    public function displayTwig($page) 
+    public function displayTwig($page, $params = []) 
     {
         $this->constructTwig();
-        echo $this->twig->render($page . '.twig');
+        echo $this->twig->render($page . '.twig', $params);
     }
     
     public function constructTwig() {

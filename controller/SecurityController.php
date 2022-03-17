@@ -16,19 +16,33 @@ class SecurityController extends AbstractController {
     
     public function displayRegister() 
     {
-        $this->displayTwig('register');
+         if (!isset($_SESSION['user'])) {
+            $this->displayTwig('register');
+            
+        } else {
+            header('location: ./index.php?url=account');
+            exit();
+        }
+        
     }
     
     public function displayLogin() 
     {
-        $this->displayTwig('login');
+         if (!isset($_SESSION['user'])) {
+            $this->displayTwig('login');
+            
+        } else {
+            header('location: ./index.php?url=account');
+            exit();
+        }
+
     }
     
     
     public function securityRegister(): void
     {
         
-        $passwordObscure = password_hash($_POST['password'], PASSWORD_DEFAULT);
+        $passwordObscure = password_hash(htmlspecialchars($_POST['password']), PASSWORD_DEFAULT);
         
         $user = new User();
         
@@ -39,7 +53,7 @@ class SecurityController extends AbstractController {
         $user->setAddress("adresse par defaut");
         $user->setPostalCode(56000);
         $user->setCity("ville");
-        $user->setRole('standard');
+        $user->setRole('user');
         
         $this->repository->insert($user);
         
@@ -96,9 +110,15 @@ class SecurityController extends AbstractController {
             
             header('location: ./index.php?url=account');
             exit();
+            // voir pour un $this->twig->redirectToRoute
+            // voir si télécharger le component a une +value
+            
+            } else {
+                $this->displayTwig('login', [
+                    'message' => 'Adresse mail ou mot de passe incorrect']);
             }
         } else {
-            header('location: ./index.php?url=login');
+            header('location: ./index.php?url=error404');
             exit();
         }
     }
@@ -151,7 +171,7 @@ class SecurityController extends AbstractController {
     // -------------------------------------------------------------------------------------
     
         // Connexion
-    /*case 'identifierUtilisateur':
+    case 'identifierUtilisateur':
         $user = identifierUtilisateur();
 
         if ($user) { // si $user n'est pas false

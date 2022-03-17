@@ -7,6 +7,7 @@ class UserController extends AbstractController
     
     public function displayAccount() 
     {
-        $this->displayTwig('account');
+        $this->displayTwig('account', [
+            'session' => unserialize($_SESSION['user'])]);
     }
 }

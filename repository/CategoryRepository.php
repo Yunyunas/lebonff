@@ -9,23 +9,7 @@ class CategoryRepository extends AbstractRepository {
     public function __construct(){
         parent::__construct(self::TABLE);
     }
-        
-    public function fetchCategories() {
-        
-        $query = $this->connexion->prepare("SELECT * from category");
-        $data = null;
-        try {
-            $query->setFetchMode(PDO::FETCH_ASSOC);
-            $query->execute();
-            $data = $query->fetchAll();
-            
-        } catch (Exception $e) {
-            $data = $e;
-        }
-        
-        return $data;
-    }
-    
+
     public function fetchCategory($id) {
         
         $data = null;
@@ -42,6 +26,25 @@ class CategoryRepository extends AbstractRepository {
         }
 
         return $data;
+    }
+    
+    public function  insert(Category $category): bool
+    {
+        try {
+            $query = $this->connexion->prepare("INSERT INTO category(name, description, url_picture) 
+                                            VALUES (:name, :description, :url_picture)");
+           
+            $query->bindValue(':name', $category->getName());
+            $query->bindValue(':description', $category->getDescription());
+            $query->bindValue(':url_picture', $category->getUrlPicture());
+            $query->execute();
+            $category = $query->fetchObject("category");
+            
+            return $category;
+            
+        } catch (Exception $e) {
+            $data = $e;
+        }
     }
         
 }

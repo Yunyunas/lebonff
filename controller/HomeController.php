@@ -4,14 +4,17 @@ require_once './controller/AbstractController.php';
 
 class HomeController extends AbstractController {
 
-    
-    public function __construct() {
-        
-    }
-    
+
     public function displayHome()
     {
-        $this->displayTwig('home');
+        if (!isset($_SESSION['user'])) {
+            $this->displayTwig('home');
+            
+        } else {
+            $this->displayTwig('home', [
+                'session' => unserialize($_SESSION['user'])]);
+        }
+
     }
     
     public function displayError404()
