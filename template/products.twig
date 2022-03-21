@@ -7,12 +7,15 @@
 
     <div class="row">
 		<h1 class="my-4 col-md-4">Liste des annonces</h1>
-        <a href="index.php?url=addProduct">Accéder au formulaire pour ajouter une annonce</a>
-		<div class="col-md-4">
+       	<div class="col-md-4">
+		</div>
+
+		<div class="col-md-8">
+			<a class="btn btn-success" id="btn-ajouter-rubrique" href="index.php?url=addProduct" style="visibility:{{ session.id != '' ? 'visible' : 'hidden' }}">Créer une annonce</a>
 		</div>
 
 		<div class="col-md-4">
-			<a class="btn btn-danger" id="btn-ajouter-rubrique" href="index.php?action=formAjouterRubrique" style="visibility:{{ session.utilisateur.admin != 1 ? 'hidden' : 'visible' }}">Ajouter une rubrique</a>
+			<a class="btn btn-danger" id="btn-ajouter-rubrique" href="index.php?url=addProduct" style="visibility:{{ session.user.admin != 'admin' ? 'hidden' : 'visible' }}">Ajouter une catégorie</a>
 		</div>
 	</div>
 
@@ -21,17 +24,21 @@
 				<div class="col-lg-3 col-md-4 col-sm-6 mb-4">
 				
 					<div class="card h-100">
-						<a href="#"><img class="card-img-top" src="{{product.url_picture}}" alt="Image de {{product.name}}"></a>
+						<a href="index.php?url=product&id={{product.id}}"><img class="card-img-top" src="./public/img/products/{{product.url_picture}}" alt="Image de {{product.name}}"></a>
 						<div class="card-body">
 							<h4 class="card-title">
-								<a href="#">{{product.name}}</a>
+								<a href="index.php?url=product&id={{product.id}}">{{product.name}}</a>
 							</h4>
 							<p class="card-text">{{product.description}}</p>
 							<p class="card-text">{{product.price}} euros</p>
 							<p class="card-text">Annonce créée le {{product.created_at}} et par {{product.id_user}} dans la catégorie {{product.id_category.name}}</p>
-							<a class="btn btn-primary" href="#" style="visibility:{{ session.role != 'admin' ? 'hidden' : 'visible' }}">Modifier</a>
-							<a class="btn btn-danger" href="#" style="visibility:{{ session.role != 'admin' ? 'hidden' : 'visible' }}">Supprimer</a>
+							<a class="btn btn-primary" href="index.php?url=updateProduct&id={{product.id}}" style="visibility:{{ session.role != 'admin' ? 'hidden' : 'visible' }}">Modifier</a>
+							<a class="btn btn-danger" href="index.php?url=deleteProduct&id={{product.id}}" style="visibility:{{ session.role != 'admin' ? 'hidden' : 'visible' }}">Supprimer</a>
 						</div>
+						
+	                    <div class="card-footer">
+                        	<a href="index.php?url=product&id={{product.id}}" class="btn btn-primary">Voir plus</a>
+                    	</div>
 					</div>
 				</div>
 			{% endfor %}

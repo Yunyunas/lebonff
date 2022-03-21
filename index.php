@@ -31,6 +31,11 @@ switch($url){
         $userController = new UserController();
         $userController->displayAccount();
         break;
+    
+    case "updateAccount" : 
+        $userController = new UserController();
+        $userController->displayUpdateAccount();
+        break;
         
     case "categories" : 
         $categoryController = new CategoryController();
@@ -41,15 +46,33 @@ switch($url){
         $categoryController = new CategoryController();
         $categoryController->displayAddCategoryForm();
         break;
+    
+    case "updateCategoryForm" : 
+        $categoryController = new CategoryController();
+        $categoryController->displayUpdateCategoryForm();
+        break;
         
     case "products" : 
         $productController = new ProductController();
         $productController->displayProducts();
         break;
         
+    case "product" : 
+        $productController = new ProductController();
+        $productController->displayProductDetail();
+        break;
+        
+    case "addProduct" : 
+        $productController = new ProductController();
+        $productController->displayAddProductForm();
+        break;
+        
         
     //----------------------- ROUTES FONCTIONNELLES ----------------------------
     
+    /** 
+     * SECURITY
+     */
     case "securityRegister":
         $securityController = new SecurityController();
         $securityController->securityRegister();
@@ -64,12 +87,50 @@ switch($url){
         $securityController = new SecurityController();
         $securityController->logout();
         break;
+    
+    /** 
+     * USER
+     */
+    case "updateProfil" : 
+        $userController = new UserController();
+        $userController->updateProfil();
+        break;
+    
+    case "updatePassword" : 
+        $userController = new UserController();
+        $userController->updatePassword();
+        break;
         
+    /** 
+     * CATEGORY
+     */
     case "insertCategory":
         $categoryController = new CategoryController();
         $categoryController->insertCategory();
         break;
+    
+    case "updateCategory":
+        $categoryController = new CategoryController();
+        $categoryController->updateCategory();
+        break;
+    
+    case "deleteCategory":
+        $categoryController = new CategoryController();
+        $categoryController->deleteCategory();
+        break;
+    
+    /** 
+     * PRODUCT
+     */
+    case "insertProduct" : 
+        $productController = new ProductController();
+        $productController->insertProduct();
+        break;
         
+    case "deleteProduct" : 
+        $productController = new ProductController();
+        $productController->deleteProduct();
+        break;
         
     // -------------------------- DEBUG / TEST ---------------------------------
     

@@ -4,7 +4,7 @@
 - Code propre, bien indenté, respect des conventions, cohérence des noms variables / fonctions et classes
 
 - Attention à la sécurité (htmlspecialchars pour formulaires, protection des routes, etc...)
-- Gérer l upload des images dans les formulaires pour les annonces et catégories
+- Gérer l upload des images dans les formulaires pour les annonces
 
 - Faire formulaire login en Javascript ?
 - Faire barre de recherche AJAX
@@ -15,4 +15,6 @@
 
 - Gérer les erreurs et les exceptions
 
+- Attention à l'affichage des produits (afficher user, la catégorie etc)
 
+- Lorsqu'il y a un update ou delete => supprimer l'ancienne image ? (product et category) => a voir

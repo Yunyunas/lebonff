@@ -23,7 +23,6 @@ class SecurityController extends AbstractController {
             header('location: ./index.php?url=account');
             exit();
         }
-        
     }
     
     public function displayLogin() 
@@ -35,7 +34,6 @@ class SecurityController extends AbstractController {
             header('location: ./index.php?url=account');
             exit();
         }
-
     }
     
     
@@ -93,7 +91,6 @@ class SecurityController extends AbstractController {
             $user->setLastName($data['last_name']);
             $user->setFirstName($data['first_name']);
             $user->setEmail($data['email']);
-            //$user->setPassword($data['password']);
             $user->setRole($data['role']);
             
             // J'instancie les informations de mon user actuel dans la SESSION
@@ -148,52 +145,4 @@ class SecurityController extends AbstractController {
         
         var_dump($user->getId());
     } 
-    
-    
-    // ---------------------------------------------------------------------------------------
-    
-    
-    
-    /**
-     * @Route("/login", name="security_login")
-     */
-    /*public function login(AuthenticationUtils $utils)
-    {
-        $form = $this->createForm(LoginType::class, ['email' => $utils->getLastUsername()]);
-
-        return $this->render('security/login.html.twig', [
-            'formView' => $form->createView(),
-            'error' => $utils->getLastAuthenticationError()
-        ]);
-    }
-    
-    
-    // -------------------------------------------------------------------------------------
-    
-        // Connexion
-    case 'identifierUtilisateur':
-        $user = identifierUtilisateur();
-
-        if ($user) { // si $user n'est pas false
-
-            setSession($user->getMail());
-            afficherAnnoncesParUtilisateur();
-        
-            echo $twig->render('compteUtilisateur.html.twig', [
-                'rubrique'=>afficherRubriques(),
-                'annonce'=>afficherAnnoncesParUtilisateur(),
-                'session'=> $_SESSION
-                ]);
-
-        } else {
-
-            echo $twig->render('connexion.html.twig', [
-                'message' => 'Adresse mail ou mot de passe incorrect',
-                'rubrique'=>afficherRubriques(),
-                'session'=> $_SESSION
-                ]);
-        }
-
-    break;
-    */
 }

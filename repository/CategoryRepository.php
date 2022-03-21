@@ -28,6 +28,7 @@ class CategoryRepository extends AbstractRepository {
         return $data;
     }
     
+    
     public function  insert(Category $category): bool
     {
         try {
@@ -46,5 +47,40 @@ class CategoryRepository extends AbstractRepository {
             $data = $e;
         }
     }
-        
+    
+    
+    public function  update(Category $category)
+    {
+        try {
+
+            $query = $this->connexion->prepare("UPDATE category SET name = :name, 
+            description = :description, url_picture = :url_picture WHERE id = :id");
+            
+            $query->bindValue(':id', $category->getId());
+            $query->bindValue(':name', $category->getName());
+            $query->bindValue(':description', $category->getDescription());
+            $query->bindValue(':url_picture', $category->getUrlPicture());
+            $query->execute();
+
+            return $category;
+            
+        } catch (Exception $e) {
+            $data = $e;
+        }
+    }
+    
+    
+    public function  delete(Category $category)
+    {
+        try {
+            $query = $this->connexion->prepare("DELETE FROM category WHERE id = :id");
+            
+            $query->bindValue(':id', $category->getId());
+            $query->execute();
+            
+        } catch (Exception $e) {
+            $data = $e;
+        }
+    }
+    
 }

@@ -1,0 +1,39 @@
+{% extends "layout.twig" %}
+
+{% block title %} <title>Modifier une catégorie</title> {% endblock %}
+
+{% block content %}
+    
+    <div class="container">
+        <div class="row">
+        <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+            <div class="card card-signin flex-row my-5">
+            <div class="card-img-left d-none d-md-flex">
+            </div>
+            <div class="card-body">
+                <h5 class="card-title text-center">Modifier une catégorie</h5>
+                <form class="form-signin" method="post" action="index.php?url=updateCategory&id={{category.id}}" enctype="multipart/form-data">
+                <div class="form-label-group">
+                    <label for="name">Nom</label>
+                    <input type="text" id="name" name="name" class="form-control" placeholder="Nom de la catégorie" value="{{category.name}}" required autofocus>
+                </div>
+                
+                <div class="form-label-group">
+                    <label for="description">Description</label>
+                    <input type="text" id="description" name="description" class="form-control" placeholder="Description de la catégorie" value="{{category.description}}" required>
+                </div>
+
+                <div class="form-label-group">
+                    <label for="image">Image</label>
+                    <input type="file" id="image" name="image" class="form-control" placeholder="Image souhaitée" value="{{category.url_picture}}" required>
+                </div>
+
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Valider</button>
+                </form>
+            </div>
+            </div>
+        </div>
+        </div>
+    </div>
+
+{% endblock %}	

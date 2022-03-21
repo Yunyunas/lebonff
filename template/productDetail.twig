@@ -1,0 +1,62 @@
+{% extends "layout.twig" %}
+
+{% block title %} <title> Annonce {{product.name}} </title> {% endblock %}
+{% block content %}
+
+<body>
+  <!-- Page Content -->
+<div class="container">
+
+    <div class="row">
+
+        <div class="col-lg-3">
+            <h1 class="my-4">Le bon FF</h1>
+            <div class="list-group">
+                <a href="#" class="list-group-item">Nouveautés</a>
+                
+                {% for category in categories %}
+
+                <a href="index.php?url=products&id={{category.id}}&name={{category.name}}" 
+                class="list-group-item {{product.name_category != product.name ? '' : 'active'}}">{{category.name}}</a>
+   
+                {% endfor %}
+            </div>
+        </div>
+      <!-- /.col-lg-3 -->
+
+        <div class="col-lg-9">
+
+            <div class="card mt-4">
+                <img class="card-img-top img-fluid" src="./public/img/products/{{product.url_picture}}" alt="Image de {{product.name}}">
+                <div class="card-body">
+                    <h3 class="card-title">{{product.name}}</h3>
+                    <h4>Prix : {{product.price}} euros</h4>
+                    {# <p class="card-text"> info autre </p> #}
+                </div>
+            </div>
+        <!-- /.card -->
+
+        <div class="card card-outline-secondary my-4">
+          <div class="card-header">
+            Détail du produit
+          </div>
+          <div class="card-body">
+
+            <p>{{product.description}}</p>
+            <small class="text-muted">Annonce déposée par {{product.id_user}} le {{product.created_at}}</small>
+            <hr>
+
+            <a href="#" class="btn btn-danger">Acheter</a>
+          </div>
+        </div>
+        <!-- /.card -->
+      </div>
+      <!-- /.col-lg-9 -->
+    </div>
+  </div>
+  <!-- /.container -->
+
+</body>
+
+
+{% endblock %}

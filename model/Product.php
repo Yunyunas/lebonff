@@ -20,8 +20,8 @@ class Product
      $price = 0, $createdAt = NULL, $updatedAt = NULL)
     {
         $this->id = $id;
-        $this->user = $user;
-        $this->category = $category;
+        //$this->user = $user;
+        //$this->category = $category;
         $this->name = $name;
         $this->description = $description;
         $this->urlPicture = $urlPicture;

@@ -7,28 +7,33 @@
 
     <div class="row">
 		<h1 class="my-4 col-md-4">Liste des catégories</h1>
-        <a href="index.php?url=addCategory">Accéder au formulaire pour ajouter une catégorie</a>
 		<div class="col-md-4">
+			
+		</div>
+  
+		<div class="col-md-8">
+			<a class="btn btn-success" id="btn-ajouter-rubrique" href="index.php?url=addCategory" style="visibility:{{ session.id != '' ? 'visible' : 'hidden' }}">Ajouter une catégorie</a>
 		</div>
 
 		<div class="col-md-4">
-			<a class="btn btn-danger" id="btn-ajouter-rubrique" href="index.php?action=formAjouterRubrique" style="visibility:{{ session.utilisateur.admin != 1 ? 'hidden' : 'visible' }}">Ajouter une rubrique</a>
+			<a class="btn btn-danger" id="btn-ajouter-rubrique" href="index.php?url=addCategory" style="visibility:{{ session.user.admin != 'admin' ? 'hidden' : 'visible' }}">Ajouter une catégorie</a>
 		</div>
 	</div>
+	
 
 		<div class="row">
 			{% for category in categories %}
 				<div class="col-lg-3 col-md-4 col-sm-6 mb-4">
 				
 					<div class="card h-100">
-						<a href="#"><img class="card-img-top" src="{{category.url_picture}}" alt="Image de {{category.name}}"></a>
+						<a href="#"><img class="card-img-top" src="./public/img/categories/{{category.url_picture}}" alt="Image de {{category.name}}"></a>
 						<div class="card-body">
 							<h4 class="card-title">
 								<a href="#">{{category.name}}</a>
 							</h4>
 							<p class="card-text">{{category.description}}</p>
-							<a class="btn btn-primary" href="#" style="visibility:{{ session.role != 'admin' ? 'hidden' : 'visible' }}">Modifier</a>
-							<a class="btn btn-danger" href="#" style="visibility:{{ session.role != 'admin' ? 'hidden' : 'visible' }}">Supprimer</a>
+							<a class="btn btn-primary" href="index.php?url=updateCategoryForm&id={{category.id}}" style="visibility:{{ session.role != 'admin' ? 'hidden' : 'visible' }}">Modifier</a>
+							<a class="btn btn-danger" href="index.php?url=deleteCategory&id={{category.id}}" style="visibility:{{ session.role != 'admin' ? 'hidden' : 'visible' }}">Supprimer</a>
 						</div>
 					</div>
 				</div>

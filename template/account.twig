@@ -13,10 +13,7 @@
 
 		<div class="col-md-4">
 		</div>
-
-		<div class="col-md-4">
-		<a class="btn btn-danger" id="btn-ajouter-annonce" href="index.php?action=formAjouterAnnonce" style="visibility:{{ session.id != '' ? 'visible' : 'hidden' }}">Ajouter une annonce</a>
-	    </div>
+	    
     </div>
 </div>
 
@@ -30,7 +27,15 @@
                 <p class="list-group-item"><b>Email : </b>  {{session.email}} </p>
             </div>
         </div>
+        <div class="col-md-4">
+		<a class="btn btn-primary" id="updateAccount" href="index.php?url=updateAccount">Modifier mes informations personnelles</a>
+	    </div>
+	    <div class="col-md-4">
+	    <a class="btn btn-primary" id="btn-ajouter-rubrique" href="index.php?url=addCategory" style="visibility:{{ session.id != '' ? 'visible' : 'hidden' }}">Ajouter une catégorie</a>
+		<a class="btn btn-primary" id="btn-ajouter-annonce" href="index.php?url=addProduct">Ajouter une annonce</a>
+	    </div>
 
+	 
         <div class="col-lg-9">
      
         <!-- /.col-lg-3 -->
