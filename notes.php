@@ -15,6 +15,4 @@
 
 - Gérer les erreurs et les exceptions
 
-- Attention à l'affichage des produits (afficher user, la catégorie etc)
-
 - Lorsqu'il y a un update ou delete => supprimer l'ancienne image ? (product et category) => a voir

@@ -145,14 +145,4 @@ class CategoryController extends AbstractController
         header('location: ./index.php?url=categories');
         exit();
     }
-    
-    // ------------------------- DEBUG / TEST ----------------------------------
-    
-    public function testCat() 
-    {
-        $datas = $this->repository->fetchAll();
-        
-        var_dump($datas);
-        die();
-    }
 }

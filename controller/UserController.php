@@ -1,5 +1,6 @@
 <?php
 
+require_once './repository/ProductRepository.php';
 require_once './repository/UserRepository.php';
 require_once './model/User.php';
 require_once './controller/AbstractController.php';
@@ -15,12 +16,18 @@ class UserController extends AbstractController
     
     public function displayAccount() 
     {
+        $productRepository = new ProductRepository();
+        $user = unserialize($_SESSION['user']);
+        $products = $productRepository->fetchByUser($user);
+
+        
         if (!isset($_SESSION['user'])) {
             $this->displayTwig('login');
             
         } else {
             $this->displayTwig('account', [
-            'session' => unserialize($_SESSION['user'])]);
+            'session' => unserialize($_SESSION['user']),
+            'products' => $products]);
         }
     }
     
@@ -91,5 +98,26 @@ class UserController extends AbstractController
             header('location: ./index.php?url=error404');
             exit();
         }   
+    }
+    
+    public function deleteAccount(): void 
+    {
+        // Fonction pour supprimer le compte et donc le user
+        // Demande confirmation du mot de passe pour valider la suppression
+        // Faire ça avec un pop ou un nouveau formulaire (?)
+        // Ou pas de demande de mdp mais juste un pop de confirmation (?)
+        $user = unserialize($_SESSION['user']);
+        
+        $data = $this->repository->deleteAccount($user);
+        if ($data == true) {
+            session_destroy();
+            header('location: ./index.php?url=home');
+            exit();
+        } else {
+            header('location: ./index.php?url=account');
+            exit();
+        }
+
+        
     }
 }

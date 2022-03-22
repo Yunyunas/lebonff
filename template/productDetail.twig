@@ -12,12 +12,12 @@
         <div class="col-lg-3">
             <h1 class="my-4">Le bon FF</h1>
             <div class="list-group">
-                <a href="#" class="list-group-item">Nouveautés</a>
+                <a href="index.php?url=newProducts&paramName=Nouveautés" class="list-group-item {{paramName != 'Nouveautés' ? '' : 'active'}}">Nouveautés</a>
                 
                 {% for category in categories %}
 
-                <a href="index.php?url=products&id={{category.id}}&name={{category.name}}" 
-                class="list-group-item {{product.name_category != product.name ? '' : 'active'}}">{{category.name}}</a>
+                <a href="index.php?url=products&id={{category.id}}&paramName={{category.name}}" 
+                class="list-group-item {{paramName != category.name ? '' : 'active'}}">{{category.name}}</a>
    
                 {% endfor %}
             </div>
@@ -27,7 +27,7 @@
         <div class="col-lg-9">
 
             <div class="card mt-4">
-                <img class="card-img-top img-fluid" src="./public/img/products/{{product.url_picture}}" alt="Image de {{product.name}}">
+                <img class="card-img-top img-fluid" src="./public/img/products/{{product.urlPicture}}" alt="Image de {{product.name}}">
                 <div class="card-body">
                     <h3 class="card-title">{{product.name}}</h3>
                     <h4>Prix : {{product.price}} euros</h4>

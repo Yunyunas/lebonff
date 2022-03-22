@@ -1,0 +1,57 @@
+ {% extends "layout.twig" %}
+	
+	{% block title %} <title>Modifier une annonce</title> {% endblock %}
+
+    {% block content %}
+
+<link href="public/css/connexion.css" rel="stylesheet">
+    
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+                <div class="card card-signin my-5">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">Modifier une annonce</h5>
+                        <form class="form-signin" method="post" action="index.php?url=updateProduct&id={{product.id}}" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <label for="">Catégorie</label>
+                                <select class="form-control choix-category" name="category" id="category">
+                                    {% for category in categories %}
+                                    <option value="{{ category.id }}">{{ category.name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+
+                            <div class="form-label-group">
+                                <label for="name">Titre</label>
+                                <input type="text" id="inputEnTete" name="name" class="form-control" placeholder="Titre de l'annonce"  value="{{product.name}}" required autofocus>
+                            </div>
+                            
+                            <div class="form-label-group">
+                                <label for="description">Description</label>
+                                <input type="text" id="description" name="description" class="form-control" placeholder="Description" value="{{product.description}}" required>
+                            </div>
+                            
+                            <div class="form-label-group">
+                                <label for="price">Prix</label>
+                                <input type="number" id="price" name="price" class="form-control" placeholder="Prix" value="{{product.price}}" required>
+                            </div>
+                            
+                            <div class="form-label-group">
+                                <label for="image">Image</label>
+                                <input type="file" id="image" name="image" class="form-control" placeholder="Image souhaitée" required>
+                            </div>
+
+                            
+                            <hr class="my-4">
+                            <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Envoyer</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+{% endblock %}	

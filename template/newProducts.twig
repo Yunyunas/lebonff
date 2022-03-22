@@ -1,44 +1,39 @@
 {% extends "layout.twig" %}
 
-{% block title %} <title>Annonces dans la catégorie {{paramName}}</title> {% endblock %}
+{% block title %} <title> Catégorie {{paramName}} </title> {% endblock %}
 {% block content %}
 
+<body>
+<!-- Page Content -->
 <div class="container">
 
-    {#<div class="row">
-		<h1 class="my-4 col-md-4">Liste des annonces</h1>
-       	<div class="col-md-4">
-		</div>#}
+  <!-- Page Heading -->
+    <h1 class="my-4">Catégorie {{paramName}}</h1>
 
-		<div class="col-md-8">
-			<a class="btn btn-success" id="btn-ajouter-rubrique" href="index.php?url=addProduct" style="visibility:{{ session.id != '' ? 'visible' : 'hidden' }}">Créer une annonce</a>
-		</div>
-
-		<div class="col-md-4">
-			<a class="btn btn-danger" id="btn-ajouter-rubrique" href="index.php?url=addProduct" style="visibility:{{ session.user.admin != 'admin' ? 'hidden' : 'visible' }}">Ajouter une catégorie</a>
-		</div>
-	</div>
-	
-	<h1 class="my-4">Catégorie {{paramName}}</h1>
+    {# <a class="btn btn-danger" href="index.php?action=formAjouterAnnonce" style="visibility:{{ session.utilisateur.id_utilisateur != '' ? 'visible' : 'hidden' }}">Ajouter une annonce</a> #}
 
     <div class="row">
         <div class="col-lg-3">
             <div class="list-group">
-                <a href="index.php?url=newProducts&paramName=Nouveautés" class="list-group-item {{paramName != 'Nouveautés' ? '' : 'active'}}">Nouveautés</a>
+                <a href="index.php?url=newProducts&paramName=Nouveautés" class="list-group-item active">Nouveautés</a>
                 
                 {% for category in categories %}
 
                 <a href="index.php?url=products&id={{category.id}}&paramName={{category.name}}" 
-                class="list-group-item {{paramName != category.name ? '' : 'active'}}">{{category.name}}</a>
+                class="list-group-item">{{category.name}}</a>
    
                 {% endfor %}
             </div>
         </div>
 
-        <div class="col-lg-9">
 
-		<div class="row">
-			{% for product in products %}
+
+        <div class="col-lg-9">
+     
+        <!-- /.col-lg-3 -->
+            
+            <div class="row">
+            {% for product in products %}
 				<div class="col-lg-3 col-md-4 col-sm-6 mb-4">
 				
 					<div class="card h-100">
@@ -60,8 +55,39 @@
 					</div>
 				</div>
 			{% endfor %}
-		</div>
+            </div>
+        </div>
 	</div>
-</div>
+</div>  
 
+  <!-- /.row -->
+
+  {# <!-- Pagination -->
+  <ul class="pagination justify-content-center">
+    <li class="page-item">
+      <a class="page-link" href="#" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+            <span class="sr-only">Previous</span>
+          </a>
+    </li>
+    <li class="page-item">
+      <a class="page-link" href="#">1</a>
+    </li>
+    <li class="page-item">
+      <a class="page-link" href="#">2</a>
+    </li>
+    <li class="page-item">
+      <a class="page-link" href="#">3</a>
+    </li>
+    <li class="page-item">
+      <a class="page-link" href="#" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+            <span class="sr-only">Next</span>
+          </a>
+    </li>
+  </ul> #}
+
+</div>
+<!-- /.container -->
+</body>
 {% endblock %}

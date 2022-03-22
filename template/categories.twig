@@ -26,10 +26,12 @@
 				<div class="col-lg-3 col-md-4 col-sm-6 mb-4">
 				
 					<div class="card h-100">
-						<a href="#"><img class="card-img-top" src="./public/img/categories/{{category.url_picture}}" alt="Image de {{category.name}}"></a>
+						<a href="index.php?url=products&id={{category.id}}&paramName={{category.name}}">
+							<img class="card-img-top" src="./public/img/categories/{{category.url_picture}}" alt="Image de {{category.name}}">
+						</a>
 						<div class="card-body">
 							<h4 class="card-title">
-								<a href="#">{{category.name}}</a>
+								<a href="index.php?url=products&id={{category.id}}&paramName={{category.name}}">{{category.name}}</a>
 							</h4>
 							<p class="card-text">{{category.description}}</p>
 							<a class="btn btn-primary" href="index.php?url=updateCategoryForm&id={{category.id}}" style="visibility:{{ session.role != 'admin' ? 'hidden' : 'visible' }}">Modifier</a>

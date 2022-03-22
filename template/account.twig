@@ -29,6 +29,7 @@
         </div>
         <div class="col-md-4">
 		<a class="btn btn-primary" id="updateAccount" href="index.php?url=updateAccount">Modifier mes informations personnelles</a>
+		<a class="btn btn-danger" id="updateAccount" href="index.php?url=deleteAccount">Supprimer mon compte</a>
 	    </div>
 	    <div class="col-md-4">
 	    <a class="btn btn-primary" id="btn-ajouter-rubrique" href="index.php?url=addCategory" style="visibility:{{ session.id != '' ? 'visible' : 'hidden' }}">Ajouter une catégorie</a>
@@ -41,20 +42,20 @@
         <!-- /.col-lg-3 -->
             
             <div class="row">
-                {% for p in product %}
+                {% for product in products %}
                     <div class="col-lg-4 col-md-6 mb-4">
                         <div class="card h-100">
-                            <a href="?action=afficherUneAnnonce&paramEnTete={{p.name}}&paramCorps={{p.description}}&paramIdAnnonce={{p.id}}">
-                                <img class="card-img-top" src="public/images/article1.jpg" alt="">
+                            <a href="index.php?url=product&id={{product.id}}">
+                                <img class="card-img-top" src="./public/img/products/{{product.urlPicture}}" alt="Image de {{product.name}}">
                             </a>
                             <div class="card-body">
                                 <h4 class="card-title">
-                                    <a href="?action=afficherUneAnnonce&paramEnTete={{p.name}}&paramCorps={{p.description}}&paramIdAnnonce={{p.id}}">{{p.name}}</a>
+                                    <a href="index.php?url=product&id={{product.id}}">{{product.name}}</a>
                                 </h4>
-                                <h5>{{p.price}}</h5>
-                                <p class="card-text">{{p.description}}</p>
-                                <a class="btn btn-danger" href="index.php?action=formModifierAnnonce&param={{p.id}}&entete={{p.name}}" style="visibility:{{ session.id != '' ? 'visible' : 'hidden' }}">Modifier</a>
-                                <a class="btn btn-danger" href="index.php?action=supprimerAnnonce&param={{p.id}}" style="visibility:{{ session.id != '' ? 'visible' : 'hidden' }}">Supprimer</a>
+                                <h5>{{product.price}}</h5>
+                                <p class="card-text">{{product.description}}</p>
+                                <a class="btn btn-primary" href="index.php?url=updateProductForm&id={{product.id}}" style="visibility:{{ session.id != '' ? 'visible' : 'hidden' }}">Modifier</a>
+                                <a class="btn btn-danger" href="index.php?url=deleteProduct&id={{product.id}}" style="visibility:{{ session.id != '' ? 'visible' : 'hidden' }}">Supprimer</a>
                             </div>
                         </div>
                     </div>

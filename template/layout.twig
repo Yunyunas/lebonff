@@ -30,9 +30,6 @@
                       </a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" href="index.php?url=products">Annonces</a>
-                    </li>
-                    <li class="nav-item">
                       <a class="nav-link" href="index.php?url=categories">Catégories</a></a>
                     </li>
                     {#
@@ -60,24 +57,45 @@
                   </li>
                   
                   <li class="nav-item">
-                      <a class="nav-link" href="index.php?url=account" style="visibility:{{ session.id != '' ? 'visible' : 'hidden' }}">
+                      <a class="nav-link btn btn-success" href="index.php?url=account" style="visibility:{{ session.id != '' ? 'visible' : 'hidden' }}">
                           Mon compte
                       </a>
                   </li>
-                  
-                  <li class="nav-item">
-                    <a class="nav-link" href="index.php?url=debugCat">Debug cat</a>
-                  </li>
-                    
-                   
                   </ul>
                   <form class="d-flex">
-                    <input class="form-control me-sm-2" type="text" placeholder="Rechercher...">
+                    <input class="form-control me-sm-2" type="text" placeholder="Rechercher une annonce...">
                     <button class="btn btn-secondary my-2 my-sm-0" type="submit">Rechercher</button>
                   </form>
                 </div>
               </div>
             </nav>
+            
+            {#<nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container">
+                <div class="col-md-2">
+                </div>
+
+                <div class="collapse navbar-collapse col-md-8" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item active">
+                            <a  class="nav-link active" href="index.php?action=afficherAnnoncesNouveautes&param=1&paramLibelle=Nouveautés">NOUVEAUTES</a>
+                        </li>
+
+                    {% for category in categories %}
+
+                        <li class="nav-item">   
+                            <a  class="nav-link" href="index.php?url=displayProductsByCategory&id={{category.id}}&name={{category.name}}">
+                                {{category.name|upper}}
+                            </a>
+                        </li>
+
+                    {% endfor %}
+                    </ul>
+                </div>
+                <div class="col-md-2">
+                </div>
+            </div>
+        </nav>#}
 
 
         </header>

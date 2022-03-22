@@ -61,10 +61,20 @@ switch($url){
         $productController = new ProductController();
         $productController->displayProductDetail();
         break;
+    
+    case "newProducts":
+        $productController = new ProductController();
+        $productController->displayNewProducts();
+        break;
         
     case "addProduct" : 
         $productController = new ProductController();
         $productController->displayAddProductForm();
+        break;
+        
+    case "updateProductForm" :
+        $productController = new ProductController();
+        $productController->displayUpdateProductForm();
         break;
         
         
@@ -101,6 +111,11 @@ switch($url){
         $userController->updatePassword();
         break;
         
+    case "deleteAccount" : 
+        $userController = new UserController();
+        $userController->deleteAccount();
+        break;
+        
     /** 
      * CATEGORY
      */
@@ -126,6 +141,11 @@ switch($url){
         $productController = new ProductController();
         $productController->insertProduct();
         break;
+    
+    case "updateProduct" : 
+        $productController = new ProductController();
+        $productController->updateProduct();
+        break;
         
     case "deleteProduct" : 
         $productController = new ProductController();
@@ -137,11 +157,6 @@ switch($url){
     case "debug":
         $securityController = new SecurityController();
         $securityController->debug();
-        break;
-        
-    case "debugCat":
-        $categoryController = new CategoryController();
-        $categoryController->testCat();
         break;
         
     default:

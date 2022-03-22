@@ -13,7 +13,7 @@
             <h1 class="display-3">Accueil {{message}}</h1>
             <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
             <br>            
-            <a href="index.php?url=products" class="btn btn-primary btn-lg">Voir les nouveautés</a>
+            <a href="index.php?url=newProducts&paramName=Nouveautés" class="btn btn-primary btn-lg">Voir les nouveautés</a>
         </section>
 
         <div class="row text-center">
@@ -21,19 +21,19 @@
             {% for product in products %}
             <div class="col-lg-3 col-md-6 mb-4">
                 <div class="card h-100">
-                    <a href="index.php?url=productDetail&id={{product.id}}">
+                    <a href="index.php?url=product&id={{product.id}}">
                     <img class="card-img-top" src="./public/img/products/{{product.urlPicture}}" alt="Image de {{product.name}}">
                     </a>
                     <div class="card-body">
                         <h4 class="card-title">
-                            <a href="index.php?url=productDetail&id={{product.id}}">{{product.name}}</a>
+                            <a href="index.php?url=product&id={{product.id}}">{{product.name}}</a>
                         </h4>
                         <p class="card-text">{{product.description}}</p>
                         <p>Prix : {{product.price}} euros</p>
                     </div>
 
                     <div class="card-footer">
-                        <a href="index.php?url=productDetail&id={{product.id}}" class="btn btn-primary">Voir plus</a>
+                        <a href="index.php?url=product&id={{product.id}}" class="btn btn-primary">Voir plus</a>
                     </div>
                 </div>
             </div>

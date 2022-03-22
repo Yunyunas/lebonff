@@ -95,7 +95,7 @@ class UserRepository extends AbstractRepository {
     }
     
     
-    public function  deleteAccount(User $user) 
+    public function  deleteAccount(User $user): bool 
     {
         try {
             //var_dump($user);
@@ -104,6 +104,7 @@ class UserRepository extends AbstractRepository {
             
             $query->bindValue(':id', $user->getId());
             $query->execute();
+            return true;
             
             //return $user;
             
