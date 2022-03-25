@@ -19,118 +19,83 @@ class ProductController extends AbstractController
         $this->repository = new ProductRepository();
     }
     
+    
+    /** 
+     * @Route ("index.php?url=products")
+     */
     public function displayProducts()
     {
         $category = new Category();
         $category->setId($_GET['id']);
         
         $products = $this->repository->fetchByCategory($category);
-
-        $catRepo = new CategoryRepository();
-        $categories = $catRepo->fetchAll();
         
-        if (!isset($_SESSION['user'])) {
-            $this->displayTwig('products', [
+        
+        $this->displayTwig('products', [
                 'products' => $products,
-                'categories' => $categories,
                 'paramName' => $_GET['paramName']]);
-            
-        } else {
-            $this->displayTwig('products', [
-                'session' => unserialize($_SESSION['user']),
-                'products' => $products,
-                'categories' => $categories,
-                'paramName' => $_GET['paramName']]);
-        }
     }
     
+    
+    /** 
+     * @Route ("index.php?url=newProducts")
+     */
     public function displayNewProducts()
     {
         $products = $this->repository->fetchNewProducts();
-
-        $catRepo = new CategoryRepository();
-        $categories = $catRepo->fetchAll();
-        
-        if (!isset($_SESSION['user'])) {
-            $this->displayTwig('products', [
-                'products' => $products,
-                'categories' => $categories,
-                'paramName' => $_GET['paramName']]);
-            
-        } else {
-            $this->displayTwig('products', [
-                'session' => unserialize($_SESSION['user']),
-                'products' => $products,
-                'categories' => $categories,
-                'paramName' => $_GET['paramName']]);
-        }
+      
+        $this->displayTwig('products', [
+            'products' => $products,
+            'paramName' => $_GET['paramName']]);
     }
     
+    
+    /** 
+     * @Route ("index.php?url=productDetail")
+     */
     public function displayProductDetail()
     {
-        $catRepo = new CategoryRepository();
-        $categories = $catRepo->fetchAll();
-        
         $product = new Product();
         $product->setId($_GET['id']);
+        
         $data = $this->repository->fetchProduct($product);
+        
         $paramName = $data->getCategory()->getName();
 
-
-        
-        if (!isset($_SESSION['user'])) {
-            $this->displayTwig('productDetail', [
-                'product' => $data,
-                'categories' => $categories,
-                'paramName' => $paramName]);
-            
-        } else {
-            $this->displayTwig('productDetail', [
-                'session' => unserialize($_SESSION['user']),
-                'product' => $data,
-                'categories' => $categories,
-                'paramName' => $paramName]);
-        }
+        $this->displayTwig('productDetail', [
+            'product' => $data,
+            'paramName' => $paramName]);
     }
     
-        
+    
+    /** 
+     * @Route ("index.php?url=addProduct")
+     */    
     public function displayAddProductForm()
     {
-        $catRepo = new CategoryRepository();
-        $categories = $catRepo->fetchAll();
-        
-        if (!isset($_SESSION['user'])) {
-            $this->displayTwig('login');
-            
-        } else {
-            $this->displayTwig('addProductForm', [
-                'session' => unserialize($_SESSION['user']),
-                'categories' => $categories]);
-        }
+        $this->displayTwig('addProductForm');
     }
     
+    
+    /** 
+     * @Route ("index.php?url=updateProductForm")
+     */
     public function displayUpdateProductForm()
     {
-        $catRepo = new CategoryRepository();
-        $categories = $catRepo->fetchAll();
-        
         $product = new Product();
         $product->setId($_GET['id']);
         
         $data = $this->repository->fetchProduct($product);
-        
-        if (!isset($_SESSION['user'])) {
-            $this->displayTwig('login');
-            
-        } else {
-            $this->displayTwig('updateProductForm', [
-                'session' => unserialize($_SESSION['user']),
-                'categories' => $categories,
-                'product' => $data]);
-        }
+       
+        $this->displayTwig('updateProductForm', [
+            'product' => $data]);
+
     }
     
     
+    /** 
+     * @Route ("index.php?url=insertProduct")
+     */
     public function insertProduct()
     {
         if (isset($_FILES['image'])) {
@@ -177,6 +142,9 @@ class ProductController extends AbstractController
     }
     
     
+    /** 
+     * @Route ("index.php?url=updateProduct")
+     */
     public function updateProduct()
     {
         if (isset($_FILES['image'])) {
@@ -226,6 +194,9 @@ class ProductController extends AbstractController
     }
     
     
+    /** 
+     * @Route ("index.php?url=deleteProduct")
+     */
     public function deleteProduct()
     {
         $product = new Product();

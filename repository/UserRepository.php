@@ -11,7 +11,8 @@ class UserRepository extends AbstractRepository {
     }
     
     
-    public function fetchLogin($email) {
+    public function fetchLogin($email)
+    {
         $data = null;
 
         try {
@@ -21,12 +22,47 @@ class UserRepository extends AbstractRepository {
                 $query->bindParam(":email", $email);
                 $query->execute();
                 $data = $query->fetch(PDO::FETCH_ASSOC);
+                
+                $user = new User();
+                    $user->setId($data['id']);
+                    $user->setLastName($data['last_name']);
+                    $user->setFirstName($data['first_name']);
+                    $user->setEmail($data['email']);
+                    $user->setPassword($data['password']);
+                    $user->setRole($data['role']);
+                
+                return $user;
             }
         } catch (Exception $e) {
             $data = $e;
         }
+    }
+    
+    public function fetchById($id)
+    {
+        $data = null;
 
-        return $data;
+        try {
+            $query = $this->connexion->prepare("SELECT * FROM user WHERE id = :id");
+            
+            if ($query) {
+                $query->bindParam(":id", $id);
+                $query->execute();
+                $data = $query->fetch(PDO::FETCH_ASSOC);
+                
+                $user = new User();
+                    $user->setId($data['id']);
+                    $user->setLastName($data['last_name']);
+                    $user->setFirstName($data['first_name']);
+                    $user->setEmail($data['email']);
+                    $user->setPassword($data['password']);
+                    $user->setRole($data['role']);
+                
+                return $user;
+            }
+        } catch (Exception $e) {
+            $data = $e;
+        }
     }
     
     
@@ -44,18 +80,16 @@ class UserRepository extends AbstractRepository {
             $query->bindValue(':postal_code', $user->getPostalCode());
             $query->bindValue(':city', $user->getCity());
             $query->bindValue(':role', $user->getRole());
-            $query->execute();
-            $user = $query->fetchObject("user");
-            
-            return $user;
+            return $query->execute();
+
             
         } catch (Exception $e) {
-            $data = $e;
+            return false;
         }
     }
     
     
-    public function  updateProfil(User $user) 
+    public function  updateProfil(User $user): bool 
     {
         try {
             $query = $this->connexion->prepare("UPDATE user SET last_name = :lastName, 
@@ -65,32 +99,27 @@ class UserRepository extends AbstractRepository {
             $query->bindValue(':lastName', $user->getLastName());
             $query->bindValue(':firstName', $user->getFirstName());
             $query->bindValue(':email', $user->getEmail());
-            $query->execute();
-            //var_dump($user);
-            //die();
-            return $user;
+            
+            return $query->execute();
             
         } catch (Exception $e) {
-            $data = $e;
+            return false;
         }
     }
     
     
-    public function  updatePassword(User $user) 
+    public function  updatePassword(User $user): bool 
     {
         try {
-            //var_dump($user);
-            //die();
             $query = $this->connexion->prepare("UPDATE user SET password = :password WHERE id = :id");
             
             $query->bindValue(':id', $user->getId());
             $query->bindValue(':password', $user->getPassword());
-            $query->execute();
-
-            return $user;
             
+            return $query->execute();
+
         } catch (Exception $e) {
-            $data = $e;
+            return false;
         }
     }
     
@@ -98,18 +127,14 @@ class UserRepository extends AbstractRepository {
     public function  deleteAccount(User $user): bool 
     {
         try {
-            //var_dump($user);
-            //die();
             $query = $this->connexion->prepare("DELETE FROM user WHERE id = :id");
             
             $query->bindValue(':id', $user->getId());
-            $query->execute();
-            return true;
             
-            //return $user;
+            return $query->execute();
             
         } catch (Exception $e) {
-            $data = $e;
+            return false;
         }
     }
 }

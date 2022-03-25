@@ -1,0 +1,30 @@
+- Commenter le code,
+- Code propre, bien indenté, respect des conventions, cohérence des noms variables / fonctions et classes
+
+- Attention à la sécurité (htmlspecialchars pour formulaires, protection des routes, etc...)
+
+- Faire formulaire login en Javascript ?
+- Faire barre de recherche AJAX
+- Javascript : animation type loader sur bouton ou autre.
+
+- Bootstrap : plutôt les formulaires
+- Faire quelques pages en CSS à la main (admin) + header et footer -> attention RESPONSIVE
+
+- Gérer les erreurs et les exceptions
+
+- Lorsqu'il y a un update ou delete => supprimer l'ancienne image ? (product et category) => a voir
+
+
+
+-----------------------------------------------------------------------------------------------------
+- Supprimer "address", "postal code" et "city" de la table User en BDD + du model User.
+- Lorsque modification d'une annonce => updated at doit être maj
+- Lorsque création d'une annonce => created at doit être maj "NOW()" dans la requête SQL ?
+- Price doit être un string pour permettre les décimales et ensuite utiliser parseInt !
+- Ajouter le numéro de téléphone ? Si oui = string varchar 20
+
+- Côté admin => AdminController / adminLayout.twig
+ -> attention à bien sécuriser les routes admin
+ 
+- Formulaires : tous les champs sont required ! Voir pour que ce ne soit pas le cas, que l'on puisse modifier qu'un élément si nécessaire
+(avec value ça devrait être ok mais voir surtout pour les images)

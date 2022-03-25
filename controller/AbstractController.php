@@ -2,6 +2,7 @@
 
 use Twig\Environment;
 
+require_once './repository/CategoryRepository.php';
 require_once './vendor/autoload.php';
 
 abstract class AbstractController
@@ -11,16 +12,23 @@ abstract class AbstractController
     private $twig;
     private array $params;
 
-    public function __construct()
-    {
-        // Voir si devra être complété
-    }
-    
-    
     public function displayTwig($page, $params = []) 
     {
         $this->constructTwig();
-        echo $this->twig->render($page . '.twig', $params);
+        
+        $catRepo = new CategoryRepository();
+        $categories = $catRepo->fetchAll();
+        $categories = ['categories' => $categories];
+        
+        $tabs = array_merge($params, $categories);
+        
+        if (!isset($_SESSION['user'])) {
+            echo $this->twig->render($page . '.twig', $tabs);
+        } else {
+            $session = ['session' => unserialize($_SESSION['user'])];
+            $tabs = array_merge($params, $categories, $session);
+            echo $this->twig->render($page . '.twig', $tabs);
+        }
     }
     
     public function constructTwig() {

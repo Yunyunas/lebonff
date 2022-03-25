@@ -9,11 +9,16 @@ class SecurityController extends AbstractController {
 
     private $repository;
     
+
     public function __construct()
     {
         $this->repository = new UserRepository();
     }
     
+    
+    /** 
+     * @Route ("index.php?url=register")
+     */
     public function displayRegister() 
     {
          if (!isset($_SESSION['user'])) {
@@ -25,6 +30,10 @@ class SecurityController extends AbstractController {
         }
     }
     
+    
+    /** 
+     * @Route ("index.php?url=login")
+     */
     public function displayLogin() 
     {
          if (!isset($_SESSION['user'])) {
@@ -37,6 +46,9 @@ class SecurityController extends AbstractController {
     }
     
     
+    /** 
+     * @Route ("index.php?url=securityRegister")
+     */
     public function securityRegister(): void
     {
         
@@ -55,7 +67,9 @@ class SecurityController extends AbstractController {
         
         $this->repository->insert($user);
         
-        // J'instancie les informations de mon user actuel dans la SESSION
+
+        $user = $this->repository->fetchLogin($user->getEmail());
+
         $_SESSION['user'] = [
                 'id' => $user->getId(),
                 'lastName' => $user->getLastName(),
@@ -70,6 +84,10 @@ class SecurityController extends AbstractController {
         exit();
     }
     
+    
+    /** 
+     * @Route ("index.php?url=securityLogin")
+     */
     public function securityLogin(): void
     {
         if(!isset($_POST['email'], $_POST['password'])){
@@ -80,20 +98,12 @@ class SecurityController extends AbstractController {
         $email = htmlspecialchars($_POST['email']);
         $password = htmlspecialchars($_POST['password']);
 
-        $data = $this->repository->fetchLogin($email);
+        $user = $this->repository->fetchLogin($email);
         
-        if($data){
-            if(password_verify ($password, $data['password'])) {
+        if($user){
+            if(password_verify ($password, $user->getPassword())) {
             
-            $user = new User();
-
-            $user->setId($data['id']);
-            $user->setLastName($data['last_name']);
-            $user->setFirstName($data['first_name']);
-            $user->setEmail($data['email']);
-            $user->setRole($data['role']);
-            
-            // J'instancie les informations de mon user actuel dans la SESSION
+           // J'instancie les informations de mon user actuel dans la SESSION
             $_SESSION['user'] = [
                 'id' => $user->getId(),
                 'lastName' => $user->getLastName(),
@@ -120,6 +130,10 @@ class SecurityController extends AbstractController {
         }
     }
     
+    
+    /** 
+     * @Route ("index.php?url=logout")
+     */
     public function logout(): void
     {
         session_destroy();
@@ -127,7 +141,8 @@ class SecurityController extends AbstractController {
         exit();
     }
     
-     public function debug() {
+    
+    public function debug() {
         echo ("Infos de la session : ");
         var_dump ($_SESSION);
         

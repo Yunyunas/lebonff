@@ -10,8 +10,8 @@ class CategoryRepository extends AbstractRepository {
         parent::__construct(self::TABLE);
     }
 
-    public function fetchCategory($id) {
-        
+    public function fetchCategory($id) 
+    {
         $data = null;
         try {
             $query = $this->connexion->prepare("SELECT * from category WHERE id = :id");
@@ -22,7 +22,7 @@ class CategoryRepository extends AbstractRepository {
             
             }
         } catch (Exception $e) {
-            $data = $e;
+            return $e;
         }
 
         return $data;
@@ -38,21 +38,19 @@ class CategoryRepository extends AbstractRepository {
             $query->bindValue(':name', $category->getName());
             $query->bindValue(':description', $category->getDescription());
             $query->bindValue(':url_picture', $category->getUrlPicture());
-            $query->execute();
-            $category = $query->fetchObject("category");
             
-            return $category;
+            return $query->execute();
             
         } catch (Exception $e) {
-            $data = $e;
+            //return $e;
+            return false;
         }
     }
     
     
-    public function  update(Category $category)
+    public function  update(Category $category): bool
     {
         try {
-
             $query = $this->connexion->prepare("UPDATE category SET name = :name, 
             description = :description, url_picture = :url_picture WHERE id = :id");
             
@@ -60,26 +58,28 @@ class CategoryRepository extends AbstractRepository {
             $query->bindValue(':name', $category->getName());
             $query->bindValue(':description', $category->getDescription());
             $query->bindValue(':url_picture', $category->getUrlPicture());
-            $query->execute();
-
-            return $category;
+            
+            return $query->execute();
             
         } catch (Exception $e) {
-            $data = $e;
+            //return $e;
+            return false;
         }
     }
     
     
-    public function  delete(Category $category)
+    public function delete(Category $category): bool
     {
         try {
             $query = $this->connexion->prepare("DELETE FROM category WHERE id = :id");
             
             $query->bindValue(':id', $category->getId());
-            $query->execute();
+            
+            return $query->execute();
             
         } catch (Exception $e) {
-            $data = $e;
+            //return $e;
+            return false;
         }
     }
     

@@ -15,50 +15,39 @@ class CategoryController extends AbstractController
     }
     
     
+    /** 
+     * @Route ("index.php?url=categories")
+     */
     public function displayCategories()
     {
-        $datas = $this->repository->fetchAll();
-        
-        if (!isset($_SESSION['user'])) {
-            $this->displayTwig('categories', [
-                'categories' => $datas]);
-            
-        } else {
-            $this->displayTwig('categories', [
-                'session' => unserialize($_SESSION['user']),
-                'categories' => $datas]);
-        }
+        $this->displayTwig('categories');
     }
     
     
+    /** 
+     * @Route ("index.php?url=addCategory")
+     */
     public function displayAddCategoryForm()
     {
-        if (!isset($_SESSION['user'])) {
-            $this->displayTwig('addCategoryForm');
-            
-        } else {
-            $this->displayTwig('addCategoryForm', [
-                'session' => unserialize($_SESSION['user'])]);
-        }
+        $this->displayTwig('addCategoryForm');
     }
     
     
-        public function displayUpdateCategoryForm()
+    
+    /** 
+     * @Route ("index.php?url=updateCategoryForm")
+     */
+    public function displayUpdateCategoryForm()
     {
-        
         $data = $this->repository->fetchCategory($_GET['id']);
-        
-        if (!isset($_SESSION['user'])) {
-            $this->displayTwig('updateCategoryForm');
-            
-        } else {
-            $this->displayTwig('updateCategoryForm', [
-                'session' => unserialize($_SESSION['user']),
-                'category' => $data]);
-        }
+        $this->displayTwig('updateCategoryForm', [
+            'category' => $data]);
     }
     
     
+    /** 
+     * @Route ("index.php?url=insertCategory")
+     */
     public function insertCategory() 
     {
         if (isset($_FILES['image'])) {
@@ -95,6 +84,10 @@ class CategoryController extends AbstractController
         }
     }
     
+    
+    /** 
+     * @Route ("index.php?url=updateCategory")
+     */
     public function updateCategory()
     {
        
@@ -135,6 +128,9 @@ class CategoryController extends AbstractController
     }
     
     
+    /** 
+     * @Route ("index.php?url=deleteCategory")
+     */
     public function deleteCategory()
     {
         $category = new Category();

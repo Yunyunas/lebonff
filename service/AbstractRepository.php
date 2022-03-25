@@ -18,15 +18,17 @@ abstract class AbstractRepository
         $this->table = $table;
     }
     
-    public function fetchAll(){
+    public function fetchAll(): array
+    {
         $data = null;
         try {
             $resultat = $this->connexion->query('SELECT * FROM '.$this->table);
             if ($resultat) {
                 $data = $resultat->fetchAll(PDO::FETCH_ASSOC);
             }
+            
         } catch (Exception $e) {
-            die($e);
+            return $e;
         }
         
         return $data;

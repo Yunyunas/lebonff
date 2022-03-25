@@ -1,0 +1,372 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    width: 100%;
+    background: #E5E7EB;
+    position: relative;
+    display: flex;
+}
+
+#menu {
+    background-color: #111827;
+    width: 300px;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+#menu .logo {
+    display: flex;
+    align-items: center;
+    color: #fff;
+    padding: 30px 0 0 30px;
+}
+
+#menu .logo a {
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+}
+
+#menu .logo img {
+    width: 40px;
+    margin-right: 15px;
+}
+
+#menu .items {
+    margin-top: 40px;
+} 
+
+#menu .items li {
+    list-style: none;
+    padding: 15px 0;
+    transition: 0.3s ease;
+}
+
+#menu .items li:hover {
+    background-color: #253047;
+    cursor: pointer;
+}
+
+#menu .items li:nth-child(1) {
+    border-left: 4px solid #fff;
+}
+
+#menu .items li i {
+    color: rgb(134, 141, 151);
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    font-size: 14px;
+    margin: 0 10px 0 25px;
+}
+
+#menu .items li:hover i,
+#menu .items li:hover a {
+    color: #F3F4F6;
+}
+
+#menu .items li a {
+    text-decoration: none;
+    color: rgb(134, 141, 151);
+    font-weight: 300;
+    transition: 0.3s ease;
+}
+
+#interface {
+    width: calc(100% - 300px);
+    margin-left: 300px;
+    position: relative;
+}
+
+#interface .navigation {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #fff;
+    padding: 15px 30px;
+    border-bottom: 3px solid #594ef7;
+    position: fixed;
+    width: calc(100% - 300px);
+}
+
+#interface .navigation .search {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 10px 14px;
+    border: 1px solid #d7dbe6;
+    border-radius: 6px;
+}
+
+#interface .navigation .search i {
+    margin-right: 14px;
+}
+
+/* Voir pour le "outline" */
+#interface .navigation .search input {
+    border: none;
+    outline: none;
+    font-size: 14px;
+}
+
+#interface .navigation .profile {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+#interface .navigation .profile img {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.flex {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+#menu-btn {
+    display: none;
+    color: #2b2b2b;
+    font-size: 20px;
+    cursor: pointer;
+    margin-right: 20px;
+}
+
+.title {
+    color: #444a53;
+    padding: 30px 30px 0 30px;
+    font-size: 24px;
+    font-weight: 800;
+    margin-top: 70px;
+}
+
+.cards {
+    padding: 30px 30px 0 30px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.cards .card-box {
+    background-color: #fff;
+    width: 235px;
+    padding: 16px 20px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.cards .card-box i {
+    font-size: 22px;
+    width: 60px;
+    height: 50px;
+    line-height: 50px;
+    border-radius: 50%;
+    text-align: center;
+    color: #fff;
+    margin-right: 15px;
+}
+
+.cards .card-box:nth-child(1) i {
+    background-color: #7B74EC;
+}
+
+.cards .card-box:nth-child(2) i {
+    background-color: #5C8AF0;
+}
+
+.cards .card-box:nth-child(3) i {
+    background-color: #E45D99;
+}
+
+.cards .card-box span {
+    font-size: 16px;
+    font-weight: 600;
+    color: #828997;
+}
+
+.cards .card-box a {
+    text-decoration: none;
+}
+
+.board {
+    width: 94%;
+    margin: 30px 0 30px 30px;
+    overflow: auto;
+    background-color: #fff;
+    border-radius: 8px;
+}
+
+.board img {
+    width: 45px;
+    height: 45px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-right: 15px;
+}
+
+.board h5 {
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.board p {
+    font-weight: 400;
+    font-size: 13px;
+    color: #787d8d;
+}
+
+.board .people {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: start;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+tr {
+    border-bottom: 1px solid #eef0f3;
+}
+
+thead td{
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: 400;
+    background-color: #F9FAFB;
+    text-align: start;
+    padding: 15px;
+}
+
+tbody tr td {
+    padding: 10px 10px;
+}
+
+tbody tr td a {
+    text-decoration: none;
+    color: black;
+}
+
+.edit a {
+    text-decoration: none;
+    font-size: 14px;
+    color: #554cd1;
+    font-weight: 600;
+}
+
+.edit a i {
+    margin-left: 10px;
+}
+
+.delete a {
+    text-decoration: none;
+    font-size: 14px;
+    color: #860319;
+    font-weight: 600;
+}
+
+.delete a i {
+    margin-left: 10px;
+}
+
+@media (max-width: 1024px) {
+    #menu {
+        width: 270px;
+        position: fixed;
+        left: -270px;
+        transition: 0.3s ease;
+    }
+    
+    #menu.active{
+        left: 0px;
+    }
+    
+    #menu-btn {
+        display: initial;
+    }
+    
+    #interface {
+        width: 100%;
+        margin-left: 0px;
+        display: inline-block;
+        transition: 0.3s ease;
+    }
+    
+    #interface.active {
+        width: calc(100% - 270px);
+        margin-left: 270px;
+    }
+    
+    #interface .navigation {
+        width: 100%;
+    }
+    
+    .cards {
+    	padding: 30px 30px 0 30px;
+    	justify-content: flex-start;
+    }
+    
+    .cards .card-box {
+        padding: 16px 20px;
+        margin: 10px 20px 10px 0;
+    }
+    
+    .board {
+        width: 92%;
+        padding: 0;
+        overflow-x: auto;
+    }
+    
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+}
+
+@media (max-width: 500px) {
+    #interface .navigation {
+        padding: 15px;
+    }
+    
+    #interface .navigation .search input {
+        width: 150px;
+    }
+    
+    .title {
+        padding: 30px 15px 0 15px;
+    }
+    
+    .cards {
+        padding: 15px 15px 0 15px;
+    }
+    
+    .cards .card-box {
+        width: 100%;
+        margin: 8px 0;
+    }
+    
+    .board {
+        margin: 30px 15px 30px 15px;
+    }
+}

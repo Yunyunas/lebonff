@@ -1,0 +1,47 @@
+{% extends "adminLayout.twig" %}
+
+{% block title %} <title>Admin</title> {% endblock %}
+
+{% block content %}
+
+	<div class="board">
+	    <table>
+	        <thead>
+	            <tr>
+	                <td>Nom</td>
+	                <td>Description</td>
+	                <td>Image</td>
+	                <td>Modifier</td>
+	                <td>Supprimer</td>
+	            </tr>
+	        </thead>
+	        <tbody>
+	        	{% for category in categories %}
+	            <tr>
+	                <td class="people">
+	                    <img src="./public/img/categories/{{category.url_picture}}" alt="Image de {{category.name}}">
+	                    <div class="name">
+	                        <h5>{{category.name}}</h5>
+	                        <p>{{category.id}}</p>
+	                    </div>
+	                </td>
+	                
+	                <td>
+	                    <p>{{category.description}}</p>
+	                </td>
+	                
+	                <td class="role">
+	                    <p>{{category.url_picture}}</p>
+	                </td>
+	                <td class="edit"><a href="index.php?url=updateCategoryForm&id={{category.id}}">Modifier<i class="fa-solid fa-pen"></i></a></td>
+	                
+	                <td class="delete"><a href="index.php?url=deleteCategory&id={{category.id}}">Supprimer<i class="fa-solid fa-ban"></i></a></td>
+	            </tr>
+	          	{% endfor %}
+	      	</tbody>
+	    </table>
+	</div>
+</section>
+
+
+{% endblock %}

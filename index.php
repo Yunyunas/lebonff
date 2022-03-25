@@ -7,16 +7,24 @@ require_once './controller/SecurityController.php';
 require_once './controller/UserController.php';
 require_once './controller/ProductController.php';
 require_once './controller/CategoryController.php';
+require_once './controller/AdminController.php';
 
 $url = $_GET['url'] ?? "home";
 
 switch($url){
     
+    
+    /** 
+     * HOME
+     */
     case "home" : 
         $homeController = new HomeController();
         $homeController->displayHome();
         break;
-       
+    
+    /** 
+     * SECURITY
+     */   
     case "login" : 
         $securityController = new SecurityController();
         $securityController->displayLogin();
@@ -26,17 +34,29 @@ switch($url){
         $securityController = new SecurityController();
         $securityController->displayRegister();
         break;
-        
+    
+    
+    /** 
+     * USER
+     */
     case "account" : 
         $userController = new UserController();
         $userController->displayAccount();
         break;
     
-    case "updateAccount" : 
+    case "updateMyAccount" : 
         $userController = new UserController();
-        $userController->displayUpdateAccount();
+        $userController->displayUpdateMyAccount();
         break;
         
+    case "updateAccountAdmin" :
+        $adminController = new AdminController();
+        $adminController->displayUpdateAccount();
+        break;
+        
+    /** 
+     * CATEGORY
+     */
     case "categories" : 
         $categoryController = new CategoryController();
         $categoryController->displayCategories();
@@ -51,7 +71,10 @@ switch($url){
         $categoryController = new CategoryController();
         $categoryController->displayUpdateCategoryForm();
         break;
-        
+    
+    /** 
+     * PRODUCT
+     */    
     case "products" : 
         $productController = new ProductController();
         $productController->displayProducts();
@@ -75,6 +98,24 @@ switch($url){
     case "updateProductForm" :
         $productController = new ProductController();
         $productController->displayUpdateProductForm();
+        break;
+    
+    /** 
+     * ADMIN
+     */    
+    case "admin" : 
+        $adminController = new AdminController();
+        $adminController->displayAdmin();
+        break;
+        
+    case "adminCategories" : 
+        $adminController = new AdminController();
+        $adminController->displayAdminCategories();
+        break;
+        
+    case "adminProducts" : 
+        $adminController = new AdminController();
+        $adminController->displayAdminProducts();
         break;
         
         
@@ -111,9 +152,9 @@ switch($url){
         $userController->updatePassword();
         break;
         
-    case "deleteAccount" : 
+    case "deleteMyAccount" : 
         $userController = new UserController();
-        $userController->deleteAccount();
+        $userController->deleteMyAccount();
         break;
         
     /** 
@@ -152,6 +193,19 @@ switch($url){
         $productController->deleteProduct();
         break;
         
+    /**
+     * ADMIN
+     */
+    case "updateAccount" : 
+        $adminController = new AdminController();
+        $adminController->updateAccount();
+        break;
+    
+    case "deleteAccount" : 
+        $adminController = new AdminController();
+        $adminController->deleteAccount();
+        break;
+        
     // -------------------------- DEBUG / TEST ---------------------------------
     
     case "debug":
@@ -159,6 +213,14 @@ switch($url){
         $securityController->debug();
         break;
         
+    case "test":
+        $homeController = new HomeController();
+        $homeController->test();
+        break;
+    
+    
+    // ------------------------- PAGE ERROR 404 --------------------------------
+    
     default:
         $homeController = new HomeController();
         $homeController->displayError404();

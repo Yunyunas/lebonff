@@ -14,30 +14,34 @@ class UserController extends AbstractController
         $this->repository = new UserRepository();
     }
     
+    
+    /** 
+     * @Route ("index.php?url=account")
+     */
     public function displayAccount() 
     {
         $productRepository = new ProductRepository();
         $user = unserialize($_SESSION['user']);
         $products = $productRepository->fetchByUser($user);
 
-        
-        if (!isset($_SESSION['user'])) {
-            $this->displayTwig('login');
-            
-        } else {
-            $this->displayTwig('account', [
-            'session' => unserialize($_SESSION['user']),
+        $this->displayTwig('account', [
             'products' => $products]);
-        }
     }
     
-    // Affichage de la page modification profil
-    public function displayUpdateAccount(): void
+    
+    /** 
+     * @Route ("index.php?url=updateMyAccount")
+     */
+    public function displayUpdateMyAccount(): void
     {
         $this->displayTwig('updateAccountForm', [
             'session' => unserialize($_SESSION['user'])]);
     }
     
+    
+    /** 
+     * @Route ("index.php?url=updateProfil")
+     */
     public function updateProfil(): void
     {
         // Dans l'idée ou je ne veux modifier qu'un champs, soit je fais des
@@ -71,6 +75,9 @@ class UserController extends AbstractController
     }
     
     
+    /** 
+     * @Route ("index.php?url=updatePassword")
+     */
     public function updatePassword(): void
     {
         $passwordOld = htmlspecialchars($_POST['passwordOld']);
@@ -100,7 +107,11 @@ class UserController extends AbstractController
         }   
     }
     
-    public function deleteAccount(): void 
+    
+    /** 
+     * @Route ("index.php?url=deleteMyAccount")
+     */
+    public function deleteMyAccount(): void 
     {
         // Fonction pour supprimer le compte et donc le user
         // Demande confirmation du mot de passe pour valider la suppression
@@ -117,7 +128,5 @@ class UserController extends AbstractController
             header('location: ./index.php?url=account');
             exit();
         }
-
-        
     }
 }

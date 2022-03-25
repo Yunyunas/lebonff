@@ -1,0 +1,62 @@
+{% extends "adminLayout.twig" %}
+
+{% block title %} <title>Admin</title> {% endblock %}
+
+{% block content %}
+
+	<div class="board">
+	    <table>
+	        <thead>
+	            <tr>
+	                <td>Annonce</td>
+	                <td>Catégorie</td>
+	                <td>Utilisateur</td>
+	                <td>Description</td>
+	                <td>Prix</td>
+	                <td>Image</td>
+	                <td>Modifier</td>
+	                <td>Supprimer</td>
+	            </tr>
+	        </thead>
+	        <tbody>
+	        	{% for product in products %}
+	            <tr>
+	                <td class="people">
+	                    <img src="./public/img/products/{{product.url_picture}}" alt="Image de {{product.name}}">
+	                    <div class="name">
+							<a href="index.php?url=product&id={{product.id}}&paramName={{paramName}}"><h5>{{product.name}}</h5></a>
+	                        <p>{{product.id}}</p>
+	                    </div>
+	                </td>
+	                
+	                <td>
+	                    <p>Catégorie</p>
+	                </td>
+	                
+	                <td>
+	                    <p>Utilisateur</p>
+	                </td>
+	                
+	                <td>
+	                    <p>{{product.description}}</p>
+	                </td>
+	                
+	                <td>
+	                    <p>{{product.price}} €</p>
+	                </td>
+	                
+	                <td class="role">
+	                    <p>{{product.url_picture}}</p>
+	                </td>
+	                <td class="edit"><a href="index.php?url=updateProductForm&id={{product.id}}">Modifier</a></td>
+	                
+	                <td class="delete"><a href="index.php?url=deleteProduct&id={{product.id}}">Supprimer</a></td>
+	            </tr>
+	          	{% endfor %}
+	      	</tbody>
+	    </table>
+	</div>
+</section>
+
+
+{% endblock %}

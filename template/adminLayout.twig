@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+    <head>
+    	<meta charset="utf-8">
+    	<meta name="description" content="site petites annonces sur l'univers de final fantasy">
+    	<meta name="keywords" content="final fantasy materia arme tifa cloud">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    	{% block title %}<title>Admin</title>{% endblock %}
+
+        {% block stylesheets %} 
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <link rel="stylesheet" href="./public/css/admin.css" />    
+        {% endblock %}
+        
+        {% block javascripts %}
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        {% endblock %}
+        
+    </head>
+    
+    <body>
+        <header>
+            <nav id="menu">
+                <div class="logo">
+                    <a href="index.php?url=home"><img src="./public/img/logotest.png" alt="logo"></a>
+                    <a href="index.php?url=home"><h2>Le bon FF</h2></a>
+                </div>
+                
+                <ul class="items">
+                    <li><i class="fa-solid fa-gear"></i><a href="index.php?url=admin">Tableau administrateur</a></li>
+                    <li><i class="fas fa-fw fa-folder"></i><a href="index.php?url=adminCategories">Catégories</a></li>
+                    <li><i class="fas fa-fw fa-folder"></i><a href="index.php?url=adminProducts">Annonces</a></li>
+                    <li><i class="fa-solid fa-users"></i><a href="index.php?url=admin">Utilisateurs</a></li>   
+                </ul>
+            </nav>
+        </header>
+        
+        <section id="interface">
+            <div class="navigation">
+                <div class="flex">
+                    <div>
+                        <i id="menu-btn" class="fa-solid fa-bars"></i>
+                    </div>
+                    <div class="search">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="text" placeholder="Rechercher">
+                    </div>
+                </div>
+                
+                <div class="profile">
+                    <a href="index.php?url=account"><img src="./public/img/1.png" alt="image de profil"></a>
+                </div>
+            </div>
+            
+            <h3 class="title">Tableau administrateur</h3>
+            
+            <div class="cards">
+                <div class="card-box">
+                    <i class="fas fa-fw fa-folder"></i>
+                    <div>
+                        <a href="index.php?url=addCategory">
+                            <span>Ajouter une catégorie</span>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="card-box">
+                    <i class="fas fa-fw fa-folder"></i>
+                    <div>
+                        <a href="index.php?url=addProduct">
+                            <span>Ajouter une annonce</span>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="card-box">
+                    
+                    <i class="fa-solid fa-users"></i>
+                    <div>
+                        <a href="index.php?url=admin">
+                            <span>Gérer les utilisateurs</span> 
+                        </a>
+                    </div>
+                   
+                </div>
+            </div>
+    
+        
+        {% block content %}{% endblock %}
+        
+    <script type="text/javascript">
+        $('#menu-btn').click(function() {
+            $('#menu').toggleClass("active");
+            $('#interface').toggleClass("active");
+        })
+    </script>
+    
+    </body>
+</html>

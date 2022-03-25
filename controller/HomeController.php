@@ -6,25 +6,34 @@ require_once './controller/AbstractController.php';
 class HomeController extends AbstractController {
 
 
+    /** 
+     * @Route ("index.php?url=home")
+     */
     public function displayHome()
     {
         $productRepository = new ProductRepository();
         $products = $productRepository->fetchNewProducts();
         
-        if (!isset($_SESSION['user'])) {
-            $this->displayTwig('home', [
+        $this->displayTwig('home', [
                 'products' => $products]);
-            
-        } else {
-            $this->displayTwig('home', [
-                'session' => unserialize($_SESSION['user']),
-                'products' => $products]);
-        }
-
     }
     
+    
+    /** 
+     * @Route ("index.php?url=error404")
+     * @Route par défault
+     */
     public function displayError404()
     {
         $this->displayTwig('error404');
     }
+    
+    /** 
+     * @Route ("index.php?url=test")
+     */
+    public function test()
+    {
+        $this->displayTwig('testHeader2');
+    }
+    
 }
