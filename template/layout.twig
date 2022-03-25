@@ -13,6 +13,7 @@
             	<!--<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">-->
         <link href="public/css/bootstrap.min.css" rel="stylesheet">
         <link href="public/css/style.css" rel="stylesheet">
+        <link href="public/css/layout.css" rel="stylesheet"></link>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         {% endblock %}
         
@@ -20,86 +21,84 @@
     
     <body>
         <header>
-            <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-              <div class="container-fluid">
-                <a class="navbar-brand" href="index.php?url=home">Le Bon Final Fantasy</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-                  <span class="navbar-toggler-icon"></span>
-                </button>
-            
-                <div class="collapse navbar-collapse" id="navbarColor01">
-                  <ul class="navbar-nav me-auto">
-                    <li class="nav-item">
-                      <a class="nav-link active" href="index.php?url=home">Accueil
-                        <span class="visually-hidden"></span>
-                      </a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="index.php?url=categories">Catégories</a></a>
-                    </li>
-                    {#
-                  <li class="nav-item">
-                    <a class="nav-link" href="index.php?url=debug">Debug</a>
-                  </li>#}
-                  
-                  <li class="nav-item">
-                      <a class="nav-link" href={{session.id != '' ? 'index.php?url=logout' : 'index.php?url=login'}}>
-                          {{session.id != '' ? 'Deconnexion' : 'Se connecter'}}
-                      </a>
-                  </li>
-                  
-                  <li class="nav-item">
-                      <a class="nav-link btn btn-success" href="index.php?url=account" style="visibility:{{ session.id != '' ? 'visible' : 'hidden' }}">
-                          Mon compte
-                      </a>
-                  </li>
-                  </ul>
-                  <form class="d-flex">
-                    <input class="form-control me-sm-2" type="text" placeholder="Rechercher une annonce...">
-                    <button class="btn btn-secondary my-2 my-sm-0" type="submit">Rechercher</button>
-                  </form>
-                </div>
-              </div>
-            </nav>
-            
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container">
-                <div class="col-md-2">
-                </div>
-
-                <div class="collapse navbar-collapse col-md-8" id="navbarResponsive">
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item active">
-                            <a  class="nav-link active" href="index.php?url=newProducts&paramName=Nouveautés">NOUVEAUTES</a>
-                        </li>
-
-                    {% for category in categories %}
-
-                        <li class="nav-item">   
-                            <a  class="nav-link" href="index.php?url=products&id={{category.id}}&paramName={{category.name}}">
-                                {{category.name|upper}}
-                            </a>
-                        </li>
-
-                    {% endfor %}
+            <nav id="menu">
+                <div class="nav-menu">
+                    <div class="logo">
+                        <a href="index.php?url=home"><img src="./public/img/logotest.png" alt="logo"></a>
+                        <a href="index.php?url=home"><h2>Le bon Final Fantasy</h2></a>
+                    </div>
+                    
+                    <ul class="items">
+                        <li><a href="index.php?url=home">Accueil</a></li>
+                        <li><a href="index.php?url=newProducts&paramName=Nouveautés">Nouveautés</a></li>
+                        <li><a href="index.php?url=categories">Catégories</a></li>
                     </ul>
                 </div>
-                <div class="col-md-2">
+                
+                <div class="nav-end">
+                    <div class="search">
+                        <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        <input type="text" placeholder="Rechercher">
+                    </div>
+                    
+                    <div class="profile">
+                        <!-- Voir pour si déconnecté => Se connecter (form JS + redirection vers inscription) / Si connecté => Mon compte + photo et menu déroulant déconnexion ? -->
+                        <a href={{session.id != '' ? 'index.php?url=account' : 'index.php?url=login'}}>{{session.id != '' ? 'Mon compte' : 'Se connecter'}}</a>
+                        <a href="index.php?url=account" style="visibility:{{ session.id != '' ? 'visible' : 'hidden' }}"><img src="./public/img/1.png" alt="image de profil"></a>
+                    </div>
                 </div>
+                
+            </nav>
+            
+            <div id="nav-cat">
+                <ul class="items-cat">
+                    {% for category in categories %}
+                        <li><a href="index.php?url=products&id={{category.id}}&paramName={{category.name}}">{{category.name}}</a></li>
+                    {% endfor %}
+                </ul>
             </div>
-        </nav>
-
-
         </header>
         
         {% block content %}{% endblock %}
         
-    <footer class="py-5 bg-primary">
-        <div class="container">
-            <nav class="bottomlinkt">
-                <p class="m-0 text-center text-white">Copyright &copy; Your Website 2022</p>
-            </nav>
-        </div>
-    </footer>	
+        <footer id="footer">
+            <div class="block">
+                <div class="site">
+                    <h2>Site</h2>
+                    <ul class="block-items">
+                        <li><a href="index.php?url=home">Page d'accueil</a></li>
+                        <li><a href="index.php?url=home">Page des nouveautés</a></li>
+                        <li><a href="index.php?url=home">Page des catégories</a></li>
+                        <li><a href="index.php?url=home">Mentions légales</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="block">
+                <div class="final-fantasy">
+                    <h2>Jeux Final Fantasy</h2>
+                    <ul class="block-items">
+                        <li>Final Fantasy VII</li>
+                        <li>Final Fantasy VIII</li>
+                        <li>Final Fantasy IX</li>
+                        <li>Final Fantasy X</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="collab">
+                <div class="block">
+                        <img src="./public/img/merci.png" alt="Image d'un formateur lambda">
+                </div>
+                
+                <div class="block">
+                    <img src="./public/img/merci3.png" alt="Image d'une collègue lambda">
+                </div>
+                
+                <div class="block">
+                    <img src="./public/img/merci2.png" alt="Image d'une collègue lambda">
+                </div>
+            </div>
+        </footer>	
     </body>
 </html>

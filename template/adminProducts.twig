@@ -22,7 +22,7 @@
 	        	{% for product in products %}
 	            <tr>
 	                <td class="people">
-	                    <img src="./public/img/products/{{product.url_picture}}" alt="Image de {{product.name}}">
+	                    <img src="./public/img/products/{{product.url_picture}}" alt="{{product.name}}">
 	                    <div class="name">
 							<a href="index.php?url=product&id={{product.id}}&paramName={{paramName}}"><h5>{{product.name}}</h5></a>
 	                        <p>{{product.id}}</p>
