@@ -33,7 +33,14 @@ class HomeController extends AbstractController {
      */
     public function test()
     {
-        $this->displayTwig('testHeader2');
+        $this->displayTwig('testHeader');
     }
     
+    /** 
+     * @Route ("index.php?url=test2")
+     */
+    public function test2()
+    {
+        $this->displayTwig('testHeader2');
+    }
 }
