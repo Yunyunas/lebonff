@@ -5,21 +5,15 @@
 
 <div class="container">
 
-    {#<div class="row">
-		<h1 class="my-4 col-md-4">Liste des annonces</h1>
-       	<div class="col-md-4">
-		</div>#}
-
-		<div class="col-md-8">
-			<a class="btn btn-success" id="btn-ajouter-rubrique" href="index.php?url=addProduct" style="visibility:{{ session.id != '' ? 'visible' : 'hidden' }}">Créer une annonce</a>
+    <div class="row">
+    	<div class="col-md-8">
+			<h1 class="my-4 col-md-8">Catégorie {{paramName}}</h1>
 		</div>
-
 		<div class="col-md-4">
-			<a class="btn btn-danger" id="btn-ajouter-rubrique" href="index.php?url=addProduct" style="visibility:{{ session.user.admin != 'admin' ? 'hidden' : 'visible' }}">Ajouter une catégorie</a>
+			<a class="my-5 px-5 btn btn-success" id="btn-ajouter-rubrique" href="index.php?url=addProduct" style="visibility:{{ session.id != '' ? 'visible' : 'hidden' }}">Créer une annonce</a>
 		</div>
 	</div>
-	
-	<h1 class="my-4">Catégorie {{paramName}}</h1>
+
 
     <div class="row">
         <div class="col-lg-3">
@@ -36,30 +30,29 @@
         </div>
 
         <div class="col-lg-9">
-
-		<div class="row">
-			{% for product in products %}
-				<div class="col-lg-3 col-md-4 col-sm-6 mb-4">
-				
-					<div class="card h-100">
-						<a href="index.php?url=product&id={{product.id}}&paramName={{paramName}}"><img class="card-img-top" src="./public/img/products/{{product.urlPicture}}" alt="Image de {{product.name}}"></a>
-						<div class="card-body">
-							<h4 class="card-title">
-								<a href="index.php?url=product&id={{product.id}}&paramName={{paramName}}">{{product.name}}</a>
-							</h4>
-							<p class="card-text">{{product.description}}</p>
-							<p class="card-text">{{product.price}} euros</p>
-							<p class="card-text">Annonce créée le {{product.created_at}} et par {{product.id_user}} dans la catégorie {{product.id_category.name}}</p>
-							<a class="btn btn-primary" href="index.php?url=updateProduct&id={{product.id}}" style="visibility:{{ session.role != 'admin' ? 'hidden' : 'visible' }}">Modifier</a>
-							<a class="btn btn-danger" href="index.php?url=deleteProduct&id={{product.id}}" style="visibility:{{ session.role != 'admin' ? 'hidden' : 'visible' }}">Supprimer</a>
+			<div class="row">
+				{% for product in products %}
+					<div class="col-lg-4 col-md-4 col-sm-6 mb-4">
+		
+						<div class="card h-100">
+							<a href="index.php?url=product&id={{product.id}}&paramName={{paramName}}"><img class="card-img-top" src="./public/img/products/{{product.urlPicture}}" alt="Image de {{product.name}}"></a>
+							<div class="card-body">
+								<h4 class="card-title">
+									<a href="index.php?url=product&id={{product.id}}&paramName={{paramName}}">{{product.name}}</a>
+								</h4>
+								<p class="card-text">{{product.description}}</p>
+								<p class="card-text">Prix : {{product.price}} euros</p>
+								<a class="btn btn-primary" href="index.php?url=updateProduct&id={{product.id}}" style="visibility:{{ session.role != 'admin' ? 'hidden' : 'visible' }}">Modifier</a>
+								<a class="btn btn-danger" href="index.php?url=deleteProduct&id={{product.id}}" style="visibility:{{ session.role != 'admin' ? 'hidden' : 'visible' }}">Supprimer</a>
+							</div>
+							
+		                    <div class="card-footer">
+	                        	<a href="index.php?url=product&id={{product.id}}&paramName={{paramName}}" class="btn btn-primary">Voir plus</a>
+	                    	</div>
 						</div>
-						
-	                    <div class="card-footer">
-                        	<a href="index.php?url=product&id={{product.id}}&paramName={{paramName}}" class="btn btn-primary">Voir plus</a>
-                    	</div>
 					</div>
-				</div>
-			{% endfor %}
+				{% endfor %}
+			</div>
 		</div>
 	</div>
 </div>

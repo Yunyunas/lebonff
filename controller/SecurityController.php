@@ -58,22 +58,21 @@ class SecurityController extends AbstractController {
         
         $user->setLastName(htmlspecialchars($_POST['lastName']));
         $user->setFirstName(htmlspecialchars($_POST['firstName']));
+        $user->setPhone(htmlspecialchars($_POST['phone']));
         $user->setEmail(htmlspecialchars($_POST['email']));
         $user->setPassword(htmlspecialchars($passwordObscure));
-        $user->setAddress("adresse par defaut");
-        $user->setPostalCode(56000);
-        $user->setCity("ville");
         $user->setRole('user');
         
         $this->repository->insert($user);
         
-
+        // A MODIFIER ABSOLUMENT CAR ACTUELLEMENT REGISTER AVEC UN EMAIL DEJA EN BDD = LOGIN SANS MDP
         $user = $this->repository->fetchLogin($user->getEmail());
 
         $_SESSION['user'] = [
                 'id' => $user->getId(),
                 'lastName' => $user->getLastName(),
                 'firstName' => $user->getFirstName(),
+                'phone' => $user->getPhone(),
                 'email' => $user->getEmail(),
                 'role' => $user->getRole()
                 ];
@@ -108,6 +107,7 @@ class SecurityController extends AbstractController {
                 'id' => $user->getId(),
                 'lastName' => $user->getLastName(),
                 'firstName' => $user->getFirstName(),
+                'phone' => $user->getPhone(),
                 'email' => $user->getEmail(),
                 'role' => $user->getRole()
                 ];

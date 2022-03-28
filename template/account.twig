@@ -1,20 +1,13 @@
 {% extends "layout.twig" %}
 
 {% block title %} <title> Mon compte </title> {% endblock %}
+
 {% block content %}
-<!-- Page Content -->
 
 <div class="container">
-
-  <!-- Page Heading -->
   	<div class="row">
- 
-		<h1 class="my-4 col-md-4">Bienvenue {{session.firstName}} !</h1>
-
-		<div class="col-md-4">
-		</div>
-	    
-    </div>
+ 		<h1 class="my-4 col-md-4">Bienvenue {{session.firstName}} !</h1>
+	</div>
 </div>
 
 <div class="container">
@@ -24,23 +17,21 @@
             	<h4 class="list-group-item active"> Informations</h4>
                 <p class="list-group-item"><b>Nom : </b> {{session.lastName}} </p>
                 <p class="list-group-item"><b>Prénom : </b>  {{session.firstName}} </p>
+                <p class="list-group-item"><b>Téléphone : </b>  {{session.phone}} </p>
                 <p class="list-group-item"><b>Email : </b>  {{session.email}} </p>
+                <a class="btn btn-primary" id="updateAccount" href="index.php?url=account/update">Modifier mes informations personnelles</a>
+		        <a class="btn btn-danger" id="updateAccount" href="index.php?url=account/delete">Supprimer mon compte</a>
+		        <hr>
+		        <a class="btn btn-success" id="btn-ajouter-annonce" href="index.php?url=addProduct">Ajouter une annonce</a>
+		        <hr>
+		        <a class="btn btn-danger" id="logout" href="index.php?url=logout">Déconnexion</a>
+		        <hr>
+		        <a class="btn btn-warning" id="panel-admin" href="index.php?url=admin/users" style="visibility:{{ session.role != 'admin' ? 'hidden' : 'visible' }}">Accès panel admin</a>
+		        <hr style="visibility:{{ session.role != 'admin' ? 'hidden' : 'visible' }}">
             </div>
         </div>
-        <div class="col-md-4">
-		<a class="btn btn-primary" id="updateAccount" href="index.php?url=updateMyAccount">Modifier mes informations personnelles</a>
-		<a class="btn btn-danger" id="updateAccount" href="index.php?url=deleteMyAccount">Supprimer mon compte</a>
-	    </div>
-	    <div class="col-md-4">
-	    <a class="btn btn-primary" id="btn-ajouter-rubrique" href="index.php?url=addCategory" style="visibility:{{ session.id != '' ? 'visible' : 'hidden' }}">Ajouter une catégorie</a>
-		<a class="btn btn-primary" id="btn-ajouter-annonce" href="index.php?url=addProduct">Ajouter une annonce</a>
-	    </div>
-
-	 
+        
         <div class="col-lg-9">
-     
-        <!-- /.col-lg-3 -->
-            
             <div class="row">
                 {% for product in products %}
                     <div class="col-lg-4 col-md-6 mb-4">

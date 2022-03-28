@@ -35,7 +35,6 @@ switch($url){
         $securityController->displayRegister();
         break;
     
-    
     /** 
      * USER
      */
@@ -44,14 +43,9 @@ switch($url){
         $userController->displayAccount();
         break;
     
-    case "updateMyAccount" : 
+    case "account/update" : 
         $userController = new UserController();
         $userController->displayUpdateMyAccount();
-        break;
-        
-    case "updateAccountAdmin" :
-        $adminController = new AdminController();
-        $adminController->displayUpdateAccount();
         break;
         
     /** 
@@ -62,12 +56,12 @@ switch($url){
         $categoryController->displayCategories();
         break;
         
-    case "addCategory" : 
+    case "admin/category/create" : 
         $categoryController = new CategoryController();
         $categoryController->displayAddCategoryForm();
         break;
     
-    case "updateCategoryForm" : 
+    case "admin/category/update" : 
         $categoryController = new CategoryController();
         $categoryController->displayUpdateCategoryForm();
         break;
@@ -103,17 +97,22 @@ switch($url){
     /** 
      * ADMIN
      */    
-    case "admin" : 
+    case "admin/users" : 
         $adminController = new AdminController();
         $adminController->displayAdmin();
         break;
+            
+    case "admin/user/update" :
+        $adminController = new AdminController();
+        $adminController->displayUpdateAccount();
+        break;
         
-    case "adminCategories" : 
+    case "admin/categories" : 
         $adminController = new AdminController();
         $adminController->displayAdminCategories();
         break;
         
-    case "adminProducts" : 
+    case "admin/products" : 
         $adminController = new AdminController();
         $adminController->displayAdminProducts();
         break;
@@ -152,7 +151,7 @@ switch($url){
         $userController->updatePassword();
         break;
         
-    case "deleteMyAccount" : 
+    case "account/delete" : 
         $userController = new UserController();
         $userController->deleteMyAccount();
         break;
@@ -170,7 +169,7 @@ switch($url){
         $categoryController->updateCategory();
         break;
     
-    case "deleteCategory":
+    case "admin/category/delete":
         $categoryController = new CategoryController();
         $categoryController->deleteCategory();
         break;
@@ -201,7 +200,7 @@ switch($url){
         $adminController->updateAccount();
         break;
     
-    case "deleteAccount" : 
+    case "admin/account/delete" : 
         $adminController = new AdminController();
         $adminController->deleteAccount();
         break;
@@ -211,16 +210,6 @@ switch($url){
     case "debug":
         $securityController = new SecurityController();
         $securityController->debug();
-        break;
-        
-    case "test":
-        $homeController = new HomeController();
-        $homeController->test();
-        break;
-        
-    case "test2":
-        $homeController = new HomeController();
-        $homeController->test2();
         break;
     
     

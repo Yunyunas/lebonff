@@ -5,8 +5,5 @@
 .home-image {
     width: 100%;
     height: auto;
-}
-
-.socialmedia {
-    margin: 2em;
+    border-bottom: 1px solid #111827;
 }

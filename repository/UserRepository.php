@@ -27,6 +27,7 @@ class UserRepository extends AbstractRepository {
                     $user->setId($data['id']);
                     $user->setLastName($data['last_name']);
                     $user->setFirstName($data['first_name']);
+                    $user->setPhone($data['phone']);
                     $user->setEmail($data['email']);
                     $user->setPassword($data['password']);
                     $user->setRole($data['role']);
@@ -54,6 +55,7 @@ class UserRepository extends AbstractRepository {
                     $user->setId($data['id']);
                     $user->setLastName($data['last_name']);
                     $user->setFirstName($data['first_name']);
+                    $user->setPhone($data['phone']);
                     $user->setEmail($data['email']);
                     $user->setPassword($data['password']);
                     $user->setRole($data['role']);
@@ -69,16 +71,14 @@ class UserRepository extends AbstractRepository {
     public function  insert(User $user): bool
     {
         try {
-            $query = $this->connexion->prepare("INSERT INTO user(last_name, first_name, email, password, address, postal_code, city, role) 
-                                            VALUES (:lastName, :firstName, :email, :password, :address, :postal_code, :city, :role)");
+            $query = $this->connexion->prepare("INSERT INTO user(last_name, first_name, phone, email, password, role) 
+                                            VALUES (:lastName, :firstName, :phone, :email, :password, :role)");
            
             $query->bindValue(':lastName', $user->getLastName());
             $query->bindValue(':firstName', $user->getFirstName());
+            $query->bindValue(':phone', $user->getPhone());
             $query->bindValue(':email', $user->getEmail());
             $query->bindValue(':password', $user->getPassword());
-            $query->bindValue(':address', $user->getAddress());
-            $query->bindValue(':postal_code', $user->getPostalCode());
-            $query->bindValue(':city', $user->getCity());
             $query->bindValue(':role', $user->getRole());
             return $query->execute();
 
@@ -93,11 +93,12 @@ class UserRepository extends AbstractRepository {
     {
         try {
             $query = $this->connexion->prepare("UPDATE user SET last_name = :lastName, 
-            first_name = :firstName, email = :email WHERE id = :id");
+            first_name = :firstName, phone = :phone, email = :email WHERE id = :id");
             
             $query->bindValue(':id', $user->getId());
             $query->bindValue(':lastName', $user->getLastName());
             $query->bindValue(':firstName', $user->getFirstName());
+            $query->bindValue(':phone', $user->getPhone());
             $query->bindValue(':email', $user->getEmail());
             
             return $query->execute();

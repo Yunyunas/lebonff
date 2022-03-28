@@ -5,11 +5,9 @@ class User
     private int $id;
     private string $lastName;
     private string $firstName;
+    private string $phone;
     private string $email;
     private string $password;
-    private string $address;
-    private int $postalCode;
-    private string $city;
     private string $role;
 
     /**
@@ -39,6 +37,14 @@ class User
     /**
      * @return string
      */
+    public function getPhone(): string
+    {
+        return $this->phone;
+    }
+    
+    /**
+     * @return string
+     */
     public function getEmail(): string
     {
         return $this->email;
@@ -52,29 +58,6 @@ class User
         return $this->password;
     }
 
-    /**
-     * @return string
-     */    
-    public function getAddress(): string
-    {
-        return $this->address;
-    }
-
-    /**
-     * @return int
-     */    
-    public function getPostalCode(): int
-    {
-        return $this->postalCode;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getCity(): string
-    {
-        return $this->city;
-    }
 
     /**
      * @return string
@@ -108,6 +91,14 @@ class User
     {
         $this->firstName = $firstName;
     }
+    
+    /**
+     * @param string $phone
+     */
+    public function setPhone(string $phone): void
+    {
+        $this->phone = $phone;
+    }
 
     /**
      * @param string $email
@@ -125,29 +116,6 @@ class User
         $this->password = $password;
     }
     
-    /**
-     * @param string $address
-     */
-    public function setAddress(string $address): void
-    {
-        $this->address = $address;
-    }
-    
-    /**
-     * @param int $postalCode
-     */    
-    public function setPostalCode(int $postalCode): void
-    {
-        $this->postalCode = $postalCode;
-    }
-    
-    /**
-     * @param string $city
-     */    
-    public function setCity(string $city): void
-    {
-        $this->city = $city;
-    }
     
     /**
      * @param string $role

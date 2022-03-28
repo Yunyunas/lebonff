@@ -28,15 +28,15 @@
 	                
 	                <td class="email">
 	                    <h5>{{user.email}}</h5>
-	                    <p>06.02.01.35.60</p>
+	                    <p>{{user.phone}}</p>
 	                </td>
 	                
 	                <td class="role">
 	                    <p>{{user.role}}</p>
 	                </td>
-	                <td class="edit"><a href="index.php?url=updateAccountAdmin&id={{user.id}}">Modifier<i class="fa-solid fa-pen"></i></a></td>
+	                <td class="edit"><a href="index.php?url=admin/user/update&id={{user.id}}">Modifier<i class="fa-solid fa-pen"></i></a></td>
 	                
-	                <td class="delete"><a href="index.php?url=deleteAccount&id={{user.id}}">Supprimer<i class="fa-solid fa-ban"></i></a></td>
+	                <td class="delete"><a href="index.php?url=admin/account/delete&id={{user.id}}">Supprimer<i class="fa-solid fa-ban"></i></a></td>
 	            </tr>
 	          	{% endfor %}
 	      	</tbody>

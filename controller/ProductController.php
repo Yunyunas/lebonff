@@ -64,6 +64,7 @@ class ProductController extends AbstractController
 
         $this->displayTwig('productDetail', [
             'product' => $data,
+            'user' => $data->getUser(),
             'paramName' => $paramName]);
     }
     

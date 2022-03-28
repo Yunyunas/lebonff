@@ -20,12 +20,17 @@ class UserController extends AbstractController
      */
     public function displayAccount() 
     {
-        $productRepository = new ProductRepository();
-        $user = unserialize($_SESSION['user']);
-        $products = $productRepository->fetchByUser($user);
-
-        $this->displayTwig('account', [
-            'products' => $products]);
+        if ($_SESSION['user']) {
+            $productRepository = new ProductRepository();
+            $user = unserialize($_SESSION['user']);
+            $products = $productRepository->fetchByUser($user);
+            
+            $this->displayTwig('account', [
+                'products' => $products]);
+        } else {
+            header('location: ./index.php?url=login');
+            exit();
+        }
     }
     
     
@@ -34,8 +39,13 @@ class UserController extends AbstractController
      */
     public function displayUpdateMyAccount(): void
     {
+        if ($_SESSION['user']) {
         $this->displayTwig('updateAccountForm', [
             'session' => unserialize($_SESSION['user'])]);
+        } else {
+                header('location: ./index.php?url=login');
+                exit();
+        }
     }
     
     
@@ -56,6 +66,7 @@ class UserController extends AbstractController
             $user->setId($currentUser->getId());
             $user->setLastName(htmlspecialchars($_POST['lastName']));
             $user->setFirstName(htmlspecialchars($_POST['firstName']));
+            $user->setPhone(htmlspecialchars($_POST['phone']));
             $user->setEmail(htmlspecialchars($_POST['email']));
             
             $this->repository->updateProfil($user);
@@ -64,6 +75,7 @@ class UserController extends AbstractController
             $_SESSION['user'] = [
                 'lastName' => $user->getLastName(),
                 'firstName' => $user->getFirstName(),
+                'phone' => $user->getPhone(),
                 'email' => $user->getEmail(),
                 ];
             

@@ -28,6 +28,7 @@ class ProductRepository extends AbstractRepository {
                     $user->setId($data['id'][1]);
                     $user->setLastName($data['last_name']);
                     $user->setFirstName($data['first_name']);
+                    $user->setPhone($data['phone']);
                     $user->setEmail($data['email']);
                     $user->setRole($data['role']);
                     
@@ -74,6 +75,7 @@ class ProductRepository extends AbstractRepository {
                     $user->setId($data['id'][1]);
                     $user->setLastName($data['last_name']);
                     $user->setFirstName($data['first_name']);
+                    $user->setPhone($data['phone']);
                     $user->setEmail($data['email']);
                     $user->setRole($data['role']);
                         
@@ -121,6 +123,7 @@ class ProductRepository extends AbstractRepository {
                     $user->setId($data['id'][1]);
                     $user->setLastName($data['last_name']);
                     $user->setFirstName($data['first_name']);
+                    $user->setPhone($data['phone']);
                     $user->setEmail($data['email']);
                     $user->setRole($data['role']);
                     
@@ -169,6 +172,7 @@ class ProductRepository extends AbstractRepository {
                     $user->setId($data['id'][1]);
                     $user->setLastName($data['last_name']);
                     $user->setFirstName($data['first_name']);
+                    $user->setPhone($data['phone']);
                     $user->setEmail($data['email']);
                     $user->setRole($data['role']);
                     
@@ -200,8 +204,8 @@ class ProductRepository extends AbstractRepository {
     public function insert(Product $product): bool 
     {
         try {
-            $query = $this->connexion->prepare("INSERT INTO product(id_user, id_category, name, description, url_picture, price)
-                                                VALUES (:id_user, :id_category, :name, :description, :url_picture, :price)");
+            $query = $this->connexion->prepare("INSERT INTO product(id_user, id_category, name, description, url_picture, price, created_at)
+                                                VALUES (:id_user, :id_category, :name, :description, :url_picture, :price, NOW())");
 
             $query->bindValue(':id_user', $product->getUser()->getId());
             $query->bindValue(':id_category', $product->getCategory()->getId());
@@ -223,7 +227,7 @@ class ProductRepository extends AbstractRepository {
         try {
 
             $query = $this->connexion->prepare("UPDATE product SET id_category = :id_category, name = :name, 
-            description = :description, url_picture = :url_picture, price = :price WHERE product.id = :id");
+            description = :description, url_picture = :url_picture, price = :price, updated_at = NOW() WHERE product.id = :id");
             
             $query->bindValue(':id', $product->getId());
             $query->bindValue(':id_category', $product->getCategory()->getId());
