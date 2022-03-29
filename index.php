@@ -13,7 +13,6 @@ $url = $_GET['url'] ?? "home";
 
 switch($url){
     
-    
     /** 
      * HOME
      */

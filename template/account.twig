@@ -32,7 +32,7 @@
         </div>
         
         <div class="col-lg-9">
-            <div class="row">
+            <div class="row text-center">
                 {% for product in products %}
                     <div class="col-lg-4 col-md-6 mb-4">
                         <div class="card h-100">
@@ -43,10 +43,10 @@
                                 <h4 class="card-title">
                                     <a href="index.php?url=product&id={{product.id}}">{{product.name}}</a>
                                 </h4>
-                                <h5>{{product.price}}</h5>
+                                <h5> Prix: {{product.price}} euros</h5>
                                 <p class="card-text">{{product.description}}</p>
                                 <a class="btn btn-primary" href="index.php?url=updateProductForm&id={{product.id}}" style="visibility:{{ session.id != '' ? 'visible' : 'hidden' }}">Modifier</a>
-                                <a class="btn btn-danger" href="index.php?url=deleteProduct&id={{product.id}}" style="visibility:{{ session.id != '' ? 'visible' : 'hidden' }}">Supprimer</a>
+                                <a class="btn btn-danger" href="index.php?url=deleteProduct&id={{product.id}}&img={{product.urlPicture}}" style="visibility:{{ session.id != '' ? 'visible' : 'hidden' }}">Supprimer</a>
                             </div>
                         </div>
                     </div>

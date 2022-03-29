@@ -15,27 +15,28 @@
                     <div class="card-body">
                         <h5 class="card-title text-center">Modifier les informations de {{user.firstName}} {{user.lastName}}</h5>
                         <form class="form-signin" method="post" action="index.php?url=updateAccount&id={{user.id}}">
-                        <div class="form-label-group">
-                            <label for="lastName">Nom</label>
-                            <input type="text" id="lastName" name="lastName" class="form-control" placeholder="Nom" value="{{user.lastName}}" required autofocus>
-                        </div>
-                        
-                        <div class="form-label-group">
-                            <label for="firstName">Prénom</label>
-                            <input type="text" id="firstName" name="firstName" class="form-control" placeholder="Prénom" value="{{user.firstName}}" required>
-                        </div>
-                        
-                        <div class="form-label-group">
-                            <label for="phone">Numéro de téléphone</label>
-                            <input type="text" id="phone" name="phone" class="form-control" placeholder="Numéro de téléphone" value="{{session.phone}}" required>
-                        </div>
-        
-                        <div class="form-label-group">
-                            <label for="email">Adresse mail</label>
-                            <input type="email" id="email" name="email" class="form-control" placeholder="Adresse mail" value="{{user.email}}" required>
-                        </div>
-        
-                        <button class="btn btn-lg btn-primary btn-block" type="submit">Valider</button>
+                            <div class="form-label-group">
+                                <label for="lastName">Nom</label>
+                                <input type="text" id="lastName" name="lastName" class="form-control" placeholder="Nom" value="{{user.lastName}}" required autofocus>
+                            </div>
+                            
+                            <div class="form-label-group">
+                                <label for="firstName">Prénom</label>
+                                <input type="text" id="firstName" name="firstName" class="form-control" placeholder="Prénom" value="{{user.firstName}}" required>
+                            </div>
+                            
+                            <div class="form-label-group">
+                                <label for="phone">Numéro de téléphone</label>
+                                <input type="text" id="phone" name="phone" class="form-control" placeholder="Numéro de téléphone" value="{{session.phone}}" required>
+                            </div>
+            
+                            <div class="form-label-group">
+                                <label for="email">Adresse mail</label>
+                                <input type="email" id="email" name="email" class="form-control" placeholder="Adresse mail" value="{{user.email}}" required>
+                            </div>
+                            <div class="text-center">
+                                <button class="btn btn-lg btn-primary btn-block" type="submit">Valider</button>
+                            </div>
                         </form>
                     </div>
                 </div>

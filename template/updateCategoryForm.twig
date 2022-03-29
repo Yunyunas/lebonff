@@ -12,23 +12,25 @@
             </div>
             <div class="card-body">
                 <h5 class="card-title text-center">Modifier une catégorie</h5>
-                <form class="form-signin" method="post" action="index.php?url=updateCategory&id={{category.id}}" enctype="multipart/form-data">
-                <div class="form-label-group">
-                    <label for="name">Nom</label>
-                    <input type="text" id="name" name="name" class="form-control" placeholder="Nom de la catégorie" value="{{category.name}}" required autofocus>
+                <form class="form-signin" method="post" action="index.php?url=updateCategory&id={{category.id}}&img={{category.url_picture}}" enctype="multipart/form-data">
+                    <div class="form-label-group">
+                        <label for="name">Nom</label>
+                        <input type="text" id="name" name="name" class="form-control" placeholder="Nom de la catégorie" value="{{category.name}}" required autofocus>
+                    </div>
+                    
+                    <div class="form-label-group">
+                        <label for="description">Description</label>
+                        <textarea type="text" id="description" name="description" class="form-control" placeholder="Description de la catégorie" value="{{category.description}}" required>{{category.description}}</textarea>
+                    </div>
+    
+                    <div class="form-label-group">
+                        <label for="image">Image</label>
+                        <input type="file" id="image" name="image" class="form-control" placeholder="Image souhaitée" value="{{category.url_picture}}" required>
+                    </div>
+                    
+                    <div class="text-center">
+                        <button class="btn btn-lg btn-primary btn-block" type="submit">Valider</button>
                 </div>
-                
-                <div class="form-label-group">
-                    <label for="description">Description</label>
-                    <textarea type="text" id="description" name="description" class="form-control" placeholder="Description de la catégorie" value="{{category.description}}" required></textarea>
-                </div>
-
-                <div class="form-label-group">
-                    <label for="image">Image</label>
-                    <input type="file" id="image" name="image" class="form-control" placeholder="Image souhaitée" value="{{category.url_picture}}" required>
-                </div>
-
-                <button class="btn btn-lg btn-primary btn-block" type="submit">Valider</button>
                 </form>
             </div>
             </div>

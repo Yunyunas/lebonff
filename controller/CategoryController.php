@@ -63,24 +63,34 @@ class CategoryController extends AbstractController
         $extensions = ['jpg', 'png', 'jpeg'];
         $maxSize = 4000000;
         
-        if(in_array($extension, $extensions) && $size <= $maxSize){
-            move_uploaded_file($tmpName, './public/img/categories/'.$name);
-        }
-        else{
+        if(in_array($extension, $extensions) && $size <= $maxSize && $error == 0){
+            $uniqueName = uniqid('', true);
+            $file = $uniqueName.".".$extension;
+            
+            move_uploaded_file($tmpName, './public/img/categories/'.$file);
+            
+        } else{
             echo "Mauvaise extension ou taille trop grande";
         }
         
         if (isset($_POST['name']) && $_POST['description']) {    
-        $category = new Category();
-        
-        $category->setName(htmlspecialchars($_POST['name']));
-        $category->setDescription(htmlspecialchars($_POST['description']));
-        $category->setUrlPicture($name);
-        
-        $this->repository->insert($category);
-
-        header('location: ./index.php?url=categories');
-        exit();
+            $category = new Category();
+            
+            $category->setName(htmlspecialchars($_POST['name']));
+            $category->setDescription(htmlspecialchars($_POST['description']));
+            $category->setUrlPicture($name);
+            
+            $this->repository->insert($category);
+    
+            if ($data == true) {
+                $img = $_GET['img'];
+                unlink("./public/img/products/" . $img);
+                header('location: ./index.php?url=categories');
+                exit();
+            } else {
+                header('location: ./index.php?url=categories');
+                exit();
+            }
         }
     }
     
@@ -113,17 +123,24 @@ class CategoryController extends AbstractController
         
         if($_POST['name'] || $_POST['description']) {
 
-        $category = new Category();
-        
-        $category->setId($_GET['id']);
-        $category->setName(htmlspecialchars($_POST['name']));
-        $category->setDescription(htmlspecialchars($_POST['description']));
-        $category->setUrlPicture($name);
-
-        $data = $this->repository->update($category);
-        
-        header('location: ./index.php?url=categories');
-        exit();
+            $category = new Category();
+            
+            $category->setId($_GET['id']);
+            $category->setName(htmlspecialchars($_POST['name']));
+            $category->setDescription(htmlspecialchars($_POST['description']));
+            $category->setUrlPicture($name);
+    
+            $data = $this->repository->update($category);
+            
+            if ($data == true) {
+                $img = $_GET['img'];
+                unlink("./public/img/products/" . $img);
+                header('location: ./index.php?url=categories');
+                exit();
+            } else {
+                header('location: ./index.php?url=categories');
+                exit();
+            }
         }
     }
     
@@ -135,10 +152,17 @@ class CategoryController extends AbstractController
     {
         $category = new Category();
         $category->setId($_GET['id']);
+        $img = $_GET['img'];
         
         $data = $this->repository->delete($category);
         
-        header('location: ./index.php?url=categories');
-        exit();
+        if($data === true) {
+            unlink("./public/img/categories/" . $img);
+            header('location: ./index.php?url=categories');
+            exit();
+        } else {
+            header('location: ./index.php?url=account');
+            exit();
+        }
     }
 }

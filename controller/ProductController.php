@@ -112,8 +112,11 @@ class ProductController extends AbstractController
         $extensions = ['jpg', 'png', 'jpeg'];
         $maxSize = 4000000;
         
-        if(in_array($extension, $extensions) && $size <= $maxSize){
-            move_uploaded_file($tmpName, './public/img/products/'.$name);
+        if(in_array($extension, $extensions) && $size <= $maxSize && $error == 0){
+            $uniqueName = uniqid('', true);
+            $file = $uniqueName.".".$extension;
+            
+            move_uploaded_file($tmpName, './public/img/products/'.$file);
         }
         else{
             $message = "La taille du fichier ou l'extension est incorrect.";
@@ -134,7 +137,7 @@ class ProductController extends AbstractController
         $product->setName(htmlspecialchars($_POST['name']));
         $product->setDescription(htmlspecialchars($_POST['description']));
         $product->setPrice(htmlspecialchars($_POST['price']));
-        $product->setUrlPicture($name);
+        $product->setUrlPicture($file);
         
         $this->repository->insert($product);
 
@@ -148,6 +151,7 @@ class ProductController extends AbstractController
      */
     public function updateProduct()
     {
+        // Retirer le "required" du file et donc si $_FILES -> setUrlPicture else => le reste
         if (isset($_FILES['image'])) {
             $tmpName = $_FILES['image']['tmp_name'];
             $name = $_FILES['image']['name'];
@@ -162,7 +166,10 @@ class ProductController extends AbstractController
         $maxSize = 4000000;
         
         if(in_array($extension, $extensions) && $size <= $maxSize){
-            move_uploaded_file($tmpName, './public/img/products/'.$name);
+            $uniqueName = uniqid('', true);
+            $file = $uniqueName.".".$extension;
+            
+            move_uploaded_file($tmpName, './public/img/products/'.$file);
         }
         else{
             $message = "La taille du fichier ou l'extension est incorrect.";
@@ -171,8 +178,7 @@ class ProductController extends AbstractController
         $currentUser = unserialize($_SESSION['user']);
         $user = new User();
         $user->setId($currentUser->getId());
-        //var_dump($user->getId());
-        //die();
+
         $category = new Category();
         $category->setId($_POST['category']);
         
@@ -184,10 +190,16 @@ class ProductController extends AbstractController
         $product->setName(htmlspecialchars($_POST['name']));
         $product->setDescription(htmlspecialchars($_POST['description']));
         $product->setPrice(htmlspecialchars($_POST['price']));
-        $product->setUrlPicture($name);
+        $product->setUrlPicture($file);
         
         $data = $this->repository->update($product);
+        
         if ($data == true) {
+            $img = $_GET['img'];
+            unlink("./public/img/products/" . $img);
+            header('location: ./index.php?url=account');
+            exit();
+        } else {
             header('location: ./index.php?url=account');
             exit();
         }
@@ -202,10 +214,17 @@ class ProductController extends AbstractController
     {
         $product = new Product();
         $product->setId($_GET['id']);
+        $img = $_GET['img'];
         
         $data = $this->repository->delete($product);
         
-        header('location: ./index.php?url=account');
-        exit();
+        if($data === true) {
+            unlink("./public/img/products/" . $img);
+            header('location: ./index.php?url=account');
+            exit();
+        } else {
+            header('location: ./index.php?url=account');
+            exit();
+        }
     }
 }

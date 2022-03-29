@@ -15,27 +15,28 @@
                     <div class="card-body">
                         <h5 class="card-title text-center">Modifier mes informations personnelles</h5>
                         <form class="form-signin" method="post" action="index.php?url=updateProfil">
-                        <div class="form-label-group">
-                            <label for="lastName">Nom</label>
-                            <input type="text" id="lastName" name="lastName" class="form-control" placeholder="Nom" value="{{session.lastName}}" required autofocus>
-                        </div>
-                        
-                        <div class="form-label-group">
-                            <label for="firstName">Prénom</label>
-                            <input type="text" id="firstName" name="firstName" class="form-control" placeholder="Prénom" value="{{session.firstName}}" required>
-                        </div>
-                        
-                        <div class="form-label-group">
-                            <label for="phone">Numéro de téléphone</label>
-                            <input type="text" id="phone" name="phone" class="form-control" placeholder="Numéro de téléphone" value="{{session.phone}}" required>
-                        </div>
-        
-                        <div class="form-label-group">
-                            <label for="email">Adresse mail</label>
-                            <input type="email" id="email" name="email" class="form-control" placeholder="Adresse mail" value="{{session.email}}" required>
-                        </div>
-        
-                        <button class="btn btn-lg btn-primary btn-block" type="submit">Valider</button>
+                            <div class="form-label-group">
+                                <label for="lastName">Nom</label>
+                                <input type="text" id="lastName" name="lastName" class="form-control" placeholder="Nom" value="{{session.lastName}}" required autofocus>
+                            </div>
+                            
+                            <div class="form-label-group">
+                                <label for="firstName">Prénom</label>
+                                <input type="text" id="firstName" name="firstName" class="form-control" placeholder="Prénom" value="{{session.firstName}}" required>
+                            </div>
+                            
+                            <div class="form-label-group">
+                                <label for="phone">Numéro de téléphone</label>
+                                <input type="text" id="phone" name="phone" class="form-control" placeholder="Numéro de téléphone" value="{{session.phone}}" required>
+                            </div>
+            
+                            <div class="form-label-group">
+                                <label for="email">Adresse mail</label>
+                                <input type="email" id="email" name="email" class="form-control" placeholder="Adresse mail" value="{{session.email}}" required>
+                            </div>
+                            <div class="text-center">
+                                <button class="btn btn-lg btn-primary btn-block" type="submit">Valider</button>
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -44,17 +45,19 @@
                     <div class="card-body">
                         <h5 class="card-title text-center">Modifier mon mot de passe</h5>
                         <form class="form-signin" method="post" action="index.php?url=updatePassword">
-                        <div class="form-label-group">
-                            <label for="password">Votre ancien mot de passe</label> <br>
-                            <input type="password" id="passwordOld" class="form-control" name="passwordOld" value="" required>
-                        </div>
-                        
-                        <div class="form-label-group">
-                            <label for="password">Votre nouveau mot de passe</label> <br>
-                            <input type="password" id="passwordNew" class="form-control" name="passwordNew" value="" required>
-                        </div>
-        
-                        <button class="btn btn-lg btn-primary btn-block" type="submit">Valider</button>
+                            <div class="form-label-group">
+                                <label for="password">Votre ancien mot de passe</label> <br>
+                                <input type="password" id="passwordOld" class="form-control" name="passwordOld" value="" required>
+                            </div>
+                            
+                            <div class="form-label-group">
+                                <label for="password">Votre nouveau mot de passe</label> <br>
+                                <input type="password" id="passwordNew" class="form-control" name="passwordNew" value="" required>
+                            </div>
+                            
+                            <div class="text-center">
+                                <button class="btn btn-lg btn-primary btn-block" type="submit">Valider</button>
+                            </div>
                         </form>
                     </div>
                 

@@ -30,7 +30,7 @@
         </div>
 
         <div class="col-lg-9">
-			<div class="row">
+			<div class="row text-center">
 				{% for product in products %}
 					<div class="col-lg-4 col-md-4 col-sm-6 mb-4">
 		
@@ -43,7 +43,7 @@
 								<p class="card-text">{{product.description}}</p>
 								<p class="card-text">Prix : {{product.price}} euros</p>
 								<a class="btn btn-primary" href="index.php?url=updateProduct&id={{product.id}}" style="visibility:{{ session.role != 'admin' ? 'hidden' : 'visible' }}">Modifier</a>
-								<a class="btn btn-danger" href="index.php?url=deleteProduct&id={{product.id}}" style="visibility:{{ session.role != 'admin' ? 'hidden' : 'visible' }}">Supprimer</a>
+								<a class="btn btn-danger" href="index.php?url=deleteProduct&id={{product.id}}&img={{product.urlPicture}}" style="visibility:{{ session.role != 'admin' ? 'hidden' : 'visible' }}">Supprimer</a>
 							</div>
 							
 		                    <div class="card-footer">

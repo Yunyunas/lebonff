@@ -235,11 +235,9 @@ class ProductRepository extends AbstractRepository {
             $query->bindValue(':description', $product->getDescription());
             $query->bindValue(':url_picture', $product->getUrlPicture());
             $query->bindValue(':price', $product->getPrice());
-            $query->execute();
+            $result = $query->execute();
             
-            $data = true;
-            
-            return $data;
+            return $result;
             
         } catch (Exception $e) {
             return false;
@@ -254,7 +252,8 @@ class ProductRepository extends AbstractRepository {
             
             $query->bindValue(':id', $product->getId());
             
-            return $query->execute();
+            $result = $query->execute();
+            return $result;
             
         } catch (Exception $e) {
             return false;

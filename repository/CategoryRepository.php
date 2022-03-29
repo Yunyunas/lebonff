@@ -19,13 +19,12 @@ class CategoryRepository extends AbstractRepository {
                 $query->bindParam(":id", $id);
                 $query->execute();
                 $data = $query->fetch(PDO::FETCH_ASSOC);
-            
+                
+                return $data;
             }
         } catch (Exception $e) {
             return $e;
         }
-
-        return $data;
     }
     
     
@@ -39,10 +38,11 @@ class CategoryRepository extends AbstractRepository {
             $query->bindValue(':description', $category->getDescription());
             $query->bindValue(':url_picture', $category->getUrlPicture());
             
-            return $query->execute();
+            $result = $query->execute();
+            
+            return $result;
             
         } catch (Exception $e) {
-            //return $e;
             return false;
         }
     }
@@ -59,10 +59,11 @@ class CategoryRepository extends AbstractRepository {
             $query->bindValue(':description', $category->getDescription());
             $query->bindValue(':url_picture', $category->getUrlPicture());
             
-            return $query->execute();
+            $result = $query->execute();
+            
+            return $result;
             
         } catch (Exception $e) {
-            //return $e;
             return false;
         }
     }
@@ -75,10 +76,11 @@ class CategoryRepository extends AbstractRepository {
             
             $query->bindValue(':id', $category->getId());
             
-            return $query->execute();
+            $result = $query->execute();
+            
+            return $result;
             
         } catch (Exception $e) {
-            //return $e;
             return false;
         }
     }

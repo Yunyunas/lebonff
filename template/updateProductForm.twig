@@ -13,7 +13,7 @@
                 <div class="card card-signin my-5">
                     <div class="card-body">
                         <h5 class="card-title text-center">Modifier une annonce</h5>
-                        <form class="form-signin" method="post" action="index.php?url=updateProduct&id={{product.id}}" enctype="multipart/form-data">
+                        <form class="form-signin" method="post" action="index.php?url=updateProduct&id={{product.id}}&img={{product.urlPicture}}" enctype="multipart/form-data">
                             <div class="form-group">
                                 <label for="">Catégorie</label>
                                 <select class="form-control choix-category" name="category" id="category">
@@ -30,7 +30,7 @@
                             
                             <div class="form-label-group">
                                 <label for="description">Description</label>
-                                <textarea type="text" id="description" name="description" class="form-control" placeholder="Description" value="{{product.description}}" required></textarea>
+                                <textarea type="text" id="description" name="description" class="form-control" placeholder="Description" required>{{product.description}}</textarea>
                             </div>
                             
                             <div class="form-label-group">
@@ -45,7 +45,9 @@
 
                             
                             <hr class="my-4">
-                            <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Envoyer</button>
+                            <div class="text-center">
+                                <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Envoyer</button>
+                            </div>
                         </form>
                     </div>
                 </div>
