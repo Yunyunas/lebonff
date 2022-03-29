@@ -22,8 +22,9 @@ class UserRepository extends AbstractRepository {
                 $query->bindParam(":email", $email);
                 $query->execute();
                 $data = $query->fetch(PDO::FETCH_ASSOC);
-                
-                $user = new User();
+
+                if ($data) {
+                    $user = new User();
                     $user->setId($data['id']);
                     $user->setLastName($data['last_name']);
                     $user->setFirstName($data['first_name']);
@@ -32,7 +33,8 @@ class UserRepository extends AbstractRepository {
                     $user->setPassword($data['password']);
                     $user->setRole($data['role']);
                 
-                return $user;
+                    return $user;
+                }
             }
         } catch (Exception $e) {
             $data = $e;
@@ -59,7 +61,7 @@ class UserRepository extends AbstractRepository {
                     $user->setEmail($data['email']);
                     $user->setPassword($data['password']);
                     $user->setRole($data['role']);
-                
+
                 return $user;
             }
         } catch (Exception $e) {

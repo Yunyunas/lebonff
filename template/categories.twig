@@ -22,8 +22,8 @@
 							<a href="index.php?url=products&id={{category.id}}&paramName={{category.name}}">{{category.name}}</a>
 						</h4>
 						<p class="card-text">{{category.description}}</p>
-						<a class="btn btn-primary" href="index.php?url=updateCategoryForm&id={{category.id}}" style="visibility:{{ session.role != 'admin' ? 'hidden' : 'visible' }}">Modifier</a>
-						<a class="btn btn-danger" href="index.php?url=deleteCategory&id={{category.id}}&img={{category.url_picture}}" style="visibility:{{ session.role != 'admin' ? 'hidden' : 'visible' }}">Supprimer</a>
+						<a class="btn btn-primary" href="index.php?url=admin/category/update&id={{category.id}}" style="visibility:{{ session.role != 'admin' ? 'hidden' : 'visible' }}">Modifier</a>
+						<a class="btn btn-danger" href="index.php?url=admin/category/delete&id={{category.id}}&img={{category.url_picture}}" style="visibility:{{ session.role != 'admin' ? 'hidden' : 'visible' }}">Supprimer</a>
 					</div>
 				</div>
 			</div>

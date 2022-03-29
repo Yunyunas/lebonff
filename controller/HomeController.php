@@ -29,18 +29,15 @@ class HomeController extends AbstractController {
     }
     
     /** 
-     * @Route ("index.php?url=test")
+     * @Route ("index.php?url=search")
      */
-    public function test()
+    public function search()
     {
-        $this->displayTwig('testHeader');
+        $query = $_GET['q'] ?? "";
+        
+        $productRepository = new ProductRepository();
+        $datas = $productRepository->fetchQuery($query);
+        echo json_encode($datas);
     }
     
-    /** 
-     * @Route ("index.php?url=test2")
-     */
-    public function test2()
-    {
-        $this->displayTwig('testHeader2');
-    }
 }

@@ -33,7 +33,6 @@ class CategoryController extends AbstractController
     }
     
     
-    
     /** 
      * @Route ("index.php?url=updateCategoryForm")
      */
@@ -114,10 +113,13 @@ class CategoryController extends AbstractController
         $extensions = ['jpg', 'png', 'jpeg'];
         $maxSize = 4000000;
         
-        if(in_array($extension, $extensions) && $size <= $maxSize){
-            move_uploaded_file($tmpName, './public/image/'.$name);
-        }
-        else{
+        if(in_array($extension, $extensions) && $size <= $maxSize && $error == 0){
+            $uniqueName = uniqid('', true);
+            $file = $uniqueName.".".$extension;
+            
+            move_uploaded_file($tmpName, './public/img/categories/'.$file);
+            
+        } else{
             echo "Mauvaise extension ou taille trop grande";
         }
         

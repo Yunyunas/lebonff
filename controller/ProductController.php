@@ -165,7 +165,7 @@ class ProductController extends AbstractController
         $extensions = ['jpg', 'png', 'jpeg'];
         $maxSize = 4000000;
         
-        if(in_array($extension, $extensions) && $size <= $maxSize){
+        if(in_array($extension, $extensions) && $size <= $maxSize && $error == 0){
             $uniqueName = uniqid('', true);
             $file = $uniqueName.".".$extension;
             

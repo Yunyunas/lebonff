@@ -31,7 +31,7 @@
                     
                     <ul class="items">
                         <li><a href="index.php?url=home">Accueil</a></li>
-                        <li><a href="index.php?url=newProducts&paramName=Nouveautés">Nouveautés</a></li>
+                        <li><a href="index.php?url=products/new&paramName=Nouveautés">Nouveautés</a></li>
                         <li><a href="index.php?url=categories">Catégories</a></li>
                     </ul>
                 </div>
@@ -39,7 +39,8 @@
                 <div class="nav-end">
                     <div class="search">
                         <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
-                        <input type="text" placeholder="Rechercher">
+                        <input id="search" type="text" placeholder="Rechercher">
+                        <ul id="list-search"></ul>
                     </div>
                     
                     <div class="profile">
@@ -68,7 +69,7 @@
                     <h2>Site</h2>
                     <ul class="block-items">
                         <li><a href="index.php?url=home">Page d'accueil</a></li>
-                        <li><a href="index.php?url=newProducts&paramName=Nouveautés">Page des nouveautés</a></li>
+                        <li><a href="index.php?url=products/new&paramName=Nouveautés">Page des nouveautés</a></li>
                         <li><a href="index.php?url=categories">Page des catégories</a></li>
                         <li><a href="index.php?url=home">Mentions légales</a></li>
                     </ul>

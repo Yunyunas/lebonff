@@ -48,7 +48,7 @@ class UserController extends AbstractController
         }
     }
     
-    
+    /*/
     /** 
      * @Route ("index.php?url=updateProfil")
      */
@@ -68,6 +68,7 @@ class UserController extends AbstractController
             $user->setFirstName(htmlspecialchars($_POST['firstName']));
             $user->setPhone(htmlspecialchars($_POST['phone']));
             $user->setEmail(htmlspecialchars($_POST['email']));
+            $user->setRole($currentUser->getRole());
             
             $this->repository->updateProfil($user);
             
@@ -77,6 +78,7 @@ class UserController extends AbstractController
                 'firstName' => $user->getFirstName(),
                 'phone' => $user->getPhone(),
                 'email' => $user->getEmail(),
+                'role' => $user->getRole(),
                 ];
             
             $_SESSION['user'] = serialize($user);
@@ -95,12 +97,11 @@ class UserController extends AbstractController
         $passwordOld = htmlspecialchars($_POST['passwordOld']);
         
         $user = unserialize($_SESSION['user']);
-        $email = $user->getEmail();
 
-        $data = $this->repository->fetchLogin($email);
+        $data = $this->repository->fetchById($user->getId());
 
         if($data){
-            if(password_verify ($passwordOld, $data['password']) && $_POST['passwordNew']) {
+            if(password_verify ($passwordOld, $data->getPassword()) && $_POST['passwordNew']) {
             
                 $passwordObscure = password_hash($_POST['passwordNew'], PASSWORD_DEFAULT);
                 

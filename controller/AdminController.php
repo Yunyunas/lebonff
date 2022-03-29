@@ -95,7 +95,7 @@ class AdminController extends AbstractController
             
             $this->repository->updateProfil($user);
             
-            header('location: ./index.php?url=admin');
+            header('location: ./index.php?url=admin/users');
             exit();
         }
     }
@@ -111,7 +111,7 @@ class AdminController extends AbstractController
         
         $data = $this->repository->deleteAccount($user);
             
-        header('location: ./index.php?url=admin');
+        header('location: ./index.php?url=admin/users');
         exit();
     }
 }

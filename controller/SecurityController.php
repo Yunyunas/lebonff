@@ -98,11 +98,10 @@ class SecurityController extends AbstractController {
         $password = htmlspecialchars($_POST['password']);
 
         $user = $this->repository->fetchLogin($email);
-        
+
         if($user){
             if(password_verify ($password, $user->getPassword())) {
             
-           // J'instancie les informations de mon user actuel dans la SESSION
             $_SESSION['user'] = [
                 'id' => $user->getId(),
                 'lastName' => $user->getLastName(),
@@ -112,21 +111,18 @@ class SecurityController extends AbstractController {
                 'role' => $user->getRole()
                 ];
             
-            //var_dump($_SESSION['user']);
             $_SESSION['user'] = serialize($user);
             
             header('location: ./index.php?url=account');
             exit();
-            // voir pour un $this->twig->redirectToRoute
-            // voir si télécharger le component a une +value
             
             } else {
                 $this->displayTwig('login', [
                     'message' => 'Adresse mail ou mot de passe incorrect']);
             }
         } else {
-            header('location: ./index.php?url=error404');
-            exit();
+            $this->displayTwig('login', [
+                'message' => 'Adresse mail ou mot de passe incorrect']);
         }
     }
     

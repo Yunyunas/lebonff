@@ -78,17 +78,17 @@ switch($url){
         $productController->displayProductDetail();
         break;
     
-    case "newProducts":
+    case "products/new":
         $productController = new ProductController();
         $productController->displayNewProducts();
         break;
         
-    case "addProduct" : 
+    case "product/create" : 
         $productController = new ProductController();
         $productController->displayAddProductForm();
         break;
         
-    case "updateProductForm" :
+    case "product/update" :
         $productController = new ProductController();
         $productController->displayUpdateProductForm();
         break;
@@ -209,6 +209,11 @@ switch($url){
     case "debug":
         $securityController = new SecurityController();
         $securityController->debug();
+        break;
+        
+    case "search":
+        $homeController = new HomeController();
+        $homeController->search();
         break;
     
     
