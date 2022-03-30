@@ -35,7 +35,7 @@ class UserController extends AbstractController
     
     
     /** 
-     * @Route ("index.php?url=updateMyAccount")
+     * @Route ("index.php?url=account/update")
      */
     public function displayUpdateMyAccount(): void
     {
@@ -122,7 +122,7 @@ class UserController extends AbstractController
     
     
     /** 
-     * @Route ("index.php?url=deleteMyAccount")
+     * @Route ("index.php?url=account/delete")
      */
     public function deleteMyAccount(): void 
     {

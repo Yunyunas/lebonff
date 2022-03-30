@@ -6,7 +6,12 @@
 <div class="container">
 
     <div class="row">
-		<h1 class="my-4 col-md-4">Liste des catégories</h1>
+    	<div class="col-md-8">
+			<h1 class="my-4 col-md-8">Liste des catégories</h1>
+		</div>
+		<div class="col-md-4">
+			<a class="my-5 px-5 btn btn-success" id="add-category" href="index.php?url=admin/category/create" style="visibility:{{ session.role != 'admin' ? 'hidden' : 'visible' }}">Créer une catégorie</a>
+		</div>
 	</div>
 	
 	<div class="row">

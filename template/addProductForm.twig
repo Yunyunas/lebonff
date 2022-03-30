@@ -3,8 +3,6 @@
 	{% block title %} <title>Ajouter une annonce</title> {% endblock %}
 
     {% block content %}
-
-<link href="public/css/connexion.css" rel="stylesheet">
     
 <body>
     <div class="container">
@@ -39,14 +37,17 @@
                             </div>
                             
                             <div class="form-label-group">
-                                <label for="image">Image</label>
+                                <label for="image">Image (extensions png, jpg ou jpeg)</label>
                                 <input type="file" id="image" name="image" class="form-control" placeholder="Image souhaitée" required>
                             </div>
-
+                            
+                            <div class="text-center text-danger">
+                                <p>{{message}}</p>
+                            </div>
                             
                             <hr class="my-4">
                             <div class="text-center">
-                                <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Envoyer</button>
+                                <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Valider</button>
                             </div>
                         </form>
                     </div>

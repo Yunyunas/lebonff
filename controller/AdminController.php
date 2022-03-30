@@ -17,7 +17,7 @@ class AdminController extends AbstractController
     
     
     /** 
-     * @Route ("index.php?url=admin")
+     * @Route ("index.php?url=admin/users")
      */
     public function displayAdmin() 
     {
@@ -35,7 +35,7 @@ class AdminController extends AbstractController
     
     
     /** 
-     * @Route ("index.php?url=adminCategories")
+     * @Route ("index.php?url=admin/categories")
      */
     public function displayAdminCategories() 
     {
@@ -50,7 +50,7 @@ class AdminController extends AbstractController
     
     
     /** 
-     * @Route ("index.php?url=adminProducts")
+     * @Route ("index.php?url=admin/products")
      */
     public function displayAdminProducts() 
     {
@@ -69,9 +69,9 @@ class AdminController extends AbstractController
     
     
     /** 
-     * @Route ("index.php?url=updateAccountAdmin")
+     * @Route ("index.php?url=admin/user/update")
      */
-    public function displayUpdateAccount(): void
+    public function displayUpdateUser(): void
     {
         $user = $this->repository->fetchById($_GET['id']);
         
@@ -102,7 +102,7 @@ class AdminController extends AbstractController
     
     
     /** 
-     * @Route ("index.php?url=deleteAccount")
+     * @Route ("index.php?url=admin/account/delete")
      */
     public function deleteAccount()
     {

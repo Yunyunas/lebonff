@@ -103,7 +103,7 @@ switch($url){
             
     case "admin/user/update" :
         $adminController = new AdminController();
-        $adminController->displayUpdateAccount();
+        $adminController->displayUpdateUser();
         break;
         
     case "admin/categories" : 

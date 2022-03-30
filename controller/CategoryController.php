@@ -25,7 +25,7 @@ class CategoryController extends AbstractController
     
     
     /** 
-     * @Route ("index.php?url=addCategory")
+     * @Route ("index.php?url=admin/category/create")
      */
     public function displayAddCategoryForm()
     {
@@ -34,7 +34,7 @@ class CategoryController extends AbstractController
     
     
     /** 
-     * @Route ("index.php?url=updateCategoryForm")
+     * @Route ("index.php?url=admin/category/update")
      */
     public function displayUpdateCategoryForm()
     {
@@ -49,46 +49,42 @@ class CategoryController extends AbstractController
      */
     public function insertCategory() 
     {
+        
+        $category = new Category();
+        $category->setName(htmlspecialchars($_POST['name']));
+        $category->setDescription(htmlspecialchars($_POST['description']));
+
         if (isset($_FILES['image'])) {
             $tmpName = $_FILES['image']['tmp_name'];
             $name = $_FILES['image']['name'];
             $size = $_FILES['image']['size'];
             $error = $_FILES['image']['error'];
-        }
         
-        $tabExtension = explode('.', $name);
-        $extension = strtolower(end($tabExtension));
         
-        $extensions = ['jpg', 'png', 'jpeg'];
-        $maxSize = 4000000;
+            $tabExtension = explode('.', $name);
+            $extension = strtolower(end($tabExtension));
+            
+            $extensions = ['jpg', 'png', 'jpeg'];
+            $maxSize = 4000000;
+            
+            if(in_array($extension, $extensions) && $size <= $maxSize && $error == 0){
+                $uniqueName = uniqid('', true);
+                $file = $uniqueName.".".$extension;
+                
+                move_uploaded_file($tmpName, './public/img/categories/'.$file);
+                
+                $category->setUrlPicture($file);
         
-        if(in_array($extension, $extensions) && $size <= $maxSize && $error == 0){
-            $uniqueName = uniqid('', true);
-            $file = $uniqueName.".".$extension;
-            
-            move_uploaded_file($tmpName, './public/img/categories/'.$file);
-            
-        } else{
-            echo "Mauvaise extension ou taille trop grande";
-        }
-        
-        if (isset($_POST['name']) && $_POST['description']) {    
-            $category = new Category();
-            
-            $category->setName(htmlspecialchars($_POST['name']));
-            $category->setDescription(htmlspecialchars($_POST['description']));
-            $category->setUrlPicture($name);
-            
-            $this->repository->insert($category);
-    
-            if ($data == true) {
-                $img = $_GET['img'];
-                unlink("./public/img/products/" . $img);
-                header('location: ./index.php?url=categories');
-                exit();
-            } else {
-                header('location: ./index.php?url=categories');
-                exit();
+                $this->repository->insert($category);
+                
+                $successMessage = "La catégorie a bien été créée";
+                $this->displayTwig('adminCategories', [
+                            'message' => $successMessage]);
+                
+            } else{
+                $errorMessage = "La taille de l'image est trop grande ou son extension n'est pas valide.";
+                $this->displayTwig('addCategoryForm', [
+                    'message' => $errorMessage]);
             }
         }
     }
@@ -99,56 +95,63 @@ class CategoryController extends AbstractController
      */
     public function updateCategory()
     {
+        $img = $_GET['img'];
        
-        if (isset($_FILES['image'])) {
+        $category = new Category();
+        $category->setId($_GET['id']);
+        $category->setName(htmlspecialchars($_POST['name']));
+        $category->setDescription(htmlspecialchars($_POST['description']));
+
+        if (!empty($_FILES['image']['tmp_name'])) {
             $tmpName = $_FILES['image']['tmp_name'];
             $name = $_FILES['image']['name'];
             $size = $_FILES['image']['size'];
             $error = $_FILES['image']['error'];
-        }
         
-        $tabExtension = explode('.', $name);
-        $extension = strtolower(end($tabExtension));
         
-        $extensions = ['jpg', 'png', 'jpeg'];
-        $maxSize = 4000000;
-        
-        if(in_array($extension, $extensions) && $size <= $maxSize && $error == 0){
-            $uniqueName = uniqid('', true);
-            $file = $uniqueName.".".$extension;
+            $tabExtension = explode('.', $name);
+            $extension = strtolower(end($tabExtension));
             
-            move_uploaded_file($tmpName, './public/img/categories/'.$file);
-            
-        } else{
-            echo "Mauvaise extension ou taille trop grande";
-        }
-        
-        if($_POST['name'] || $_POST['description']) {
-
-            $category = new Category();
-            
-            $category->setId($_GET['id']);
-            $category->setName(htmlspecialchars($_POST['name']));
-            $category->setDescription(htmlspecialchars($_POST['description']));
-            $category->setUrlPicture($name);
-    
-            $data = $this->repository->update($category);
-            
-            if ($data == true) {
-                $img = $_GET['img'];
-                unlink("./public/img/products/" . $img);
-                header('location: ./index.php?url=categories');
-                exit();
+            $extensions = ['jpg', 'png', 'jpeg'];
+            $maxSize = 4000000;
+         
+            if(in_array($extension, $extensions) && $size <= $maxSize && $error == 0){
+                $uniqueName = uniqid('', true);
+                $file = $uniqueName.".".$extension;
+                
+                move_uploaded_file($tmpName, './public/img/categories/'.$file);
+                
+                $category->setUrlPicture($file);
+                
+                $data = $this->repository->update($category);
+                
+                if ($data == true && file_exists('./public/img/categories/'.$img)) {
+                    unlink("./public/img/categories/" . $img);
+                }
+                
             } else {
-                header('location: ./index.php?url=categories');
-                exit();
+                $errorMessage = "La taille de l'image est trop grande ou son extension n'est pas valide.";
+                $data = $this->repository->fetchCategory($_GET['id']);
+                
+                $this->displayTwig('updateCategoryForm', [
+                    'category' => $data,
+                    'message' => $errorMessage]);
             }
-        }
+            
+        } else {
+            $category->setUrlPicture($img);
+            
+            $data = $this->repository->update($category);
+        } 
+        
+        $successMessage = "La modification de la catégorie est validée.";
+        $this->displayTwig('adminCategories', [
+                    'message' => $successMessage]);
     }
     
     
     /** 
-     * @Route ("index.php?url=deleteCategory")
+     * @Route ("index.php?url=admin/category/delete")
      */
     public function deleteCategory()
     {
@@ -160,11 +163,16 @@ class CategoryController extends AbstractController
         
         if($data === true) {
             unlink("./public/img/categories/" . $img);
-            header('location: ./index.php?url=categories');
-            exit();
+            
+            $successMessage = "La catégorie a bien été supprimée.";
+            $this->displayTwig('adminCategories', [
+                    'message' => $successMessage]);
+                    
         } else {
-            header('location: ./index.php?url=account');
-            exit();
+            $errorMessage = "Une erreur est survenue lors de la suppression de la catégorie. Avez-vous vérifié que la catégorie ne possédait pas d'annonces avant de la supprimer ?";
+            $this->displayTwig('adminCategories', [
+                    'message' => $errorMessage]);
         }
     }
+    
 }

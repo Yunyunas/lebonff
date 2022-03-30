@@ -40,13 +40,17 @@
                             
                             <div class="form-label-group">
                                 <label for="image">Image</label>
-                                <input type="file" id="image" name="image" class="form-control" placeholder="Image souhaitée" required>
+                                <input type="file" id="image" name="image" class="form-control" placeholder="Image souhaitée" value="{{product.urlPicture}}">
                             </div>
-
+                            
+                            <div class="text-center text-danger">
+                                <p>{{message}}</p>
+                            </div>
                             
                             <hr class="my-4">
+                            
                             <div class="text-center">
-                                <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Envoyer</button>
+                                <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Valider</button>
                             </div>
                         </form>
                     </div>
