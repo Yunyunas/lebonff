@@ -1,50 +1,56 @@
 {% extends "layout.twig" %}
 	
-	{% block title %} <title>S'inscrire</title> {% endblock %}
+{% block title %} <title>S'inscrire</title> {% endblock %}
 
-    {% block content %}
+{% block content %}
 
-    <div class="container">
-        <div class="row">
+<div class="container">
+    <div class="row">
         <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
             <div class="card card-signin flex-row my-5">
-            <div class="card-img-left d-none d-md-flex">
+                <div class="card-img-left d-none d-md-flex">
                 <!-- Background image for card set in CSS! -->
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title text-center">S'inscrire</h5>
+                    <form class="form-signin" method="post" action="index.php?url=securityRegister">
+                    <div class="form-label-group">
+                        <label for="lastName">Nom</label>
+                        <input type="text" id="lastName" name="lastName" class="form-control" placeholder="Nom" required autofocus>
+                    </div>
+                    
+                    <div class="form-label-group">
+                        <label for="firstName">Prénom</label>
+                        <input type="text" id="firstName" name="firstName" class="form-control" placeholder="Prénom" required>
+                    </div>
+                    
+                    <div class="form-label-group">
+                        <label for="phone">Numéro de téléphone</label>
+                        <input type="tel" id="phone" name="phone" class="form-control" placeholder="Numéro de téléphone" required>
+                    </div>
+    
+                    <div class="form-label-group">
+                        <label for="email">Adresse mail</label>
+                        <input type="email" id="email" name="email" class="form-control" placeholder="Adresse mail" required>
+                        <p class="text-danger">{{message}}</p>
+                    </div>
+    
+                    <div class="form-label-group">
+                        <label for="password">Mot de passe</label>
+                        <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+                    </div>
+                    
+                    <hr>
+                    
+                    <div class="text-center">
+                        <button class="btn btn-lg btn-primary btn-block" type="submit">Inscription</button>
+                        <input type="hidden" name="csrf_token" value="{{csrf}}">
+                    </div>
+                    </form>
+                </div>
             </div>
-            <div class="card-body">
-                <h5 class="card-title text-center">S'inscrire</h5>
-                <form class="form-signin" method="post" action="index.php?url=securityRegister">
-                <div class="form-label-group">
-                    <label for="lastName">Nom</label>
-                    <input type="text" id="lastName" name="lastName" class="form-control" placeholder="Nom" required autofocus>
-                </div>
-                
-                <div class="form-label-group">
-                    <label for="firstName">Prénom</label>
-                    <input type="text" id="firstName" name="firstName" class="form-control" placeholder="Prénom" required>
-                </div>
-                
-                <div class="form-label-group">
-                    <label for="phone">Numéro de téléphone</label>
-                    <input type="tel" id="phone" name="phone" class="form-control" placeholder="Numéro de téléphone" required>
-                </div>
-
-                <div class="form-label-group">
-                    <label for="email">Adresse mail</label>
-                    <input type="email" id="email" name="email" class="form-control" placeholder="Adresse mail" required>
-                </div>
-
-                <div class="form-label-group">
-                    <label for="password">Mot de passe</label>
-                    <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
-                </div>
-
-                <button class="btn btn-lg btn-primary btn-block" type="submit">Inscription</button>
-                </form>
-            </div>
-            </div>
-        </div>
         </div>
     </div>
+</div>
 
 {% endblock %}	

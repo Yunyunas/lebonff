@@ -7,6 +7,9 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+                <div class="my-4 text-center text-success">
+                    <p>{{message}}</p>
+                </div>
                 <div class="card card-signin my-5">
                     <div class="card-body">
                         <h5 class="card-title text-center">Se connecter</h5>
@@ -26,9 +29,12 @@
                             <div class="text-center">
                                 <button class="btn btn-lg btn-primary btn-block" type="submit">Connexion</button>
                             </div>
+                            
                             <hr>
+                            
                             <p>Pas encore de compte ? Alors inscrivez vous :</p>
-                            <a class="d-block text-center mt-2 btn btn-success " href="index.php?url=register">S'inscrire</a>
+                            <a class="d-block text-center btn btn-success" href="index.php?url=register">S'inscrire</a>
+                            <input type="hidden" name="csrf_token" value="{{csrf}}">
                         </form>
                     </div>
                 </div>

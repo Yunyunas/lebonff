@@ -72,7 +72,7 @@ class UserRepository extends AbstractRepository {
     }
     
     
-    public function  insert(User $user): bool
+    public function  insert(User $user)
     {
         try {
             $query = $this->connexion->prepare("INSERT INTO user(last_name, first_name, phone, email, password, role) 
@@ -84,9 +84,7 @@ class UserRepository extends AbstractRepository {
             $query->bindValue(':email', $user->getEmail());
             $query->bindValue(':password', $user->getPassword());
             $query->bindValue(':role', $user->getRole());
-            
             return $query->execute();
-
             
         } catch (Exception $e) {
             return false;

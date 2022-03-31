@@ -22,10 +22,11 @@ class AdminController extends AbstractController
     public function displayAdmin() 
     {
         $users = $this->repository->fetchAll();
-
-        if (!isset($_SESSION['user'])) {
+        
+                
+        $user = unserialize($_SESSION['user']);
+        if ($user->getRole() !== 'admin') {
             $this->displayTwig('login');
-            
         } else {
             $this->displayTwig('adminUsers', [
             'session' => unserialize($_SESSION['user']),
@@ -73,10 +74,13 @@ class AdminController extends AbstractController
      */
     public function displayUpdateUser(): void
     {
+        $_SESSION['csrf'] = bin2hex(random_bytes(32));
+        
         $user = $this->repository->fetchById($_GET['id']);
         
         $this->displayTwig('updateAccountAdmin', [
-            'user' => $user]);
+            'user' => $user,
+            'csrf' => $_SESSION['csrf']]);
     }
     
     
@@ -85,6 +89,12 @@ class AdminController extends AbstractController
      */
     public function updateAccount()
     {
+        
+        if(!$_SESSION['csrf'] || $_SESSION['csrf'] !== $_POST['csrf_token']){
+            header('location: ./index.php?url=admin/account/update');
+            exit();
+        }
+        
         if($_POST['firstName'] || $_POST['lastName'] || $_POST['email']) {
             
             $user = new User();

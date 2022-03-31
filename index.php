@@ -211,6 +211,11 @@ switch($url){
         $securityController->debug();
         break;
         
+    case "test":
+        $homeController = new HomeController();
+        $homeController->test();
+        break;
+        
     case "search":
         $homeController = new HomeController();
         $homeController->search();

@@ -7,7 +7,7 @@
 <!-- Faire le css de cette balise p ci dessous -->
 <p>{{message}}</p>
 
-	<div class="board">
+	<div class="admin-board">
 	    <table>
 	        <thead>
 	            <tr>
@@ -21,9 +21,9 @@
 	        <tbody>
 	        	{% for category in categories %}
 	            <tr>
-	                <td class="people">
+	                <td class="admin-people">
 	                    <img src="./public/img/categories/{{category.url_picture}}" alt="{{category.name}}">
-	                    <div class="name">
+	                    <div class="admin-name">
 	                        <h5>{{category.name}}</h5>
 	                        <p>{{category.id}}</p>
 	                    </div>
@@ -33,12 +33,12 @@
 	                    <p>{{category.description}}</p>
 	                </td>
 	                
-	                <td class="role">
+	                <td class="admin-role">
 	                    <p>{{category.url_picture}}</p>
 	                </td>
-	                <td class="edit"><a href="index.php?url=admin/category/update&id={{category.id}}">Modifier<i class="fa-solid fa-pen"></i></a></td>
+	                <td class="admin-edit"><a href="index.php?url=admin/category/update&id={{category.id}}">Modifier<i class="fa-solid fa-pen"></i></a></td>
 	                
-	                <td class="delete"><a href="index.php?url=admin/category/delete&id={{category.id}}&img={{category.url_picture}}">Supprimer<i class="fa-solid fa-ban"></i></a></td>
+	                <td class="admin-delete"><a href="index.php?url=admin/category/delete&id={{category.id}}&img={{category.url_picture}}">Supprimer<i class="fa-solid fa-ban"></i></a></td>
 	            </tr>
 	          	{% endfor %}
 	      	</tbody>

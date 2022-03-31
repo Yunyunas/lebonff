@@ -18,6 +18,17 @@ class HomeController extends AbstractController {
                 'products' => $products]);
     }
     
+    /** 
+     * @Route ("index.php?url=test")
+     */
+    public function test()
+    {
+        $productRepository = new ProductRepository();
+        $products = $productRepository->fetchNewProducts();
+        
+        $this->displayTwig('test', [
+                'products' => $products]);
+    }
     
     /** 
      * @Route ("index.php?url=error404")

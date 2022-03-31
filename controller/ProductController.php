@@ -74,7 +74,10 @@ class ProductController extends AbstractController
      */    
     public function displayAddProductForm()
     {
-        $this->displayTwig('addProductForm');
+        $_SESSION['csrf'] = bin2hex(random_bytes(32));
+        
+        $this->displayTwig('addProductForm', [
+            'csrf' => $_SESSION['csrf']]);
     }
     
     
@@ -83,13 +86,16 @@ class ProductController extends AbstractController
      */
     public function displayUpdateProductForm()
     {
+        $_SESSION['csrf'] = bin2hex(random_bytes(32));
+        
         $product = new Product();
         $product->setId($_GET['id']);
         
         $data = $this->repository->fetchProduct($product);
        
         $this->displayTwig('updateProductForm', [
-            'product' => $data]);
+            'product' => $data,
+            'csrf' => $_SESSION['csrf']]);
 
     }
     
@@ -99,6 +105,12 @@ class ProductController extends AbstractController
      */
     public function insertProduct()
     {
+        if(!$_SESSION['csrf'] || $_SESSION['csrf'] !== $_POST['csrf_token']){
+            header('location: ./index.php?url=product/create');
+            exit();
+        }
+        
+        $_SESSION['csrf'] = bin2hex(random_bytes(32));
         
         $currentUser = unserialize($_SESSION['user']);
         $user = new User();
@@ -143,7 +155,8 @@ class ProductController extends AbstractController
             else{
                 $errorMessage = "La taille de l'image est trop grande ou son extension n'est pas valide.";
                 $this->displayTwig('addProductForm', [
-                    'message' => $errorMessage]);
+                    'message' => $errorMessage,
+                    'csrf' => $_SESSION['csrf']]);
             }
         }
     }
@@ -154,6 +167,14 @@ class ProductController extends AbstractController
      */
     public function updateProduct()
     {
+        
+        if(!$_SESSION['csrf'] || $_SESSION['csrf'] !== $_POST['csrf_token']){
+            header('location: ./index.php?url=product/update');
+            exit();
+        }
+        
+        $_SESSION['csrf'] = bin2hex(random_bytes(32));
+        
         $img = $_GET['img'];
         
         $currentUser = unserialize($_SESSION['user']);
@@ -195,7 +216,7 @@ class ProductController extends AbstractController
         
                 $data = $this->repository->update($product);
                 
-                if ($data == true && file_exists('./public/img/products/'.$img)) {
+                if ($data && file_exists('./public/img/products/'.$img)) {
                     unlink("./public/img/products/" . $img);
                 }
                 
@@ -206,7 +227,8 @@ class ProductController extends AbstractController
                
                 $this->displayTwig('updateProductForm', [
                     'product' => $data,
-                    'message' => $errorMessage]);
+                    'message' => $errorMessage,
+                    'csrf' => $_SESSION['csrf']]);
             } 
             
         } else {
@@ -231,7 +253,7 @@ class ProductController extends AbstractController
         
         $data = $this->repository->delete($product);
         
-        if($data === true) {
+        if($data) {
             unlink("./public/img/products/" . $img);
             header('location: ./index.php?url=account');
             exit();

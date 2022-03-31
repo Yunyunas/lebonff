@@ -29,7 +29,10 @@ class CategoryController extends AbstractController
      */
     public function displayAddCategoryForm()
     {
-        $this->displayTwig('addCategoryForm');
+        $_SESSION['csrf'] = bin2hex(random_bytes(32));
+        
+        $this->displayTwig('addCategoryForm', [
+            'csrf' => $_SESSION['csrf']]);
     }
     
     
@@ -38,9 +41,12 @@ class CategoryController extends AbstractController
      */
     public function displayUpdateCategoryForm()
     {
+        $_SESSION['csrf'] = bin2hex(random_bytes(32));
+        
         $data = $this->repository->fetchCategory($_GET['id']);
         $this->displayTwig('updateCategoryForm', [
-            'category' => $data]);
+            'category' => $data,
+            'csrf' => $_SESSION['csrf']]);
     }
     
     
@@ -49,6 +55,12 @@ class CategoryController extends AbstractController
      */
     public function insertCategory() 
     {
+        if(!$_SESSION['csrf'] || $_SESSION['csrf'] !== $_POST['csrf_token']){
+            header('location: ./index.php?url=admin/category/create');
+            exit();
+        }
+        
+        $_SESSION['csrf'] = bin2hex(random_bytes(32));
         
         $category = new Category();
         $category->setName(htmlspecialchars($_POST['name']));
@@ -84,7 +96,8 @@ class CategoryController extends AbstractController
             } else{
                 $errorMessage = "La taille de l'image est trop grande ou son extension n'est pas valide.";
                 $this->displayTwig('addCategoryForm', [
-                    'message' => $errorMessage]);
+                    'message' => $errorMessage,
+                    'csrf' => $_SESSION['csrf']]);
             }
         }
     }
@@ -95,6 +108,13 @@ class CategoryController extends AbstractController
      */
     public function updateCategory()
     {
+        if(!$_SESSION['csrf'] || $_SESSION['csrf'] !== $_POST['csrf_token']){
+            header('location: ./index.php?url=admin/category/update');
+            exit();
+        }
+        
+        $_SESSION['csrf'] = bin2hex(random_bytes(32));
+        
         $img = $_GET['img'];
        
         $category = new Category();
@@ -107,8 +127,7 @@ class CategoryController extends AbstractController
             $name = $_FILES['image']['name'];
             $size = $_FILES['image']['size'];
             $error = $_FILES['image']['error'];
-        
-        
+
             $tabExtension = explode('.', $name);
             $extension = strtolower(end($tabExtension));
             
@@ -125,7 +144,7 @@ class CategoryController extends AbstractController
                 
                 $data = $this->repository->update($category);
                 
-                if ($data == true && file_exists('./public/img/categories/'.$img)) {
+                if ($data && file_exists('./public/img/categories/'.$img)) {
                     unlink("./public/img/categories/" . $img);
                 }
                 
@@ -135,7 +154,8 @@ class CategoryController extends AbstractController
                 
                 $this->displayTwig('updateCategoryForm', [
                     'category' => $data,
-                    'message' => $errorMessage]);
+                    'message' => $errorMessage,
+                    'csrf' => $_SESSION['csrf']]);
             }
             
         } else {
@@ -161,7 +181,7 @@ class CategoryController extends AbstractController
         
         $data = $this->repository->delete($category);
         
-        if($data === true) {
+        if($data) {
             unlink("./public/img/categories/" . $img);
             
             $successMessage = "La catégorie a bien été supprimée.";

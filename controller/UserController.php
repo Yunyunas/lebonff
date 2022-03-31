@@ -39,53 +39,54 @@ class UserController extends AbstractController
      */
     public function displayUpdateMyAccount(): void
     {
+        $_SESSION['csrf'] = bin2hex(random_bytes(32));
+        
         if ($_SESSION['user']) {
         $this->displayTwig('updateAccountForm', [
-            'session' => unserialize($_SESSION['user'])]);
+            'session' => unserialize($_SESSION['user']),
+            'csrf' => $_SESSION['csrf']]);
         } else {
                 header('location: ./index.php?url=login');
                 exit();
         }
     }
     
-    /*/
+    
     /** 
      * @Route ("index.php?url=updateProfil")
      */
     public function updateProfil(): void
     {
-        // Dans l'idée ou je ne veux modifier qu'un champs, soit je fais des
-        // if pour chaque $_POST, soit je mets des "value" dans mon html
-        // qui reprendrait les infos de la BDD
-        // Donc un str_replace value {%lastname%} et avant ça une fonction repo
-        if($_POST['firstName'] || $_POST['lastName'] || $_POST['email']) {
-        
-            $currentUser = unserialize($_SESSION['user']);
-            
-            $user = new User();
-            $user->setId($currentUser->getId());
-            $user->setLastName(htmlspecialchars($_POST['lastName']));
-            $user->setFirstName(htmlspecialchars($_POST['firstName']));
-            $user->setPhone(htmlspecialchars($_POST['phone']));
-            $user->setEmail(htmlspecialchars($_POST['email']));
-            $user->setRole($currentUser->getRole());
-            
-            $this->repository->updateProfil($user);
-            
-            // J'instancie les informations modifiées de mon user dans la SESSION
-            $_SESSION['user'] = [
-                'lastName' => $user->getLastName(),
-                'firstName' => $user->getFirstName(),
-                'phone' => $user->getPhone(),
-                'email' => $user->getEmail(),
-                'role' => $user->getRole(),
-                ];
-            
-            $_SESSION['user'] = serialize($user);
-            
-            header('location: ./index.php?url=account');
+        if(!$_SESSION['csrf'] || $_SESSION['csrf'] !== $_POST['csrf_token']){
+            header('location: ./index.php?url=account/update');
             exit();
         }
+        
+        $currentUser = unserialize($_SESSION['user']);
+        
+        $user = new User();
+        $user->setId($currentUser->getId());
+        $user->setLastName(htmlspecialchars($_POST['lastName']));
+        $user->setFirstName(htmlspecialchars($_POST['firstName']));
+        $user->setPhone(htmlspecialchars($_POST['phone']));
+        $user->setEmail(htmlspecialchars($_POST['email']));
+        $user->setRole($currentUser->getRole());
+        
+        $this->repository->updateProfil($user);
+        
+        // J'instancie les informations modifiées de mon user dans la SESSION
+        $_SESSION['user'] = [
+            'lastName' => $user->getLastName(),
+            'firstName' => $user->getFirstName(),
+            'phone' => $user->getPhone(),
+            'email' => $user->getEmail(),
+            'role' => $user->getRole(),
+            ];
+        
+        $_SESSION['user'] = serialize($user);
+        
+        header('location: ./index.php?url=account');
+        exit();
     }
     
     
@@ -94,6 +95,12 @@ class UserController extends AbstractController
      */
     public function updatePassword(): void
     {
+        
+        if(!$_SESSION['csrf'] || $_SESSION['csrf'] !== $_POST['csrf_token']){
+            header('location: ./index.php?url=account/update');
+            exit();
+        }
+        
         $passwordOld = htmlspecialchars($_POST['passwordOld']);
         
         $user = unserialize($_SESSION['user']);
@@ -109,9 +116,13 @@ class UserController extends AbstractController
 
                 $this->repository->updatePassword($user);
                 
-                $_SESSION['user'] = serialize($user);
+                // Ce session là a supprimer (?)
+                //$_SESSION['user'] = serialize($user);
                 
                 header('location: ./index.php?url=account');
+                exit();
+            } else {
+                header('location: ./index.php?url=account/update');
                 exit();
             }
         } else {
@@ -126,20 +137,35 @@ class UserController extends AbstractController
      */
     public function deleteMyAccount(): void 
     {
-        // Fonction pour supprimer le compte et donc le user
-        // Demande confirmation du mot de passe pour valider la suppression
-        // Faire ça avec un pop ou un nouveau formulaire (?)
-        // Ou pas de demande de mdp mais juste un pop de confirmation (?)
         $user = unserialize($_SESSION['user']);
         
+        $productRepository = new ProductRepository();
+        $products = $productRepository->fetchByUser($user);
+        
         $data = $this->repository->deleteAccount($user);
-        if ($data == true) {
+
+        if ($data) {
+            if ($products) {
+                for ($i = 0; $i < count($products); $i++) {
+                    $img = $products[$i]->getUrlPicture();
+                
+                    if (file_exists('./public/img/products/'.$img)) {
+                        unlink("./public/img/products/" . $img);
+                    }
+                }
+            }
+            
             session_destroy();
-            header('location: ./index.php?url=home');
-            exit();
+            $successMessage = "Votre compte a bien été supprimé.";
+            
+            $this->displayTwig('login', [
+                'message' => $successMessage]);
+
         } else {
+            $errorMessage = "une erreur est survenue lors de la suppression du compte.";
             header('location: ./index.php?url=account');
             exit();
         }
     }
+    
 }

@@ -19,7 +19,7 @@ abstract class AbstractController
         $catRepo = new CategoryRepository();
         $categories = $catRepo->fetchAll();
         $categories = ['categories' => $categories];
-        
+
         $tabs = array_merge($params, $categories);
         
         if (!isset($_SESSION['user'])) {
@@ -31,7 +31,8 @@ abstract class AbstractController
         }
     }
     
-    public function constructTwig() {
+    public function constructTwig() 
+    {
         try {
             $this->loader = new Twig\Loader\FilesystemLoader('template');
             $this->twig = new Environment($this->loader, [

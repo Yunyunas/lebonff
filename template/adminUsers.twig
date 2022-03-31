@@ -4,7 +4,7 @@
 
 {% block content %}
 
-	<div class="board">
+	<div class="admin-board">
 	    <table>
 	        <thead>
 	            <tr>
@@ -18,25 +18,25 @@
 	        <tbody>
 	        	{% for user in users %}
 	            <tr>
-	                <td class="people">
+	                <td class="admin-people">
 	                    <img src="./public/img/user2.png" alt="profil picture">
-	                    <div class="name">
+	                    <div class="admin-name">
 	                        <h5>{{user.first_name}} {{user.last_name}}</h5>
 	                        <p>{{user.id}}</p>
 	                    </div>
 	                </td>
 	                
-	                <td class="email">
+	                <td class="admin-email">
 	                    <h5>{{user.email}}</h5>
 	                    <p>{{user.phone}}</p>
 	                </td>
 	                
-	                <td class="role">
+	                <td class="admin-role">
 	                    <p>{{user.role}}</p>
 	                </td>
-	                <td class="edit"><a href="index.php?url=admin/user/update&id={{user.id}}">Modifier<i class="fa-solid fa-pen"></i></a></td>
+	                <td class="admin-edit"><a href="index.php?url=admin/user/update&id={{user.id}}">Modifier<i class="fa-solid fa-pen"></i></a></td>
 	                
-	                <td class="delete"><a href="index.php?url=admin/account/delete&id={{user.id}}">Supprimer<i class="fa-solid fa-ban"></i></a></td>
+	                <td class="admin-delete"><a href="index.php?url=admin/account/delete&id={{user.id}}">Supprimer<i class="fa-solid fa-ban"></i></a></td>
 	            </tr>
 	          	{% endfor %}
 	      	</tbody>

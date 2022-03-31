@@ -308,9 +308,5 @@ class ProductRepository extends AbstractRepository {
             return false;
         }
     }
-    
-    
-    
-    
-    
+
 }

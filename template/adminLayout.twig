@@ -7,11 +7,12 @@
     	<meta name="keywords" content="final fantasy materia arme tifa cloud">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" href="./public/img/fav.png">
     	{% block title %}<title>Admin</title>{% endblock %}
 
         {% block stylesheets %} 
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-            <link rel="stylesheet" href="./public/css/admin.css" />    
+            <link rel="stylesheet" href="./public/css/style.css" />    
         {% endblock %}
         
         {% block javascripts %}
@@ -20,15 +21,15 @@
         
     </head>
     
-    <body>
+    <body class="admin-body">
         <header>
-            <nav id="menu">
-                <div class="logo">
+            <nav id="admin-menu">
+                <div class="admin-logo">
                     <a href="index.php?url=home"><img src="./public/img/logoff.png" alt="logo"></a>
                     <a href="index.php?url=home"><h2>Le bon FF</h2></a>
                 </div>
                 
-                <ul class="items">
+                <ul class="admin-items">
                     <li><i class="fa-solid fa-gear"></i><a href="index.php?url=admin/users">Tableau administrateur</a></li>
                     <li><i class="fas fa-fw fa-folder"></i><a href="index.php?url=admin/categories">Catégories</a></li>
                     <li><i class="fas fa-fw fa-folder"></i><a href="index.php?url=admin/products">Annonces</a></li>
@@ -37,27 +38,27 @@
             </nav>
         </header>
         
-        <section id="interface">
-            <div class="navigation">
-                <div class="flex">
+        <section id="admin-interface">
+            <div class="admin-navigation">
+                <div class="admin-flex">
                     <div>
-                        <i id="menu-btn" class="fa-solid fa-bars"></i>
+                        <i id="admin-menu-btn" class="fa-solid fa-bars"></i>
                     </div>
-                    <div class="search">
+                    <div class="admin-search">
                         <i class="fa-solid fa-magnifying-glass"></i>
                         <input type="text" placeholder="Rechercher">
                     </div>
                 </div>
                 
-                <div class="profile">
+                <div class="admin-profile">
                     <a href="index.php?url=account"><img src="./public/img/1.png" alt="image de profil"></a>
                 </div>
             </div>
             
-            <h3 class="title">Tableau administrateur</h3>
+            <h3 class="admin-title">Tableau administrateur</h3>
             
-            <div class="cards">
-                <div class="card-box">
+            <div class="admin-cards">
+                <div class="admin-card-box">
                     <i class="fas fa-fw fa-folder"></i>
                     <div>
                         <a href="index.php?url=admin/category/create">
@@ -66,7 +67,7 @@
                     </div>
                 </div>
                 
-                <div class="card-box">
+                <div class="admin-card-box">
                     <i class="fas fa-fw fa-folder"></i>
                     <div>
                         <a href="index.php?url=product/create">
@@ -75,7 +76,7 @@
                     </div>
                 </div>
                 
-                <div class="card-box">
+                <div class="admin-card-box">
                     
                     <i class="fa-solid fa-users"></i>
                     <div>
@@ -91,9 +92,9 @@
         {% block content %}{% endblock %}
         
     <script type="text/javascript">
-        $('#menu-btn').click(function() {
-            $('#menu').toggleClass("active");
-            $('#interface').toggleClass("active");
+        $('#admin-menu-btn').click(function() {
+            $('#admin-menu').toggleClass("admin-active");
+            $('#admin-interface').toggleClass("admin-active");
         })
     </script>
     

@@ -4,7 +4,7 @@
 
 {% block content %}
 
-	<div class="board">
+	<div class="admin-board">
 	    <table>
 	        <thead>
 	            <tr>
@@ -21,9 +21,9 @@
 	        <tbody>
 	        	{% for product in products %}
 	            <tr>
-	                <td class="people">
+	                <td class="admin-people">
 	                    <img src="./public/img/products/{{product.url_picture}}" alt="{{product.name}}">
-	                    <div class="name">
+	                    <div class="admin-name">
 							<a href="index.php?url=product&id={{product.id}}&paramName={{paramName}}"><h5>{{product.name}}</h5></a>
 	                        <p>{{product.id}}</p>
 	                    </div>
@@ -45,12 +45,12 @@
 	                    <p>{{product.price}} €</p>
 	                </td>
 	                
-	                <td class="role">
+	                <td class="admin-role">
 	                    <p>{{product.url_picture}}</p>
 	                </td>
-	                <td class="edit"><a href="index.php?url=product/update&id={{product.id}}">Modifier</a></td>
+	                <td class="admin-edit"><a href="index.php?url=product/update&id={{product.id}}">Modifier</a></td>
 	                
-	                <td class="delete"><a href="index.php?url=deleteProduct&id={{product.id}}&img={{product.url_picture}}">Supprimer</a></td>
+	                <td class="admin-delete"><a href="index.php?url=deleteProduct&id={{product.id}}&img={{product.url_picture}}">Supprimer</a></td>
 	            </tr>
 	          	{% endfor %}
 	      	</tbody>

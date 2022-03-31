@@ -3,6 +3,7 @@
 require_once './controller/AbstractController.php';
 require_once './repository/UserRepository.php';
 require_once './model/User.php';
+//require_once './service/Validator.php';
 
 
 class SecurityController extends AbstractController {
@@ -21,8 +22,11 @@ class SecurityController extends AbstractController {
      */
     public function displayRegister() 
     {
-         if (!isset($_SESSION['user'])) {
-            $this->displayTwig('register');
+        $_SESSION['csrf'] = bin2hex(random_bytes(32));
+        
+        if (!isset($_SESSION['user'])) {
+            $this->displayTwig('register', [
+                'csrf' => $_SESSION['csrf']]);
             
         } else {
             header('location: ./index.php?url=account');
@@ -36,8 +40,12 @@ class SecurityController extends AbstractController {
      */
     public function displayLogin() 
     {
-         if (!isset($_SESSION['user'])) {
-            $this->displayTwig('login');
+        
+        $_SESSION['csrf'] = bin2hex(random_bytes(32));
+        
+        if (!isset($_SESSION['user'])) {
+            $this->displayTwig('login', [
+                'csrf' => $_SESSION['csrf']]);
             
         } else {
             header('location: ./index.php?url=account');
@@ -51,6 +59,19 @@ class SecurityController extends AbstractController {
      */
     public function securityRegister(): void
     {
+        /*
+        if(strlen($_POST['password']) < 6){
+            header('location: ./index.php?url=register');
+            exit();
+        } else {
+        */
+        
+        if(!$_SESSION['csrf'] || $_SESSION['csrf'] !== $_POST['csrf_token']){
+            header('location: ./index.php?url=register');
+            exit();
+        }
+        
+        //$validator = new Validator();
         
         $passwordObscure = password_hash(htmlspecialchars($_POST['password']), PASSWORD_DEFAULT);
         
@@ -63,24 +84,39 @@ class SecurityController extends AbstractController {
         $user->setPassword(htmlspecialchars($passwordObscure));
         $user->setRole('user');
         
-        $this->repository->insert($user);
+        // Retourne la data ou retourne false si le filtre échoue (gérer l'erreur si false => class Validator)
         
-        // A MODIFIER ABSOLUMENT CAR ACTUELLEMENT REGISTER AVEC UN EMAIL DEJA EN BDD = LOGIN SANS MDP
-        $user = $this->repository->fetchLogin($user->getEmail());
-
-        $_SESSION['user'] = [
-                'id' => $user->getId(),
-                'lastName' => $user->getLastName(),
-                'firstName' => $user->getFirstName(),
-                'phone' => $user->getPhone(),
-                'email' => $user->getEmail(),
-                'role' => $user->getRole()
-                ];
-
-        $_SESSION['user'] = serialize($user);
+        /*$test = $validator->validateEmail($_POST['email']);
+        var_dump($test); die();*/
         
-        header('location: ./index.php?url=account');
-        exit();
+        $data = $this->repository->insert($user);
+        
+        if($data) {
+            $currentData = $this->repository->fetchLogin($user->getEmail());
+            
+            // Je fais ça juste pour éviter que le password soit dans la session !
+            // SELECT SCOPE_IDENTITY() en SQL possible suite au INSERT mais peut potentiellement
+            // causer des pb si plusieurs user s'inscrivent en même temps
+            // ou ajouter une requête SQL au insert (même SELECT que pour fetch LOGIN)
+            if ($currentData) {
+                $currentUser = new User();
+                $currentUser->setId($currentData->getId());
+                $currentUser->setLastName($currentData->getLastName());
+                $currentUser->setFirstName($currentData->getFirstName());
+                $currentUser->setPhone($currentData->getPhone());
+                $currentUser->setEmail($currentData->getEmail());
+                $currentUser->setRole($currentData->getRole());
+        
+                $_SESSION['user'] = serialize($currentUser);
+                
+                header('location: ./index.php?url=account');
+                exit();
+            }
+        } else {
+            $errorMessage = "Une erreur est survenue.";
+            $this->displayTwig('register', [
+                'message' => $errorMessage]);
+        }
     }
     
     
@@ -90,6 +126,11 @@ class SecurityController extends AbstractController {
     public function securityLogin(): void
     {
         if(!isset($_POST['email'], $_POST['password'])){
+            header('location: ./index.php?url=login');
+            exit();
+        }
+ 
+        if(!$_SESSION['csrf'] || $_SESSION['csrf'] !== $_POST['csrf_token']){
             header('location: ./index.php?url=login');
             exit();
         }
@@ -152,7 +193,7 @@ class SecurityController extends AbstractController {
 
         echo("Infos user après unserialize");
         $currentUser = unserialize($_SESSION['user']);
-        var_dump($user);
+        var_dump($currentUser);
         
         var_dump($user->getId());
     } 
