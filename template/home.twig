@@ -1,6 +1,6 @@
 {% extends "layout.twig" %}
 
-{% block title %} <title> Accueil </title> {% endblock %}
+{% block title %} <title> Accueil</title> {% endblock %}
 {% block content %}
 
 
@@ -8,34 +8,37 @@
 
 <div class="container">
 
-    <section class="jumbotron my-4">
-        <h1 class="display-3">Final Fantasy</h1>
-        <p class="lead text-justify">Si l'on devait retenir qu'un seul mot pour définir un Final Fantasy, sans doute serait-ce : "atmosphère". Une amotsphère unique dont le joueur 
+    <section class="presentation">
+        <h1>Final Fantasy</h1>
+        <p>Si l'on devait retenir qu'un seul mot pour définir un Final Fantasy, sans doute serait-ce : &laquo atmosphère &raquo. Une amotsphère unique dont le joueur 
         se sent imprégné, comme s'il rentrait en communion avec un titre d'exception.</p>
-        <p class="lead text-justify">Tous les joueurs de Final Fantasy ont tous vécu cette expérience qui consiste à commencer sa partie après le dîner pour l'achever avec les 
+        <p>Tous les joueurs de Final Fantasy ont tous vécu cette expérience qui consiste à commencer sa partie après le dîner pour l'achever avec les 
         premières lueurs de l'aube. C'est le syndrome Final Fantasy. Impossible de décrocher, l'immersion est totale.</p> 
-        <p class="lead text-justify">C'est un film, un jeu, une aventure que l'on suit et que l'on vit. Le reste, ce sont aussi des décors admirables de finesse, des effets visuels proches
+        <p>C'est un film, un jeu, une aventure que l'on suit et que l'on vit. Le reste, ce sont aussi des décors admirables de finesse, des effets visuels proches
         des effets spéciaux hollywoodiens, une véritable quête artistique qui fait du joueur un esthète, adapte du jeu, spectateur du beau.</p>  
-        <a href="index.php?url=products/new&paramName=Nouveautés" class="btn btn-primary btn-lg">Voir les nouveautés</a>
+        <a href="index.php?url=products/new&paramName=Nouveautés" class="">Voir les nouveautés</a>
     </section>
 
-    <div class="row text-center">
+    <div class="products-flex">
 
         {% for product in products %}
-        <div class="col-lg-3 col-md-6 mb-4">
-            <div class="card h-100">
+        <div class="product-card">
+            <div class="product-link-img">
                 <a href="index.php?url=product&id={{product.id}}">
-                <img class="card-img-top" src="./public/img/products/{{product.urlPicture}}" alt="Image de {{product.name}}">
+                <img src="./public/img/products/{{product.urlPicture}}" alt="Image de {{product.name}}">
                 </a>
-                <div class="card-body">
-                    <h4 class="card-title">
-                        <a href="index.php?url=product&id={{product.id}}">{{product.name}}</a>
-                    </h4>
+            </div>
+            
+            <div class="product-card-body">
+                <div class="product-info">
+                        <h4>
+                            <a href="index.php?url=product&id={{product.id}}">{{product.name}}</a>
+                        </h4>
                     <p>Prix : {{product.price}} euros</p>
                 </div>
-
-                <div class="card-footer">
-                    <a href="index.php?url=product&id={{product.id}}" class="btn btn-primary">Voir plus</a>
+    
+                <div class="product-detail">
+                    <a href="index.php?url=product&id={{product.id}}" class="">Voir plus</a>
                 </div>
             </div>
         </div>

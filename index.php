@@ -212,8 +212,8 @@ switch($url){
         break;
         
     case "test":
-        $homeController = new HomeController();
-        $homeController->test();
+        $productController = new ProductController();
+        $productController->test();
         break;
         
     case "search":

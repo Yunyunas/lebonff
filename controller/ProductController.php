@@ -1,6 +1,7 @@
 <?php
 
 require_once './model/User.php';
+require_once './repository/UserRepository.php';
 
 require_once './model/Product.php';
 require_once './repository/ProductRepository.php';
@@ -61,8 +62,26 @@ class ProductController extends AbstractController
         $data = $this->repository->fetchProduct($product);
         
         $paramName = $data->getCategory()->getName();
-
+       
         $this->displayTwig('productDetail', [
+            'product' => $data,
+            'user' => $data->getUser(),
+            'paramName' => $paramName]);
+    }
+    
+    /** 
+     * @Route ("index.php?url=productDetail")
+     */
+    public function test()
+    {
+        $product = new Product();
+        $product->setId($_GET['id']);
+        
+        $data = $this->repository->fetchProduct($product);
+        
+        $paramName = $data->getCategory()->getName();
+
+        $this->displayTwig('test', [
             'product' => $data,
             'user' => $data->getUser(),
             'paramName' => $paramName]);

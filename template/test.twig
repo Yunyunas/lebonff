@@ -1,51 +1,57 @@
 {% extends "layout.twig" %}
 
-{% block title %} <title> Accueil Test </title> {% endblock %}
+{% block title %} <title> Annonce {{product.name}} </title> {% endblock %}
 {% block content %}
 
-
-<img class="home-image" src="./public/img/banniere.png" alt="Bannière Final Fantasy">
-
-<div class="container">
-
-    <section class="presentation">
-        <h1>Final Fantasy</h1>
-        <p>Si l'on devait retenir qu'un seul mot pour définir un Final Fantasy, sans doute serait-ce : &laquo atmosphère &raquo. Une amotsphère unique dont le joueur 
-        se sent imprégné, comme s'il rentrait en communion avec un titre d'exception.</p>
-        <p>Tous les joueurs de Final Fantasy ont tous vécu cette expérience qui consiste à commencer sa partie après le dîner pour l'achever avec les 
-        premières lueurs de l'aube. C'est le syndrome Final Fantasy. Impossible de décrocher, l'immersion est totale.</p> 
-        <p>C'est un film, un jeu, une aventure que l'on suit et que l'on vit. Le reste, ce sont aussi des décors admirables de finesse, des effets visuels proches
-        des effets spéciaux hollywoodiens, une véritable quête artistique qui fait du joueur un esthète, adapte du jeu, spectateur du beau.</p>  
-        <a href="index.php?url=products/new&paramName=Nouveautés" class="">Voir les nouveautés</a>
-    </section>
-
-    <div class="products-flex">
-
-        {% for product in products %}
-        <div class="product-card">
-            <div class="product-link-img">
-                <a href="index.php?url=product&id={{product.id}}">
-                <img src="./public/img/products/{{product.urlPicture}}" alt="Image de {{product.name}}">
-                </a>
+<body>
+    <div class="container">
+        <h1 class="cat-title">Catégories</h1>
+        
+        <div class="block-position">
+            <div class="block-left">
+                <div class="block-left-cat">
+                    <a href="index.php?url=newProducts&paramName=Nouveautés" class=" {{paramName != 'Nouveautés' ? '' : 'active'}}">Nouveautés</a>
+                    {% for category in categories %}
+                    <a href="index.php?url=products&id={{category.id}}&paramName={{category.name}}" 
+                    class="{{paramName != category.name ? '' : 'active'}}">{{category.name}}</a>
+                    {% endfor %}
+                </div>
+                
+                <div class="block-left-user">
+                    <div class="user-infos">
+                        <a href="#"><img src="./public/img/user2.png" alt="profile"></a>
+                        <a href="#">{{user.firstName}} {{user.lastName}}</a>
+                    </div>
+                    <p><i class="fa-solid fa-phone"></i> {{user.phone}}</p>
+                    <p><i class="fa-regular fa-envelope"></i> {{user.email}}</p>
+                </div>
             </div>
             
-            <div class="product-card-body">
-                <div class="product-info">
-                        <h4>
-                            <a href="index.php?url=product&id={{product.id}}">{{product.name}}</a>
-                        </h4>
-                    <p>Prix : {{product.price}} euros</p>
+            <div class="detail-block">
+                <div class="detail-product">
+                    <div class="detail-img">
+                        <img class="" src="./public/img/products/{{product.urlPicture}}" alt="Image de {{product.name}}">
+                    </div>
+                    
+                    <div class="detail-product-infos">
+                        <div class="product-presentation">
+                            <p>Détail de l'annonce</p>
+                        </div>
+                        <div class="product-infos">
+                            <h3 class="">{{product.name}}</h3>
+                            <h4>Prix : {{product.price}} euros</h4>
+                            <p class="text-description">{{product.description}}</p>
+                        </div>
+                    </div>
                 </div>
-    
-                <div class="product-detail">
-                    <a href="index.php?url=product&id={{product.id}}" class="">Voir plus</a>
+                
+                <div class="detail-created">
+                    <p>Annonce créée le {{product.createdAt}}</p>
                 </div>
             </div>
         </div>
-        {% endfor %}
-        
     </div>
-</div>
+</body>
 
 
 {% endblock %}
