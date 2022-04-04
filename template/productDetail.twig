@@ -4,58 +4,53 @@
 {% block content %}
 
 <body>
-  <!-- Page Content -->
-<div class="container">
-
-    <div class="row">
-
-        <div class="col-lg-3">
-            <h1 class="my-4">Le bon FF</h1>
-            <div class="list-group">
-                <a href="index.php?url=newProducts&paramName=Nouveautés" class="list-group-item {{paramName != 'Nouveautés' ? '' : 'active'}}">Nouveautés</a>
+    <div class="container">
+        <h1 class="cat-title">Catégories</h1>
+        
+        <div class="block-position">
+            <div class="block-left">
+                <div class="block-left-cat">
+                    <a href="index.php?url=products/new&paramName=Nouveautés" class=" {{paramName != 'Nouveautés' ? '' : 'active'}}">Nouveautés</a>
+                    {% for category in categories %}
+                    <a href="index.php?url=products&id={{category.id}}&paramName={{category.name}}" 
+                    class="{{paramName != category.name ? '' : 'active'}}">{{category.name}}</a>
+                    {% endfor %}
+                </div>
                 
-                {% for category in categories %}
-
-                <a href="index.php?url=products&id={{category.id}}&paramName={{category.name}}" 
-                class="list-group-item {{paramName != category.name ? '' : 'active'}}">{{category.name}}</a>
-   
-                {% endfor %}
-            </div>
-        </div>
-      <!-- /.col-lg-3 -->
-
-        <div class="col-lg-9">
-
-            <div class="card mt-4">
-                <img class="card-img-top img-fluid" src="./public/img/products/{{product.urlPicture}}" alt="Image de {{product.name}}">
-                <div class="card-body">
-                    <h3 class="card-title">{{product.name}}</h3>
-                    <h4>Prix : {{product.price}} euros</h4>
-                    {# <p class="card-text"> info autre </p> #}
+                <div class="block-left-user">
+                    <div class="user-infos">
+                        <a href="#"><img src="./public/img/user2.png" alt="profile"></a>
+                        <a href="#">{{user.firstName}} {{user.lastName}}</a>
+                    </div>
+                    <p><i class="fa-solid fa-phone"></i> {{user.phone}}</p>
+                    <p><i class="fa-regular fa-envelope"></i> {{user.email}}</p>
                 </div>
             </div>
-        <!-- /.card -->
-
-        <div class="card card-outline-secondary my-4">
-          <div class="card-header">
-            Détail du produit
-          </div>
-          <div class="card-body">
-
-            <p>{{product.description}}</p>
-            <small class="text-muted">Annonce déposée par {{user.firstName}} {{user.lastName}} le {{product.createdAt}}</small>
-            <hr>
-
-            <a href="#" class="btn btn-danger">Acheter</a>
-          </div>
+            
+            <div class="detail-block">
+                <div class="detail-product">
+                    <div class="detail-img">
+                        <img class="" src="./public/img/products/{{product.urlPicture}}" alt="Image de {{product.name}}">
+                    </div>
+                    
+                    <div class="detail-product-infos">
+                        <div class="product-presentation">
+                            <p>Détail de l'annonce</p>
+                        </div>
+                        <div class="product-infos">
+                            <h3 class="">{{product.name}}</h3>
+                            <h4>Prix : {{product.price}} euros</h4>
+                            <p class="text-description">{{product.description}}</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="detail-created">
+                    <p>Annonce créée le {{product.createdAt}}</p>
+                </div>
+            </div>
         </div>
-        <!-- /.card -->
-      </div>
-      <!-- /.col-lg-9 -->
     </div>
-  </div>
-  <!-- /.container -->
-
 </body>
 
 

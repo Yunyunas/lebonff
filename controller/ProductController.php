@@ -1,5 +1,7 @@
 <?php
 
+require_once './service/Picture.php';
+
 require_once './model/User.php';
 require_once './repository/UserRepository.php';
 
@@ -15,9 +17,12 @@ class ProductController extends AbstractController
     
     private $repository;
     
+    const FOLDER = 'products';
+    
     public function __construct()
     {
         $this->repository = new ProductRepository();
+        $this->picture = new Picture();
     }
     
     
@@ -68,25 +73,7 @@ class ProductController extends AbstractController
             'user' => $data->getUser(),
             'paramName' => $paramName]);
     }
-    
-    /** 
-     * @Route ("index.php?url=productDetail")
-     */
-    public function test()
-    {
-        $product = new Product();
-        $product->setId($_GET['id']);
-        
-        $data = $this->repository->fetchProduct($product);
-        
-        $paramName = $data->getCategory()->getName();
 
-        $this->displayTwig('test', [
-            'product' => $data,
-            'user' => $data->getUser(),
-            'paramName' => $paramName]);
-    }
-    
     
     /** 
      * @Route ("index.php?url=product/create")
@@ -147,36 +134,25 @@ class ProductController extends AbstractController
         $product->setPrice(htmlspecialchars($_POST['price']));
 
         if (isset($_FILES['image'])) {
-            $tmpName = $_FILES['image']['tmp_name'];
-            $name = $_FILES['image']['name'];
-            $size = $_FILES['image']['size'];
-            $error = $_FILES['image']['error'];
-        
-            $tabExtension = explode('.', $name);
-            $extension = strtolower(end($tabExtension));
             
-            $extensions = ['jpg', 'png', 'jpeg'];
-            $maxSize = 4000000;
+            $result = $this->picture->addPicture($_FILES['image'], 'products');
             
-            if(in_array($extension, $extensions) && $size <= $maxSize && $error == 0){
-                $uniqueName = uniqid('', true);
-                $file = $uniqueName.".".$extension;
-                
-                move_uploaded_file($tmpName, './public/img/products/'.$file);
-                
-                $product->setUrlPicture($file);
+            if ($result) {
+                $product->setUrlPicture($result);
             
                 $this->repository->insert($product);
-                
+                                
                 header('location: ./index.php?url=account');
                 exit();
-            }
-            else{
+            } else {
                 $errorMessage = "La taille de l'image est trop grande ou son extension n'est pas valide.";
                 $this->displayTwig('addProductForm', [
                     'message' => $errorMessage,
                     'csrf' => $_SESSION['csrf']]);
             }
+        } else {
+            $errorMessage = "Image invalide";
+            echo $errorMessage;
         }
     }
     
@@ -213,34 +189,19 @@ class ProductController extends AbstractController
         $product->setPrice(htmlspecialchars($_POST['price']));
         
         if (!empty($_FILES['image']['tmp_name'])) {
-            $tmpName = $_FILES['image']['tmp_name'];
-            $name = $_FILES['image']['name'];
-            $size = $_FILES['image']['size'];
-            $error = $_FILES['image']['error'];
-        
-        
-            $tabExtension = explode('.', $name);
-            $extension = strtolower(end($tabExtension));
             
-            $extensions = ['jpg', 'png', 'jpeg'];
-            $maxSize = 4000000;
+            $result = $this->picture->addPicture($_FILES['image'], self::FOLDER);
             
-            if(in_array($extension, $extensions) && $size <= $maxSize && $error == 0){
-                $uniqueName = uniqid('', true);
-                $file = $uniqueName.".".$extension;
+            if ($result) {
                 
-                move_uploaded_file($tmpName, './public/img/products/'.$file);
-                
-                $product->setUrlPicture($file);
+                $product->setUrlPicture($result);
         
                 $data = $this->repository->update($product);
                 
-                if ($data && file_exists('./public/img/products/'.$img)) {
-                    unlink("./public/img/products/" . $img);
+                if ($data) {
+                    $this->picture->deletePicture($img, self::FOLDER);
                 }
-                
-            }
-            else {
+            } else {
                 $errorMessage = "La taille de l'image est trop grande ou son extension n'est pas valide.";
                 $data = $this->repository->fetchProduct($product);
                
@@ -273,7 +234,7 @@ class ProductController extends AbstractController
         $data = $this->repository->delete($product);
         
         if($data) {
-            unlink("./public/img/products/" . $img);
+            $this->picture->deletePicture($img, self::FOLDER);
             header('location: ./index.php?url=account');
             exit();
         } else {

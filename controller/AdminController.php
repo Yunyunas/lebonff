@@ -28,7 +28,7 @@ class AdminController extends AbstractController
         if ($user->getRole() !== 'admin') {
             $this->displayTwig('login');
         } else {
-            $this->displayTwig('adminUsers', [
+            $this->displayTwig('admin/adminUsers', [
             'session' => unserialize($_SESSION['user']),
             'users' => $users]);
         }
@@ -44,7 +44,7 @@ class AdminController extends AbstractController
             $this->displayTwig('login');
             
         } else {
-            $this->displayTwig('adminCategories', [
+            $this->displayTwig('admin/adminCategories', [
             'session' => unserialize($_SESSION['user'])]);
         }
     }
@@ -62,7 +62,7 @@ class AdminController extends AbstractController
             $this->displayTwig('login');
             
         } else {
-            $this->displayTwig('adminProducts', [
+            $this->displayTwig('admin/adminProducts', [
             'session' => unserialize($_SESSION['user']),
             'products' => $products]);
         }
@@ -78,7 +78,7 @@ class AdminController extends AbstractController
         
         $user = $this->repository->fetchById($_GET['id']);
         
-        $this->displayTwig('updateAccountAdmin', [
+        $this->displayTwig('admin/updateAccountAdmin', [
             'user' => $user,
             'csrf' => $_SESSION['csrf']]);
     }

@@ -74,15 +74,6 @@ class UserController extends AbstractController
         
         $this->repository->updateProfil($user);
         
-        // J'instancie les informations modifiées de mon user dans la SESSION
-        $_SESSION['user'] = [
-            'lastName' => $user->getLastName(),
-            'firstName' => $user->getFirstName(),
-            'phone' => $user->getPhone(),
-            'email' => $user->getEmail(),
-            'role' => $user->getRole(),
-            ];
-        
         $_SESSION['user'] = serialize($user);
         
         header('location: ./index.php?url=account');
@@ -115,9 +106,6 @@ class UserController extends AbstractController
                 $user->setPassword(htmlspecialchars($passwordObscure));
 
                 $this->repository->updatePassword($user);
-                
-                // Ce session là a supprimer (?)
-                //$_SESSION['user'] = serialize($user);
                 
                 header('location: ./index.php?url=account');
                 exit();

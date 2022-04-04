@@ -1,25 +1,22 @@
 - Commenter le code,
-- Code propre, bien indenté, respect des conventions, cohérence des noms variables / fonctions et classes
-
-- Attention à la sécurité (htmlspecialchars pour formulaires, protection des routes, etc...)
-
-- Faire formulaire login en Javascript ?
-- Faire barre de recherche AJAX
-- Javascript : animation type loader sur bouton ou autre.
-
-- Bootstrap : plutôt les formulaires
-- Faire quelques pages en CSS à la main (admin) + header et footer -> attention RESPONSIVE
-
+- Code propre, bien indenté, respect des conventions, cohérence des noms 
 - Gérer les erreurs et les exceptions
 
-
-
------------------------------------------------------------------------------------------------------
-- Price doit être un string pour permettre les décimales et ensuite utiliser parseInt !
-
+--------------------------------------------------------------------------------
 - Côté admin => AdminController / adminLayout.twig
  -> attention à bien sécuriser les routes admin
-            
-            
-            // EXTENSIONS IMG ET MAX SIZE EN CONSTANTES 
-            // VOIR POUR CREER CLASSE IMAGE avec ses constantes, ses méthodes (ajouter / supprimer / modifier...)
+
+--------------------------------------------------------------------------------
+- Organiser les templates (dossier admin...)
+
+- Responsive ProductDetail
+- Responsive header (pour mobile)
+
+- Classes : validator, admin, image, error
+
+- Barres de recherche AJAX
+
+--------------------------  BONUS ----------------------------------------------
+- Créer une page annonces par utilisateur
+- Image de profil pour les users
+- Pop de confirmation pour tout bouton "supprimer"

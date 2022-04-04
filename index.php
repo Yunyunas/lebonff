@@ -11,7 +11,7 @@ require_once './controller/AdminController.php';
 
 $url = $_GET['url'] ?? "home";
 
-switch($url){
+switch($url) {
     
     /** 
      * HOME
@@ -211,11 +211,6 @@ switch($url){
         $securityController->debug();
         break;
         
-    case "test":
-        $productController = new ProductController();
-        $productController->test();
-        break;
-        
     case "search":
         $homeController = new HomeController();
         $homeController->search();
@@ -228,5 +223,6 @@ switch($url){
         $homeController = new HomeController();
         $homeController->displayError404();
        break;
+       
 }
 

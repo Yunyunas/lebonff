@@ -1,9 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 
 @font-face {
-    font-family: "Final";
-    src: url("./public/font/finalf.ttf") format("truetype");
+	font-family: 'Final-fantasy';
+	src: url(../font/final-fantasy.otf) format("opentype");
+	font-weight: normal;
+	font-style: normal;
 }
+
 
 * {
     margin: 0;
@@ -45,11 +48,14 @@ body {
     margin-right: 8px;
 }
 
-#menu .logo h2 {
-    font-family: "Final", sans-serif;
-    font-size: 26px;
+#menu .logo h1 {
+    font-family: 'Final-fantasy', sans-serif;
+    text-transform: uppercase;
+    font-size: 35px;
     color: #F3F4F6;
     margin-bottom: 0;
+    letter-spacing: 3px;
+    font-weight: 100;
 }
 
 #menu .items {
@@ -328,6 +334,11 @@ body {
 
 .presentation h1 {
     margin-bottom: 0.5em;
+    font-family: 'Final-fantasy', sans-serif;
+    text-transform: uppercase;
+    font-size: 60px;
+    letter-spacing: 3px;
+    font-weight: 300;
 }
 
 .presentation p {
@@ -547,7 +558,7 @@ body {
     padding: 1em 1em 0 1em;
 }
 
-/* RESPONSIVE PAGE PRODUCT DETAIL A FAIRE !*/
+/* RESPONSIVE PAGE PRODUCT DETAIL A FAIRE ! */
 
 
 /*******************************************************************************/
@@ -581,7 +592,14 @@ body {
 #admin-menu .admin-logo a {
     text-decoration: none;
     color: white;
-    font-size: 18px;
+    font-family: 'Final-fantasy', sans-serif;
+    text-transform: uppercase;
+    font-size: 20px;
+}
+
+#admin-menu .admin-logo h2 {
+    letter-spacing: 3px;
+    font-weight: 100;
 }
 
 #admin-menu .admin-logo img {
