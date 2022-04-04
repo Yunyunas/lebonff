@@ -6,12 +6,12 @@ class Picture {
     
     const EXTENSIONS = ['jpg', 'png', 'jpeg'];
 
-    public function addPicture($files, $folder) 
+    public function addPicture($files, $folder): string 
     {
         $tabExtension = explode('.', $files['name']);
         $extension = strtolower(end($tabExtension));
         
-        if(in_array($extension, self::EXTENSIONS) && $files['size'] <= self::MAXSIZE && $files['error'] == 0){
+        if(in_array($extension, self::EXTENSIONS) && $files['size'] <= self::MAXSIZE && $files['error'] == 0) {
             $uniqueName = uniqid('', true);
             $file = $uniqueName.".".$extension;
             
@@ -19,9 +19,9 @@ class Picture {
             
             return $file;
 
-        } else {
-            return false;
-        }
+        } 
+        
+        return false;
     }
     
     
@@ -30,9 +30,9 @@ class Picture {
         if (file_exists('./public/img/'.$folder.'/'.$currentPicture)) {
             unlink('./public/img/'.$folder.'/' . $currentPicture);
             return true;
-        } else {
-                return false;
-        }   
+        } 
+        
+        return false;
     }
     
 }

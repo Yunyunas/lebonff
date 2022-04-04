@@ -7,12 +7,10 @@
  -> attention à bien sécuriser les routes admin
 
 --------------------------------------------------------------------------------
-- Organiser les templates (dossier admin...)
-
 - Responsive ProductDetail
 - Responsive header (pour mobile)
 
-- Classes : validator, admin, image, error
+- Classes : validator, admin, error
 
 - Barres de recherche AJAX
 
