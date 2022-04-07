@@ -29,6 +29,7 @@ class Product
      */
     public function getUser(): User
     {
+        
         return $this->user;
     }
     

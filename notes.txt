@@ -1,20 +1,21 @@
 - Commenter le code,
 - Code propre, bien indenté, respect des conventions, cohérence des noms 
-- Gérer les erreurs et les exceptions
 
 --------------------------------------------------------------------------------
-- Côté admin => AdminController / adminLayout.twig
- -> attention à bien sécuriser les routes admin
 
---------------------------------------------------------------------------------
-- Responsive ProductDetail
 - Responsive header (pour mobile)
 
-- Classes : validator, admin, error
+- Classes : validator et error
 
 - Barres de recherche AJAX
 
---------------------------  BONUS ----------------------------------------------
+- Gérer les erreurs et les exceptions
+
+--------------------------- BONUS ----------------------------------------------
 - Créer une page annonces par utilisateur
 - Image de profil pour les users
 - Pop de confirmation pour tout bouton "supprimer"
+
+- Ajouter une table favoris ou "coup de coeur"
+  -> ajouter un bouton sur mes annonces
+  -> CRUD ajouter supprimer afficher

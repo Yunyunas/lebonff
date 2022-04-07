@@ -1,6 +1,5 @@
 <?php 
-//require_once './model/User.php';
-//require_once './model/Category.php';
+
 require_once './service/AbstractRepository.php';
 
 class ProductRepository extends AbstractRepository {
@@ -14,8 +13,8 @@ class ProductRepository extends AbstractRepository {
     public function fetchNewProducts(): array
     {
         $query = $this->connexion->prepare("SELECT * from product INNER JOIN user 
-                                            ON user.id = product.id_user INNER JOIN category
-                                            ON category.id = product.id_category ORDER BY created_at DESC LIMIT 9");
+                                            ON user.id = product.user_id INNER JOIN category
+                                            ON category.id = product.category_id ORDER BY created_at DESC LIMIT 9");
         $data = null;
         try {
             $query->setFetchMode(PDO::FETCH_NAMED);
@@ -63,8 +62,8 @@ class ProductRepository extends AbstractRepository {
         $data = null;
         try {
             $query = $this->connexion->prepare("SELECT * from product 
-                                                INNER JOIN user ON user.id = product.id_user
-                                                INNER JOIN category ON category.id = product.id_category
+                                                INNER JOIN user ON user.id = product.user_id
+                                                INNER JOIN category ON category.id = product.category_id
                                                 WHERE product.id = :id");
             if ($query) {
                 $query->bindValue(":id", $product->getId());
@@ -107,11 +106,11 @@ class ProductRepository extends AbstractRepository {
     public function fetchByCategory(Category $category): array 
     {
         $query = $this->connexion->prepare("SELECT * from product INNER JOIN user 
-                                            ON user.id = product.id_user INNER JOIN category
-                                            ON category.id = product.id_category WHERE category.id = :id_category");
+                                            ON user.id = product.user_id INNER JOIN category
+                                            ON category.id = product.category_id WHERE category.id = :category_id");
         $data = null;
         try {
-            $query->bindValue(':id_category', $category->getId());
+            $query->bindValue(':category_id', $category->getId());
             $query->setFetchMode(PDO::FETCH_NAMED);
             $query->execute();
             $datas = $query->fetchAll();
@@ -156,11 +155,11 @@ class ProductRepository extends AbstractRepository {
     public function fetchByUser(User $user): array
     {
         $query = $this->connexion->prepare("SELECT * from product INNER JOIN user 
-                                            ON user.id = product.id_user INNER JOIN category
-                                            ON category.id = product.id_category WHERE user.id = :id_user");
+                                            ON user.id = product.user_id INNER JOIN category
+                                            ON category.id = product.category_id WHERE user.id = :user_id");
         $data = null;
         try {
-            $query->bindValue(':id_user', $user->getId());
+            $query->bindValue(':user_id', $user->getId());
             $query->setFetchMode(PDO::FETCH_NAMED);
             $query->execute();
             $datas = $query->fetchAll();
@@ -203,11 +202,11 @@ class ProductRepository extends AbstractRepository {
     public function insert(Product $product): bool 
     {
         try {
-            $query = $this->connexion->prepare("INSERT INTO product(id_user, id_category, name, description, url_picture, price, created_at)
-                                                VALUES (:id_user, :id_category, :name, :description, :url_picture, :price, NOW())");
+            $query = $this->connexion->prepare("INSERT INTO product(user_id, category_id, name, description, url_picture, price, created_at)
+                                                VALUES (:user_id, :category_id, :name, :description, :url_picture, :price, NOW())");
 
-            $query->bindValue(':id_user', $product->getUser()->getId());
-            $query->bindValue(':id_category', $product->getCategory()->getId());
+            $query->bindValue(':user_id', $product->getUser()->getId());
+            $query->bindValue(':category_id', $product->getCategory()->getId());
             $query->bindValue(':name', $product->getName());
             $query->bindValue(':description', $product->getDescription());
             $query->bindValue(':url_picture', $product->getUrlPicture());
@@ -225,11 +224,11 @@ class ProductRepository extends AbstractRepository {
     {
         try {
 
-            $query = $this->connexion->prepare("UPDATE product SET id_category = :id_category, name = :name, 
+            $query = $this->connexion->prepare("UPDATE product SET category_id = :category_id, name = :name, 
             description = :description, url_picture = :url_picture, price = :price, updated_at = NOW() WHERE product.id = :id");
             
             $query->bindValue(':id', $product->getId());
-            $query->bindValue(':id_category', $product->getCategory()->getId());
+            $query->bindValue(':category_id', $product->getCategory()->getId());
             $query->bindValue(':name', $product->getName());
             $query->bindValue(':description', $product->getDescription());
             $query->bindValue(':url_picture', $product->getUrlPicture());

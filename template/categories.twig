@@ -19,14 +19,17 @@
 			<div class="col-lg-3 col-md-4 col-sm-6 mb-4">
 			
 				<div class="card h-100">
-					<a href="index.php?url=products&id={{category.id}}&paramName={{category.name}}">
-						<img class="card-img-top" src="./public/img/categories/{{category.url_picture}}" alt="Image de {{category.name}}">
-					</a>
+					<div>
+						<a href="index.php?url=products&id={{category.id}}&paramName={{category.name}}">
+							<img class="card-img-top" src="./public/img/categories/{{category.url_picture}}" alt="Image de {{category.name}}">
+						</a>
+					</div>
 					<div class="card-body">
 						<h4 class="card-title">
 							<a href="index.php?url=products&id={{category.id}}&paramName={{category.name}}">{{category.name}}</a>
 						</h4>
 						<p class="card-text">{{category.description}}</p>
+						
 						<a class="btn btn-primary" href="index.php?url=admin/category/update&id={{category.id}}" style="visibility:{{ session.role != 'admin' ? 'hidden' : 'visible' }}">Modifier</a>
 						<a class="btn btn-danger" href="index.php?url=admin/category/delete&id={{category.id}}&img={{category.url_picture}}" style="visibility:{{ session.role != 'admin' ? 'hidden' : 'visible' }}">Supprimer</a>
 					</div>

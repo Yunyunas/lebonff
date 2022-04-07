@@ -173,7 +173,7 @@ class CategoryController extends AbstractController
     
     
     /** 
-     * @Route ("index.php?url=admin/category/delete")
+     * Route ("index.php?url=admin/category/delete")
      */
     public function deleteCategory()
     {

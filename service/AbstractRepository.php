@@ -18,6 +18,9 @@ abstract class AbstractRepository
         $this->table = $table;
     }
     
+    /**
+     * return array
+     */
     public function fetchAll(): array
     {
         $data = null;
@@ -28,7 +31,8 @@ abstract class AbstractRepository
             }
             
         } catch (Exception $e) {
-            return $e;
+            
+            $data = ['error' => $e->getMessage()];
         }
         
         return $data;

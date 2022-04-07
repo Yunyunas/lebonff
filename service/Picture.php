@@ -18,7 +18,6 @@ class Picture {
             move_uploaded_file($files['tmp_name'], './public/img/'.$folder.'/'.$file);
             
             return $file;
-
         } 
         
         return false;

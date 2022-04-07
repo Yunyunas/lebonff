@@ -18,7 +18,7 @@ class SecurityController extends AbstractController {
     
     
     /** 
-     * @Route ("index.php?url=register")
+     * Route ("index.php?url=register")
      */
     public function displayRegister() 
     {
@@ -36,7 +36,7 @@ class SecurityController extends AbstractController {
     
     
     /** 
-     * @Route ("index.php?url=login")
+     * Route ("index.php?url=login")
      */
     public function displayLogin() 
     {
@@ -55,7 +55,7 @@ class SecurityController extends AbstractController {
     
     
     /** 
-     * @Route ("index.php?url=securityRegister")
+     * Route ("index.php?url=securityRegister")
      */
     public function securityRegister(): void
     {
@@ -113,15 +113,17 @@ class SecurityController extends AbstractController {
                 exit();
             }
         } else {
+            $_SESSION['csrf'] = bin2hex(random_bytes(32));
             $errorMessage = "Une erreur est survenue.";
             $this->displayTwig('register', [
-                'message' => $errorMessage]);
+                'message' => $errorMessage,
+                'csrf' => $_SESSION['csrf']]);
         }
     }
     
     
     /** 
-     * @Route ("index.php?url=securityLogin")
+     * Route ("index.php?url=securityLogin")
      */
     public function securityLogin(): void
     {
@@ -169,7 +171,7 @@ class SecurityController extends AbstractController {
     
     
     /** 
-     * @Route ("index.php?url=logout")
+     * Route ("index.php?url=logout")
      */
     public function logout(): void
     {

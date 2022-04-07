@@ -8,6 +8,7 @@ require_once './controller/UserController.php';
 require_once './controller/ProductController.php';
 require_once './controller/CategoryController.php';
 require_once './controller/AdminController.php';
+require_once './controller/FavouriteController.php';
 
 $url = $_GET['url'] ?? "home";
 
@@ -45,6 +46,14 @@ switch($url) {
     case "account/update" : 
         $userController = new UserController();
         $userController->displayUpdateMyAccount();
+        break;
+        
+    /** 
+     * FAVOURITE
+     */
+    case "favourites" : 
+        $favouriteController = new favouriteController();
+        $favouriteController->displayFavourites();
         break;
         
     /** 
@@ -153,6 +162,19 @@ switch($url) {
     case "account/delete" : 
         $userController = new UserController();
         $userController->deleteMyAccount();
+        break;
+        
+    /** 
+     * FAVOURITE
+     */
+    case "addFavourite" : 
+        $favouriteController = new favouriteController();
+        $favouriteController->addFavourite();
+        break;
+        
+    case "deleteFavourite" : 
+        $favouriteController = new favouriteController();
+        $favouriteController->deleteFavourite();
         break;
         
     /** 

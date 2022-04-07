@@ -7,7 +7,7 @@
 
     <div class="row">
     	<div class="col-md-8">
-			<h1 class="my-4 col-md-8">Catégorie {{paramName}}</h1>
+			<h1 class="my-4 col-md-8 cat-title">Catégorie {{paramName}}</h1>
 		</div>
 		<div class="col-md-4">
 			<a class="my-5 px-5 btn btn-success" id="add-product" href="index.php?url=product/create" style="visibility:{{ session.id != '' ? 'visible' : 'hidden' }}">Créer une annonce</a>
@@ -35,7 +35,9 @@
 					<div class="col-lg-4 col-md-4 col-sm-6 mb-4">
 		
 						<div class="card h-100">
-							<a href="index.php?url=product&id={{product.id}}&paramName={{paramName}}"><img class="card-img-top" src="./public/img/products/{{product.urlPicture}}" alt="Image de {{product.name}}"></a>
+							<div>
+								<a href="index.php?url=product&id={{product.id}}&paramName={{paramName}}"><img class="card-img-top" src="./public/img/products/{{product.urlPicture}}" alt="Image de {{product.name}}"></a>
+							</div>
 							<div class="card-body">
 								<h4 class="card-title">
 									<a href="index.php?url=product&id={{product.id}}&paramName={{paramName}}">{{product.name}}</a>
@@ -48,6 +50,7 @@
 							
 		                    <div class="card-footer">
 	                        	<a href="index.php?url=product&id={{product.id}}&paramName={{paramName}}" class="btn btn-primary">Voir plus</a>
+	                        	<a class="btn btn-success" href="index.php?url=addFavourite&id={{product.id}}"><i class="fa-regular fa-heart"></i></a>
 	                    	</div>
 						</div>
 					</div>
