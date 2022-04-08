@@ -95,9 +95,41 @@ body {
     background-color: white;
 }
 
-#menu .nav-end .search button {
+/* REVOIR RESPONSIVE RESULTATS SEARCH BAR A PARTIR DU 768PX VOIR + */
+#list-search {
+    list-style: none;
+    position: absolute;
+    padding: 0;
+    width: 11%;
+    margin-top: 0.2em;
+    border-radius: 6px;
+    background-color: #e5e7eb;
+}
+
+#list-search li {
+    padding: 0.4em 0.6em;
+    border-radius: 6px;
+}
+
+#list-search li:hover{
+    cursor: pointer;
     background-color: white;
-    border: 0;
+
+}
+
+#list-search li i {
+    font-size: 16px;
+    margin-right: 0.7em;
+}
+
+#list-search li a {
+    text-decoration: none;
+    color: black;
+    font-size: 14px;
+}
+
+#list-search li a:hover {
+    font-weight: 700;
 }
 
 #menu .nav-end .search i {
@@ -234,15 +266,22 @@ body {
     #nav-cat .items-cat li a {
         font-size: 16px;
     }
+    
+    #menu .nav-end .block-search {
+        display: flex;
+        flex-direction: column;
+    }
 
-    #menu .nav-end .search {
+    #menu .nav-end .block-search .search {
         padding: 4px;
         margin-right: 1em;
     }
             
-    #menu .nav-end .search input {
+    #menu .nav-end .block-search .search input {
         font-size: 13px;
     }
+    
+    
     
     #menu .nav-end .profile a {
         font-size: 14px;

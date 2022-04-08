@@ -44,7 +44,7 @@ abstract class AbstractRepository
             $this->connexion = new PDO("mysql:host=" . self::SERVER . ";dbname=" . self::BASE, self::USER, self::PASSWORD);
             $this->connexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (Exception $e) {
-            die('Erreur : ' . $e->getMessage());
+            $data = ['error' => $e->getMessage()];
         }
         $this->connexion->exec("SET CHARACTER SET utf8");
     }

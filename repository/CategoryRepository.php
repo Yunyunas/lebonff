@@ -23,7 +23,7 @@ class CategoryRepository extends AbstractRepository {
                 return $data;
             }
         } catch (Exception $e) {
-            return $e;
+            $data = ['error' => $e->getMessage()];
         }
     }
     
@@ -43,7 +43,7 @@ class CategoryRepository extends AbstractRepository {
             return $result;
             
         } catch (Exception $e) {
-            return false;
+            $data = ['error' => $e->getMessage()];
         }
     }
     
@@ -64,7 +64,7 @@ class CategoryRepository extends AbstractRepository {
             return $result;
             
         } catch (Exception $e) {
-            return false;
+            $data = ['error' => $e->getMessage()];
         }
     }
     
@@ -81,7 +81,7 @@ class CategoryRepository extends AbstractRepository {
             return $result;
             
         } catch (Exception $e) {
-            return false;
+            $data = ['error' => $e->getMessage()];
         }
     }
     

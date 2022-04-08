@@ -52,7 +52,7 @@ class ProductRepository extends AbstractRepository {
             return $products;
             
         } catch (Exception $e) {
-            return $e;
+            $data = ['error' => $e->getMessage()];
         }
     }
     
@@ -97,7 +97,7 @@ class ProductRepository extends AbstractRepository {
                 return $product;
             }
         } catch (Exception $e) {
-            return $e;
+            $data = ['error' => $e->getMessage()];
         }
 
         
@@ -147,7 +147,7 @@ class ProductRepository extends AbstractRepository {
             return $products;
             
         } catch (Exception $e) {
-            return $e;
+            $data = ['error' => $e->getMessage()];
         }
     }
     
@@ -195,7 +195,7 @@ class ProductRepository extends AbstractRepository {
             return $products;
             
         } catch (Exception $e) {
-            return $e;
+            $data = ['error' => $e->getMessage()];
         }
     }
     
@@ -215,7 +215,7 @@ class ProductRepository extends AbstractRepository {
             return $query->execute();
 
         } catch (Exception $e) {
-            $data = $e;
+            $data = ['error' => $e->getMessage()];
         }
     }
     
@@ -238,7 +238,7 @@ class ProductRepository extends AbstractRepository {
             return $result;
             
         } catch (Exception $e) {
-            return false;
+            $data = ['error' => $e->getMessage()];
         }
     }
     
@@ -254,57 +254,26 @@ class ProductRepository extends AbstractRepository {
             return $result;
             
         } catch (Exception $e) {
-            return false;
+            $data = ['error' => $e->getMessage()];
         }
     }
     
     
     public function fetchQuery($data) 
     {
-        $data = null;
+        $name = '%'.$data.'%';
         try {
             $query = $this->connexion->prepare("SELECT * FROM product WHERE name LIKE :name");
             
-            $query->bindParam(':name', '%'.$data.'%');
+            $query->bindParam(':name', $name);
             $query->setFetchMode(PDO::FETCH_NAMED);
             $query->execute();
             $datas = $query->fetchAll();
-            
-            if ($datas) {
-                $products = [];
-            
-                foreach ($datas as $data) {
-                    $user = new User();
-                        $user->setId($data['id'][1]);
-                        $user->setLastName($data['last_name']);
-                        $user->setFirstName($data['first_name']);
-                        $user->setPhone($data['phone']);
-                        $user->setEmail($data['email']);
-                        $user->setRole($data['role']);
-                        
-                    $category = new Category();
-                        $category->setId($data['id'][2]);
-                        $category->setName($data['name'][1]);
-                        $category->setDescription($data['description'][1]);
-                        $category->setUrlPicture($data['url_picture'][1]);
-     
-                    $product = new Product();
-                    $products[] = $product;
-                        $product->setId($data['id'][0]);
-                        $product->setUser($user);
-                        $product->setCategory($category);
-                        $product->setName($data['name'][0]);
-                        $product->setDescription($data['description'][0]);
-                        $product->setUrlPicture($data['url_picture'][0]);
-                        $product->setPrice($data['price']);
-                        $product->setCreatedAt($data['created_at']);
-                }
-                
-                return $products;
-            }
+
+            return $datas;
             
         } catch(Exception $e) {
-            return false;
+            $data = ['error' => $e->getMessage()];
         }
     }
 

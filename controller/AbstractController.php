@@ -2,6 +2,7 @@
 
 use Twig\Environment;
 
+require_once './repository/ProductRepository.php';
 require_once './repository/CategoryRepository.php';
 require_once './vendor/autoload.php';
 
@@ -43,8 +44,6 @@ abstract class AbstractController
             die('Erreur');
         }
     }
-    
-    
 }
 
 

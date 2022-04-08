@@ -16,7 +16,6 @@ class FavouriteRepository extends AbstractRepository {
         $userId = $favourite->getUser()->getId();
         $productId = $favourite->getProduct()->getId();
         
-        //var_dump($userId, $productId); die();
         try {
             $query->bindParam(':user_id', $userId);
             $query->bindParam(':product_id', $productId);
@@ -25,8 +24,7 @@ class FavouriteRepository extends AbstractRepository {
                     
             return $data;
         } catch (Exception $e) {
-            // CORRIGER LA GESTION D'ERREUR ICI
-            return false;
+            $data = ['error' => $e->getMessage()];
         }  
             
     }
@@ -81,8 +79,7 @@ class FavouriteRepository extends AbstractRepository {
             return $favourites;
             
         } catch (Exception $e) {
-            // CORRIGER LA GESTION D'ERREUR ICI
-            return $e;
+            $data = ['error' => $e->getMessage()];
         }
     }
         
@@ -98,8 +95,7 @@ class FavouriteRepository extends AbstractRepository {
             return $query->execute();
 
         } catch (Exception $e) {
-            // A MODIFIER
-            $data = $e;
+            $data = ['error' => $e->getMessage()];
         }
     }
     
@@ -115,7 +111,7 @@ class FavouriteRepository extends AbstractRepository {
             return $result;
             
         } catch (Exception $e) {
-            return false;
+            $data = ['error' => $e->getMessage()];
         }
     }
     
@@ -131,7 +127,7 @@ class FavouriteRepository extends AbstractRepository {
             return $result;
             
         } catch (Exception $e) {
-            return false;
+            $data = ['error' => $e->getMessage()];
         }
     }
     
@@ -147,7 +143,7 @@ class FavouriteRepository extends AbstractRepository {
             return $result;
             
         } catch (Exception $e) {
-            return false;
+            $data = ['error' => $e->getMessage()];
         }
     }
 }

@@ -37,7 +37,7 @@ class UserRepository extends AbstractRepository {
                 }
             }
         } catch (Exception $e) {
-            $data = $e;
+            $data = ['error' => $e->getMessage()];
         }
     }
     
@@ -67,7 +67,7 @@ class UserRepository extends AbstractRepository {
                 }
             }
         } catch (Exception $e) {
-            $data = $e;
+            $data = ['error' => $e->getMessage()];
         }
     }
     
@@ -87,7 +87,7 @@ class UserRepository extends AbstractRepository {
             return $query->execute();
             
         } catch (Exception $e) {
-            return false;
+            $data = ['error' => $e->getMessage()];
         }
     }
     
@@ -107,7 +107,7 @@ class UserRepository extends AbstractRepository {
             return $query->execute();
             
         } catch (Exception $e) {
-            return false;
+            $data = ['error' => $e->getMessage()];
         }
     }
     
@@ -123,7 +123,7 @@ class UserRepository extends AbstractRepository {
             return $query->execute();
 
         } catch (Exception $e) {
-            return false;
+            $data = ['error' => $e->getMessage()];
         }
     }
     
@@ -138,7 +138,7 @@ class UserRepository extends AbstractRepository {
             return $query->execute();
             
         } catch (Exception $e) {
-            return false;
+            $data = ['error' => $e->getMessage()];
         }
     }
 }

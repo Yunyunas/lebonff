@@ -55,6 +55,7 @@ class FavouriteController extends AbstractController
         
         $data = $this->repository->fetchOne($favourite);
         
+
         // A MODIFIER ET A RENDRE + DYNAMIQUE
         if ($data) {
             echo ("Ce produit est déjà dans vos coups de coeur.");

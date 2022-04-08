@@ -23,11 +23,11 @@ class HomeController extends AbstractController {
      */
     public function test()
     {
+
         $productRepository = new ProductRepository();
-        $products = $productRepository->fetchNewProducts();
-        
-        $this->displayTwig('test', [
-                'products' => $products]);
+        $query = "sh";
+        $datas = $productRepository->fetchQuery($query);
+        var_dump($datas); die();
     }
     
     /** 
@@ -44,7 +44,7 @@ class HomeController extends AbstractController {
      */
     public function search()
     {
-        $query = $_GET['q'] ?? "";
+        $query = $_GET['q'];
         
         $productRepository = new ProductRepository();
         $datas = $productRepository->fetchQuery($query);

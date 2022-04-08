@@ -237,6 +237,11 @@ switch($url) {
         $homeController = new HomeController();
         $homeController->search();
         break;
+        
+    case "test":
+        $homeController = new HomeController();
+        $homeController->test();
+        break;
     
     
     // ------------------------- PAGE ERROR 404 --------------------------------
