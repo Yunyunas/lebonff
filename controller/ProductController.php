@@ -74,6 +74,21 @@ class ProductController extends AbstractController
             'paramName' => $paramName]);
     }
 
+    /** 
+     * @Route ("index.php?url=products/user")
+     */
+    public function displayProductsByUser()
+    {
+        $user = new User();
+        $user->setId($_GET['id']);
+        
+        $products = $this->repository->fetchByUser($user);
+        $user = $products[0]->getUser();
+        
+        $this->displayTwig('productsByUser', [
+                'products' => $products,
+                'user' => $user]);
+    }
     
     /** 
      * @Route ("index.php?url=product/create")

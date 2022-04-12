@@ -92,6 +92,11 @@ switch($url) {
         $productController->displayNewProducts();
         break;
         
+    case "products/user" : 
+        $productController = new ProductController();
+        $productController->displayProductsByUser();
+        break;
+        
     case "product/create" : 
         $productController = new ProductController();
         $productController->displayAddProductForm();

@@ -1,0 +1,53 @@
+{% extends "layout.twig" %}
+
+{% block title %} <title>Annonces de {{user.firstName}} {{user.lastName}}</title> {% endblock %}
+{% block content %}
+
+<div class="container products-user">
+
+	<h1 class="cat-title">Annonces de {{user.firstName}} {{user.lastName}}</h1>
+	
+    <div class="block-position">
+        <div class="block-left">
+        	<div class="user-info">
+	            <div class="title-user">
+	            	<img src="./public/img/user2.png" alt="profile">
+	            	<h3>{{user.firstName}} {{user.lastName}}</h3>
+	            </div>
+	            <p><i class="fa-solid fa-phone"></i> {{user.phone}}</p>
+	            <p><i class="fa-regular fa-envelope"></i> {{user.email}}</p>
+        	</div>
+        </div>
+
+        <div class="block-right">
+
+			{% for product in products %}
+				<div class="card-product-position">
+	
+					<div>
+						<a href="index.php?url=product&id={{product.id}}"><img class="card-img-top" src="./public/img/products/{{product.urlPicture}}" alt="Image de {{product.name}}"></a>
+					</div>
+					<div class="product-card-body">
+						<div class="product-info">
+							<h4>
+								<a href="index.php?url=product&id={{product.id}}&paramName={{paramName}}">{{product.name}}</a>
+							</h4>
+							<p>{{product.description}}</p>
+							<p>Prix : {{product.price}} euros</p>
+							<a href="index.php?url=product/update&id={{product.id}}" style="visibility:{{ session.role != 'admin' ? 'hidden' : 'visible' }}">Modifier</a>
+							<a href="index.php?url=deleteProduct&id={{product.id}}&img={{product.urlPicture}}" style="visibility:{{ session.role != 'admin' ? 'hidden' : 'visible' }}">Supprimer</a>
+						</div>
+						
+	                    <div class="product-detail">
+	                    	<a href="index.php?url=product&id={{product.id}}&paramName={{paramName}}">Voir plus</a>
+	                    	<a class="favourite-btn" href="index.php?url=addFavourite&id={{product.id}}"><i class="fa-regular fa-heart"></i></a>
+	                	</div>
+                	</div>
+				</div>
+			{% endfor %}
+			
+		</div>
+	</div>
+</div>
+
+{% endblock %}
