@@ -6,17 +6,16 @@
 #3 BALISES HTML
 #4 LAYOUT
 #5 PAGE "HOME"
-#6 PAGE "PRODUCT DETAIL"
-#7 ADMIN
+#6 PAGE "PRODUCTS/USER"
+#7 PAGE "PRODUCT DETAIL"
+#8 ADMIN
 
 --------------------------------------------------------------------------------
 */
 
-
 /*
 #1 FONTS
  */
- 
  
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 
@@ -27,13 +26,25 @@
 	font-style: normal;
 }
 
+/*******************************************************************************/
+
 /*
 #2 VARIABLES
  */
- 
+
 :root {
-    --main-color: brown;
+    --color-deep-blue: #111827;
+    --color-a-blue: #2c3e50;
+    --color-grey: #E5E7EB;
+    --color-border: #d8d8d8;
+    --color-link: #18bc9c;
+    --color-link-hover: #13967d;
+    --color-font: #212529;
+    --color-card-footer: #f7f7f7;
+    --color-white: #fff;
 }
+
+/*******************************************************************************/
  
 /*
 #3 BALISES HTML
@@ -48,16 +59,25 @@
 body {
     margin: 0;
     padding: 0;
-    background: #E5E7EB;
-    color: #212529;
+    background: var(--color-grey);
+    color: var(--color-font);
 }
+
+h1, h2 {
+    font-family: 'Final-fantasy', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-weight: 100;
+}
+
+/*******************************************************************************/
 
 /*
 #4 LAYOUT
  */
 
 #menu {
-    background-color: #111827;
+    background-color: var(--color-deep-blue);
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -80,17 +100,13 @@ body {
 
 #menu .logo img {
     width: 55px;
-    margin-right: 8px;
+    margin-right: 0.5em;
 }
 
 #menu .logo h1 {
-    font-family: 'Final-fantasy', sans-serif;
-    text-transform: uppercase;
     font-size: 35px;
     color: #F3F4F6;
     margin-bottom: 0;
-    letter-spacing: 3px;
-    font-weight: 100;
 }
 
 #menu .items {
@@ -124,10 +140,10 @@ body {
 #menu .nav-end .search {
     display: flex;
     align-items: center;
-    padding: 10px;
+    padding: 0.62em;
     margin-right: 4em;
     border-radius: 6px;
-    background-color: white;
+    background-color: var(--color-white);
 }
 
 /* REVOIR RESPONSIVE RESULTATS SEARCH BAR A PARTIR DU 768PX VOIR + */
@@ -138,7 +154,7 @@ body {
     width: 11%;
     margin-top: 0.2em;
     border-radius: 6px;
-    background-color: #e5e7eb;
+    background-color: var(--color-grey);
 }
 
 #list-search li {
@@ -148,7 +164,7 @@ body {
 
 #list-search li:hover{
     cursor: pointer;
-    background-color: white;
+    background-color: var(--color-white);
 
 }
 
@@ -169,7 +185,7 @@ body {
 
 #menu .nav-end .search i {
     margin-right: 14px;
-    color: #111827;;
+    color: var(--color-deep-blue);
 }
 
 #menu .nav-end .search input {
@@ -180,7 +196,7 @@ body {
 
 #menu .nav-end .profile a {
     text-decoration: none;
-    color: white;
+    color: var(--color-white);
     font-size: 18px;
 }
 
@@ -198,7 +214,7 @@ body {
 }
 
 #nav-cat {
-    background-color: white;
+    background-color: var(--color-white);
     display: flex;
     justify-content: center;
 }
@@ -230,15 +246,15 @@ body {
     display: flex;
     justify-content: space-around;
     align-items: flex-start;
-    background-color: #111827;
+    background-color: var(--color-deep-blue);
     padding: 3em 0;
 }
 
 #footer .block {
-    color: white;
+    color: var(--color-white);
 }
 
-#footer .block h2 {
+#footer .block h3 {
     font-size: 20px;
     text-align: start;
     padding-bottom: 0.5em;
@@ -254,11 +270,11 @@ body {
 #footer .block .block-items a {
     text-decoration: none;
     font-size: 14px;
-    color: white;
+    color: var(--color-white);
 }
 
 #footer .block .block-items a:hover {
-    color: #E5E7EB;
+    color: var(--color-grey);
     font-weight: 800;
 }
 
@@ -276,7 +292,7 @@ body {
 
 @media (max-width: 1024px) {
     #menu .nav-end .search {
-    padding: 8px;
+    padding: 0.5em;
     margin-right: 2em;
     }
 }
@@ -287,7 +303,7 @@ body {
     }
     #menu .logo img {
         width: 35px;
-        margin-right: 5px;
+        margin-right: 0.31em;
     }
     
     #menu .logo h1 {
@@ -308,15 +324,13 @@ body {
     }
 
     #menu .nav-end .block-search .search {
-        padding: 4px;
+        padding: 0.25em;
         margin-right: 1em;
     }
             
     #menu .nav-end .block-search .search input {
         font-size: 13px;
     }
-    
-    
     
     #menu .nav-end .profile a {
         font-size: 14px;
@@ -333,7 +347,7 @@ body {
     }
     
     #footer .block .block-items a,
-    #footer .block .block-items li{
+    #footer .block .block-items li {
         font-size: 12px;
     }
     
@@ -382,7 +396,7 @@ body {
         flex-wrap: wrap;
     }
     
-    #footer .block h2 {
+    #footer .block h3 {
         font-size: 16px;
     }
     
@@ -392,19 +406,19 @@ body {
 }
 
 /*******************************************************************************/
-/************************** HOME ***********************************************/
 
 /*
 #5 PAGE "HOME"
  */
+ 
 .home-image {
     width: 100%;
     height: auto;
-    border-bottom: 1px solid #111827;
+    border-bottom: 1px solid var(--color-deep-blue);
 }
 
 .presentation {
-    background-color: white;
+    background-color: var(--color-white);
     margin: 2.5em 0;
     padding: 2em 2em 3em 2em;
     border-radius: 0.5em;
@@ -412,11 +426,8 @@ body {
 
 .presentation h1 {
     margin-bottom: 0.5em;
-    font-family: 'Final-fantasy', sans-serif;
-    text-transform: uppercase;
     font-size: 60px;
-    letter-spacing: 3px;
-    font-weight: 300;
+
 }
 
 .presentation p {
@@ -430,10 +441,10 @@ body {
 
 .presentation a {
     text-decoration: none;
-    color: white;
+    color: var(--color-white);
     font-size: 18px;
-    border: 1px solid #2c3e50;
-    background-color: #2c3e50;
+    border: 1px solid var(--color-a-blue);
+    background-color: var(--color-a-blue);
     border-radius: 0.75rem;
     padding: 0.75em 1.25em;
     margin: 1.5em 0;
@@ -449,10 +460,10 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    background-color: white;
+    background-color: var(--color-white);
     margin-bottom: 1.5em;
     width: 23.5%;
-    border: 1px solid #d8d8d8;
+    border: 1px solid var(--color-border);
     border-radius: 0.3rem;
 }
 
@@ -468,8 +479,8 @@ body {
 }
 
 .product-card-body .product-detail {
-    border-top: 1px solid #d8d8d8;
-    background-color: #f7f7f7;
+    border-top: 1px solid var(--color-border);
+    background-color: var(--color-card-footer);
     padding: 1.2em 0;
     width: 100%;
     text-align: center;
@@ -477,18 +488,18 @@ body {
 
 .product-card-body .product-detail a {
     text-decoration: none;
-    color: white;
+    color: var(--color-white);
     font-size: 16px;
-    border: 1px solid #2c3e50;
-    background-color: #2c3e50;
+    border: 1px solid var(--color-a-blue);
+    background-color: var(--color-a-blue);
     border-radius: 0.3rem;
     padding: 0.5em 1em;
     margin: 1.5em 0;
 }
 
 .product-card-body .product-detail .favourite-btn {
-    background-color: #18bc9c;
-    border-color: #18bc9c;
+    background-color: var(--color-link);
+    border-color: var(--color-link);
 }
 
 @media (max-width: 1024px) {
@@ -508,8 +519,8 @@ body {
         width: 100%;
     }
 }
+
 /*******************************************************************************/
-/************************** PRODUCTS/USER **************************************/
 
 /*
 #6 PAGE "PRODUCTS/USER"
@@ -521,8 +532,8 @@ body {
 }
  
 .user-info {
-    background-color: white;
-    border: 1px solid #d8d8d8;
+    background-color: var(--color-white);
+    border: 1px solid var(--color-border);
     border-radius: 0.3rem;
     padding: 1rem;
 }
@@ -564,9 +575,9 @@ body {
     flex-direction: column;
     justify-content: space-between;
     width: 31.5%;
-    background-color: white;
+    background-color: var(--color-white);
     margin-bottom: 1.5em;
-    border: 1px solid #d8d8d8;
+    border: 1px solid var(--color-border);
     border-radius: 0.3rem;
 }
 
@@ -648,17 +659,14 @@ body {
 
 
 /*******************************************************************************/
-/************************** PRODUCT DETAIL *************************************/
 
 /*
 #7 PAGE "PRODUCT DETAIL"
  */
+ 
 .cat-title {
     margin: 0.5em 0;
-    font-family: 'Final-fantasy', sans-serif;
-    text-transform: uppercase;
     letter-spacing: 2px;
-    font-weight: 300;
 }
 
 .block-position {
@@ -678,7 +686,7 @@ body {
     flex-direction: column;
     margin-bottom: 2em;
     border-radius: 0.25rem;
-    background-color: white;
+    background-color: var(--color-white);
 }
 
 .block-position .block-left .block-left-cat a {
@@ -687,7 +695,7 @@ body {
     padding: .5rem 1rem;
     margin-bottom: 0;
     color: #212529;
-    border-top: 1px solid rgba(0,0,0,.125);
+    border-top: 1px solid var(--color-border);
 }
 
 .block-position .block-left .block-left-cat a:hover {
@@ -695,15 +703,15 @@ body {
 }
 
 .block-position .block-left .block-left-cat a.active {
-    color: #fff;
-    background-color: #2c3e50;
-    border-color: #2c3e50;
+    color: var(--color-white);
+    background-color: var(--color-a-blue);
+    border-color: var(--color-a-blue);
 }
 
 .block-position .block-left .block-left-user {
     display: flex;
     flex-direction: column;
-    background-color: white;
+    background-color: var(--color-white);
     padding: 1rem;
     border-radius: 0.25rem;
 }
@@ -745,7 +753,7 @@ body {
 
 .block-position .detail-block .detail-product {
     display: flex;
-    background-color: white;
+    background-color: var(--color-white);
 }
 
 .block-position .detail-block .detail-product .detail-img {
@@ -755,7 +763,7 @@ body {
 .block-position .detail-block .detail-product .detail-img img {
     width: 100%;
     height: auto;
-    border-right: 2px solid #f7f7f7;
+    border-right: 2px solid var(--color-card-footer);
 }
 
 .block-position .detail-block .detail-product .detail-product-infos {
@@ -765,8 +773,8 @@ body {
 }
 
 .block-position .detail-block .detail-product .detail-product-infos .product-presentation {
-    background-color: #f7f7f7;
-    border-bottom: 1px solid #d8d8d8;
+    background-color: var(--color-card-footer);
+    border-bottom: 1px solid var(--color-border);
     border-radius: 0.25rem;
     padding: 1em 1em 0 1em;
 }
@@ -781,13 +789,12 @@ body {
 }
 
 .block-position .detail-block .detail-created {
-    background-color: #f7f7f7;
-    border-bottom: 1px solid #d8d8d8;
+    background-color: var(--color-card-footer);
+    border-bottom: 1px solid var(--color-border);
     border-radius: 0.25rem;
     padding: 1em 1em 0 1em;
 }
 
-/* RESPONSIVE PAGE PRODUCT DETAIL A FAIRE ! */
 @media (max-width: 768px) {
     .cat-title {
         font-size: 32px;
@@ -826,8 +833,8 @@ body {
         max-width: 100%;
         height: 100%;
         max-height: 400px;
-        border-right: 2px solid #f7f7f7;
-        border-left: 2px solid #f7f7f7;
+        border-right: 2px solid var(--color-card-footer);
+        border-left: 2px solid var(--color-card-footer);
     }
         
     .block-position .detail-block .detail-product .detail-product-infos {
@@ -876,7 +883,6 @@ body {
 }
 
 /*******************************************************************************/
-/**************************** ADMIN *******************************************/
 
 /*
 #8 ADMIN
@@ -886,14 +892,14 @@ body {
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
     width: 100%;
-    background: #E5E7EB;
+    background: var(--color-grey);
     position: relative;
     display: flex;
 }
 
 #admin-menu {
-    background-color: #111827;
-    width: 300px;
+    background-color: var(--color-deep-blue);
+    width: 18.75em;
     height: 100%;
     position: fixed;
     top: 0;
@@ -903,26 +909,19 @@ body {
 #admin-menu .admin-logo {
     display: flex;
     align-items: center;
-    color: #fff;
-    padding: 30px 0 0 30px;
+    color: var(--color-white);
+    padding: 1.87em 0 0 1.87em;
 }
 
 #admin-menu .admin-logo a {
     text-decoration: none;
-    color: white;
-    font-family: 'Final-fantasy', sans-serif;
-    text-transform: uppercase;
+    color: var(--color-white);
     font-size: 20px;
-}
-
-#admin-menu .admin-logo h2 {
-    letter-spacing: 3px;
-    font-weight: 100;
 }
 
 #admin-menu .admin-logo img {
     width: 50px;
-    margin-right: 10px;
+    margin-right: 0.62em;
 }
 
 #admin-menu .admin-items {
@@ -931,7 +930,7 @@ body {
 
 #admin-menu .admin-items li {
     list-style: none;
-    padding: 15px 0;
+    padding: 0.93em 0;
     transition: 0.3s ease;
 }
 
@@ -941,17 +940,17 @@ body {
 }
 
 #admin-menu .admin-items li:nth-child(1) {
-    border-left: 4px solid #fff;
+    border-left: 4px solid var(--color-white);
 }
 
 #admin-menu .admin-items li i {
     color: rgb(134, 141, 151);
-    width: 30px;
-    height: 30px;
-    line-height: 30px;
+    width: 1.87em;
+    height: 1.87em;
+    line-height: 1.87em;
     text-align: center;
     font-size: 14px;
-    margin: 0 10px 0 25px;
+    margin: 0 0.62em 0 1.56em;
 }
 
 #admin-menu .admin-items li:hover i,
@@ -967,8 +966,8 @@ body {
 }
 
 #admin-interface {
-    width: calc(100% - 300px);
-    margin-left: 300px;
+    width: calc(100% - 18.75em);
+    margin-left: 18.75em;
     position: relative;
 }
 
@@ -976,27 +975,26 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: #fff;
-    padding: 15px 30px;
+    background-color: var(--color-white);
+    padding: 0.93em 1.87em;
     border-bottom: 3px solid #594ef7;
     position: fixed;
-    width: calc(100% - 300px);
+    width: calc(100% - 18.75em);
 }
 
 #admin-interface .admin-navigation .admin-search {
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    padding: 10px 14px;
+    padding: 0.62em 0.87em;
     border: 1px solid #d7dbe6;
     border-radius: 6px;
 }
 
 #admin-interface .admin-navigation .admin-search i {
-    margin-right: 14px;
+    margin-right: 0.87em;
 }
 
-/* Voir pour le "outline" */
 #admin-interface .admin-navigation .admin-search input {
     border: none;
     outline: none;
@@ -1027,19 +1025,19 @@ body {
     color: #2b2b2b;
     font-size: 20px;
     cursor: pointer;
-    margin-right: 20px;
+    margin-right: 1.25em;
 }
 
 .admin-title {
     color: #444a53;
-    padding: 30px 30px 0 30px;
+    padding: 1.87em 1.87em 0 1.87em;
     font-size: 24px;
     font-weight: 800;
-    margin-top: 70px;
+    margin-top: 4.37em;
 }
 
 .admin-cards {
-    padding: 30px 30px 0 30px;
+    padding: 1.87em 1.87em 0 1.87em;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -1047,9 +1045,9 @@ body {
 }
 
 .admin-cards .admin-card-box {
-    background-color: #fff;
-    width: 235px;
-    padding: 16px 20px;
+    background-color: var(--color-white);
+    width: 14.69em;
+    padding: 1em 1.25em;
     border-radius: 5px;
     display: flex;
     justify-content: flex-start;
@@ -1063,7 +1061,7 @@ body {
     line-height: 50px;
     border-radius: 50%;
     text-align: center;
-    color: #fff;
+    color: var(--color-white);
     margin-right: 15px;
 }
 
@@ -1091,9 +1089,9 @@ body {
 
 .admin-board {
     width: 94%;
-    margin: 30px 0 30px 30px;
+    margin: 1.87em 0 1.87em 1.87em;
     overflow: auto;
-    background-color: #fff;
+    background-color: var(--color-white);
     border-radius: 8px;
 }
 
@@ -1102,7 +1100,7 @@ body {
     height: 45px;
     object-fit: cover;
     border-radius: 50%;
-    margin-right: 15px;
+    margin-right: 0.93em;
 }
 
 .admin-board h5 {
@@ -1132,17 +1130,17 @@ tr {
     border-bottom: 1px solid #eef0f3;
 }
 
-thead td{
+thead td {
     font-size: 14px;
     text-transform: uppercase;
     font-weight: 400;
     background-color: #F9FAFB;
     text-align: start;
-    padding: 15px;
+    padding: 0.93em;
 }
 
 tbody tr td {
-    padding: 10px 10px;
+    padding: 0.62em;
 }
 
 tbody tr td a {
@@ -1158,7 +1156,7 @@ tbody tr td a {
 }
 
 .admin-edit a i {
-    margin-left: 10px;
+    margin-left: 0.62em;
 }
 
 .admin-delete a {
@@ -1169,14 +1167,14 @@ tbody tr td a {
 }
 
 .admin-delete a i {
-    margin-left: 10px;
+    margin-left: 0.62em;
 }
 
 @media (max-width: 1024px) {
     #admin-menu {
-        width: 270px;
+        width: 16.87em;
         position: fixed;
-        left: -270px;
+        left: -16.87em;
         transition: 0.3s ease;
     }
     
@@ -1196,8 +1194,8 @@ tbody tr td a {
     }
     
     #admin-interface.admin-active {
-        width: calc(100% - 270px);
-        margin-left: 270px;
+        width: calc(100% - 16.87em);
+        margin-left: 16.87em;
     }
     
     #admin-interface .admin-navigation {
@@ -1205,13 +1203,13 @@ tbody tr td a {
     }
     
     .admin-cards {
-    	padding: 30px 30px 0 30px;
+    	padding: 1.87em 1.87em 0 1.87em;
     	justify-content: flex-start;
     }
     
     .admin-cards .admin-card-box {
-        padding: 16px 20px;
-        margin: 10px 20px 10px 0;
+        padding: 1em 1.25em;
+        margin: 0.62em 1.25em 0.62em 0;
     }
     
     .admin-board {
@@ -1228,27 +1226,27 @@ tbody tr td a {
 
 @media (max-width: 500px) {
     #admin-interface .admin-navigation {
-        padding: 15px;
+        padding: 0.93em;
     }
     
     #admin-interface .admin-navigation .admin-search input {
-        width: 150px;
+        width: 9.37em;
     }
     
     .admin-title {
-        padding: 30px 15px 0 15px;
+        padding: 1.87em 0.93em 0 0.93em;
     }
     
     .admin-cards {
-        padding: 15px 15px 0 15px;
+        padding: 0.93em 0.93em 0 0.93em;
     }
     
     .admin-cards .admin-card-box {
         width: 100%;
-        margin: 8px 0;
+        margin: 0.5em 0;
     }
     
     .admin-board {
-        margin: 30px 15px 30px 15px;
+        margin: 1.87em 0.93em 1.87em 0.93em;
     }
 }

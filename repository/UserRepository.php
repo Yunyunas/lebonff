@@ -141,4 +141,22 @@ class UserRepository extends AbstractRepository {
             $data = ['error' => $e->getMessage()];
         }
     }
+    
+    public function fetchQuery($data) 
+    {
+        $name = '%'.$data.'%';
+        try {
+            $query = $this->connexion->prepare("SELECT * FROM user WHERE name LIKE :name");
+            
+            $query->bindParam(':name', $name);
+            $query->setFetchMode(PDO::FETCH_NAMED);
+            $query->execute();
+            $datas = $query->fetchAll();
+
+            return $datas;
+            
+        } catch(Exception $e) {
+            $data = ['error' => $e->getMessage()];
+        }
+    }
 }

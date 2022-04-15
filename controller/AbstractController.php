@@ -5,6 +5,7 @@ use Twig\Environment;
 require_once './repository/ProductRepository.php';
 require_once './repository/CategoryRepository.php';
 require_once './vendor/autoload.php';
+require_once './service/CustomErrors.php';
 
 abstract class AbstractController
 {
@@ -21,14 +22,28 @@ abstract class AbstractController
         $categories = $catRepo->fetchAll();
         $categories = ['categories' => $categories];
 
-        $tabs = array_merge($params, $categories);
+        if(isset($_GET['code'])) {
+                $code = new CustomErrors();
+                $code->setCode($_GET['code']);
+                
+                if(isset($_GET['customCode'])) {
+                    $code->setCustomCode($_GET['customCode']);
+                }
+                
+                $message = $code->createMessage();
+                
+                $paramMessage = ['message' => $message];
+                $tabs = array_merge($params, $categories, $paramMessage);
+        } else {
+            $tabs = array_merge($params, $categories);
+        }
         
         if (!isset($_SESSION['user'])) {
             echo $this->twig->render($page . '.twig', $tabs);
         } else {
             $session = ['session' => unserialize($_SESSION['user'])];
-            $tabs = array_merge($params, $categories, $session);
-            echo $this->twig->render($page . '.twig', $tabs);
+            $tabsSession = array_merge($tabs, $session);
+            echo $this->twig->render($page . '.twig', $tabsSession);
         }
     }
     

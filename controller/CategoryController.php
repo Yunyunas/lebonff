@@ -37,13 +37,16 @@ class CategoryController extends AbstractController
      */
     public function displayAddCategoryForm()
     {
+       
         if ($this->role->isAdmin()) {
             $_SESSION['csrf'] = bin2hex(random_bytes(32));
-        
+            
             $this->displayTwig('admin/addCategoryForm', [
                 'csrf' => $_SESSION['csrf']]);
+
         } else {
-            $this->displayTwig('home');
+            header('location: ./index.php?url=home');
+            exit();
         }        
     }
     
@@ -62,7 +65,8 @@ class CategoryController extends AbstractController
                 'category' => $data,
                 'csrf' => $_SESSION['csrf']]);
         } else {
-            $this->displayTwig('home');
+            header('location: ./index.php?url=home');
+            exit();
         }        
     }
     
@@ -97,15 +101,14 @@ class CategoryController extends AbstractController
                     $this->displayTwig('admin/adminCategories', [
                                 'message' => $successMessage]);
                 } else {
-                    $errorMessage = "La taille de l'image est trop grande ou son extension n'est pas valide.";
-                    $this->displayTwig('admin/addCategoryForm', [
-                        'message' => $errorMessage,
-                        'csrf' => $_SESSION['csrf']]);
+                    header('location: ./index.php?url=admin/category/create&code=400&customCode=pictureError');
+                    exit();
                 }
             }
             
         } else {
-            $this->displayTwig('home');
+            header('location: ./index.php?url=home');
+            exit();
         }        
     }
     
@@ -115,6 +118,7 @@ class CategoryController extends AbstractController
      */
     public function updateCategory()
     {
+        $id = $_GET['id'];
         
         if ($this->role->isAdmin()) {
             if(!$_SESSION['csrf'] || $_SESSION['csrf'] !== $_POST['csrf_token']){
@@ -127,7 +131,7 @@ class CategoryController extends AbstractController
             $img = $_GET['img'];
            
             $category = new Category();
-            $category->setId($_GET['id']);
+            $category->setId($id);
             $category->setName(htmlspecialchars($_POST['name']));
             $category->setDescription(htmlspecialchars($_POST['description']));
     
@@ -150,13 +154,8 @@ class CategoryController extends AbstractController
                         'message' => $successMessage]);
                         
                 } else {
-                    $errorMessage = "La taille de l'image est trop grande ou son extension n'est pas valide.";
-                    $data = $this->repository->fetchCategory($_GET['id']);
-                    
-                    $this->displayTwig('admin/updateCategoryForm', [
-                        'category' => $data,
-                        'message' => $errorMessage,
-                        'csrf' => $_SESSION['csrf']]);
+                    header('location: ./index.php?url=admin/category/update&code=400&customCode=pictureError&id='.$id);
+                    exit();
                 }
                 
             } else {
@@ -166,7 +165,8 @@ class CategoryController extends AbstractController
             } 
                 
         } else {
-            $this->displayTwig('home');
+            header('location: ./index.php?url=home');
+            exit();
         }        
         
     }
@@ -192,15 +192,13 @@ class CategoryController extends AbstractController
                         'message' => $successMessage]);
                         
             } else {
-                $errorMessage = "Une erreur est survenue lors de la suppression de la catégorie. Avez-vous vérifié que la catégorie 
-                                ne possédait pas d'annonces avant de la supprimer ?";
-                                
-                $this->displayTwig('admin/adminCategories', [
-                        'message' => $errorMessage]);
+                header('location: ./index.php?url=admin/categories&code=400&customCode=adminCategoryDelete');
+                exit();
             }
             
         } else {
-            $this->displayTwig('home');
+            header('location: ./index.php?url=home');
+            exit();
         }        
     }
     

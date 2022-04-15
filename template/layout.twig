@@ -13,7 +13,7 @@
         {% block stylesheets %}
         <link href="public/css/bootstrap.min.css" rel="stylesheet">
         <link href="public/css/style.css" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"/>
         {% endblock %}
         
     </head>
@@ -23,14 +23,14 @@
             <nav id="menu">
                 <div class="nav-menu">
                     <div class="logo">
-                        <a href="index.php?url=home"><img src="./public/img/logoff.png" alt="logo"></a>
-                        <a href="index.php?url=home"><h1>Le bon FF</h1></a>
+                        <a href="index.php?url=home" title="Page d'accueil"><img src="./public/img/logoff.png" alt="logo"></a>
+                        <a href="index.php?url=home" title="Page d'accueil"><h1>Le bon FF</h1></a>
                     </div>
                     
                     <ul class="items">
-                        <li><a href="index.php?url=home">Accueil</a></li>
-                        <li><a href="index.php?url=products/new&paramName=Nouveautés">Nouveautés</a></li>
-                        <li><a href="index.php?url=categories">Catégories</a></li>
+                        <li><a href="index.php?url=home" title="Page d'accueil">Accueil</a></li>
+                        <li><a href="index.php?url=products/new&paramName=Nouveautés" title="Page des nouveautés">Nouveautés</a></li>
+                        <li><a href="index.php?url=categories" title="Page liste des catégories">Catégories</a></li>
                     </ul>
                 </div>
                 
@@ -44,8 +44,12 @@
                     </div>
                     
                     <div class="profile">
-                        <a href={{session.id != '' ? 'index.php?url=account' : 'index.php?url=login'}}>{{session.id != '' ? 'Mon compte' : 'Se connecter'}}</a>
-                        <a href="index.php?url=account" style="visibility:{{ session.id != '' ? 'visible' : 'hidden' }}"><img src="./public/img/user2.png" alt="image de profil"></a>
+                        <a title={{session.id != '' ? 'Page de mon compte' : 'Page se connecter'}} href={{session.id != '' ? 'index.php?url=account' : 'index.php?url=login'}}>
+                            {{session.id != '' ? 'Mon compte' : 'Se connecter'}}
+                        </a>
+                        <a href="index.php?url=account" style="visibility:{{ session.id != '' ? 'visible' : 'hidden' }}">
+                            <img src="./public/img/user2.png" alt="image de profil">
+                        </a>
                     </div>
                 </div>
                 
@@ -54,7 +58,7 @@
             <div id="nav-cat">
                 <ul class="items-cat">
                     {% for category in categories %}
-                        <li><a href="index.php?url=products&id={{category.id}}&paramName={{category.name}}">{{category.name}}</a></li>
+                        <li><a href="index.php?url=products&id={{category.id}}&paramName={{category.name}}" title="Page de la catégorie {{category.name}}">{{category.name}}</a></li>
                     {% endfor %}
                 </ul>
             </div>
@@ -65,31 +69,31 @@
         <footer id="footer">
             <div class="block">
                 <div class="site">
-                    <h2>Site</h2>
+                    <h3>Site</h3>
                     <ul class="block-items">
-                        <li><a href="index.php?url=home">Page d'accueil</a></li>
-                        <li><a href="index.php?url=products/new&paramName=Nouveautés">Page des nouveautés</a></li>
-                        <li><a href="index.php?url=categories">Page des catégories</a></li>
-                        <li><a href="index.php?url=home">Mentions légales</a></li>
+                        <li><a href="index.php?url=home" title="Page d'accueil">Page d'accueil</a></li>
+                        <li><a href="index.php?url=products/new&paramName=Nouveautés" title="Page des nouveautés">Page des nouveautés</a></li>
+                        <li><a href="index.php?url=categories" title="Page liste des catégories">Page des catégories</a></li>
+                        <li><a href="index.php?url=home" title="Page mentions légales">Mentions légales</a></li>
                     </ul>
                 </div>
             </div>
             
             <div class="block">
                 <div class="final-fantasy">
-                    <h2>Jeux Final Fantasy</h2>
+                    <h3>Jeux Final Fantasy</h3>
                     <ul class="block-items">
-                        <li><a href="https://www.jeuxvideo.com/jeux/jeu-55425/">Final Fantasy VII</a></li>
-                        <li><a href="https://www.jeuxvideo.com/jeux/jeu-56135/">Final Fantasy VIII</a></li>
-                        <li><a href="https://www.jeuxvideo.com/jeux/jeu-57336/">Final Fantasy IX</a></li>
-                        <li><a href="https://www.jeuxvideo.com/jeux/playstation-2-ps2/00003612-final-fantasy-x.htm">Final Fantasy X</a></li>
+                        <li><a href="https://www.jeuxvideo.com/jeux/jeu-55425/" title="Lien présentation Final Fantasy VII">Final Fantasy VII</a></li>
+                        <li><a href="https://www.jeuxvideo.com/jeux/jeu-56135/" title="Lien présentation Final Fantasy VIII">Final Fantasy VIII</a></li>
+                        <li><a href="https://www.jeuxvideo.com/jeux/jeu-57336/" title="Lien présentation Final Fantasy IX">Final Fantasy IX</a></li>
+                        <li><a href="https://www.jeuxvideo.com/jeux/playstation-2-ps2/00003612-final-fantasy-x.htm" title="Lien présentation Final Fantasy X">Final Fantasy X</a></li>
                     </ul>
                 </div>
             </div>
             
             <div class="collab">
                 <div class="block">
-                    <a href="https://www.linkedin.com/in/pierre-waflart/"><img src="./public/img/merci.png" alt="Formateur lambda"></a>
+                    <a href="https://www.linkedin.com/in/pierre-waflart/"><img src="./public/img/merci.png" alt="Pierre W"></a>
                 </div>
                 
                 <div class="block">
@@ -97,11 +101,11 @@
                 </div>
                 
                 <div class="block">
-                    <a href="https://www.linkedin.com/in/jessica-loreau-6b6561192/"><img src="./public/img/merci2.png" alt="Collègue lambda"></a>
+                    <a href="https://www.linkedin.com/in/jessica-loreau-6b6561192/"><img src="./public/img/merci2.png" alt="Jessica L"></a>
                 </div>
             </div>
         </footer>
         
-        <script type="text/javascript" src="./public/js/ajax.js"></script>
+        <script src="./public/js/ajax.js"></script>
     </body>
 </html>

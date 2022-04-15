@@ -28,7 +28,7 @@ class UserController extends AbstractController
             $this->displayTwig('account', [
                 'products' => $products]);
         } else {
-            header('location: ./index.php?url=login');
+            header('location: ./index.php?url=login&code=401');
             exit();
         }
     }
@@ -109,10 +109,12 @@ class UserController extends AbstractController
                 
                 header('location: ./index.php?url=account');
                 exit();
+                
             } else {
                 header('location: ./index.php?url=account/update');
                 exit();
             }
+            
         } else {
             header('location: ./index.php?url=error404');
             exit();
@@ -150,8 +152,7 @@ class UserController extends AbstractController
                 'message' => $successMessage]);
 
         } else {
-            $errorMessage = "une erreur est survenue lors de la suppression du compte.";
-            header('location: ./index.php?url=account');
+            header('location: ./index.php?url=account&code=deleteAccountError');
             exit();
         }
     }

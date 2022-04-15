@@ -48,7 +48,12 @@ class HomeController extends AbstractController {
         
         $productRepository = new ProductRepository();
         $datas = $productRepository->fetchQuery($query);
+        
+        //$userRepository = new UserRepository();
+        //$users = $userRepository->fetchQuery($query);
+        
         echo json_encode($datas);
+        //echo json_encode($users);
     }
     
 }

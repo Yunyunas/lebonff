@@ -38,8 +38,8 @@ class ProductController extends AbstractController
         
         
         $this->displayTwig('products', [
-                'products' => $products,
-                'paramName' => $_GET['paramName']]);
+            'products' => $products,
+            'paramName' => $_GET['paramName']]);
     }
     
     
@@ -159,15 +159,15 @@ class ProductController extends AbstractController
                                 
                 header('location: ./index.php?url=account');
                 exit();
+                
             } else {
-                $errorMessage = "La taille de l'image est trop grande ou son extension n'est pas valide.";
-                $this->displayTwig('addProductForm', [
-                    'message' => $errorMessage,
-                    'csrf' => $_SESSION['csrf']]);
+                header('location: ./index.php?url=product/create&code=400&customCode=pictureError');
+                exit();
             }
+            
         } else {
-            $errorMessage = "Image invalide";
-            echo $errorMessage;
+            header('location: ./index.php?url=product/create&code=400&customCode=formRequiredError');
+            exit();
         }
     }
     
@@ -216,14 +216,10 @@ class ProductController extends AbstractController
                 if ($data) {
                     $this->picture->deletePicture($img, self::FOLDER);
                 }
+                
             } else {
-                $errorMessage = "La taille de l'image est trop grande ou son extension n'est pas valide.";
-                $data = $this->repository->fetchProduct($product);
-               
-                $this->displayTwig('updateProductForm', [
-                    'product' => $data,
-                    'message' => $errorMessage,
-                    'csrf' => $_SESSION['csrf']]);
+                header('location: ./index.php?url=product/update&code=400&customCode=pictureError');
+                exit();
             } 
             
         } else {

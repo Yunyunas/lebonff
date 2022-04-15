@@ -18,6 +18,7 @@ input.addEventListener('keyup', (e) => {
     query(value)
     .then(data => data.json())
     .then(data => {
+        //console.log(data)
         if(value !== "") {
             for (let i = 0; i < data.length; i++) {
                 let li = document.createElement('li');

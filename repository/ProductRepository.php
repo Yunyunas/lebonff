@@ -215,7 +215,7 @@ class ProductRepository extends AbstractRepository {
             return $query->execute();
 
         } catch (Exception $e) {
-            $data = ['error' => $e->getMessage()];
+            return false;
         }
     }
     
@@ -238,7 +238,7 @@ class ProductRepository extends AbstractRepository {
             return $result;
             
         } catch (Exception $e) {
-            $data = ['error' => $e->getMessage()];
+            return false;
         }
     }
     
@@ -254,12 +254,12 @@ class ProductRepository extends AbstractRepository {
             return $result;
             
         } catch (Exception $e) {
-            $data = ['error' => $e->getMessage()];
+            return false;
         }
     }
     
     
-    public function fetchQuery($data) 
+    public function fetchQuery($data): array
     {
         $name = '%'.$data.'%';
         try {

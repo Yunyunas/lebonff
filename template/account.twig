@@ -11,7 +11,7 @@
 			<h1 class="my-4 col-md-8">Bienvenue {{session.firstName}} !</h1>
 		</div>
 		<div class="col-md-4">
-			<a class="my-5 px-5 btn btn-success" id="btn-ajouter-annonce" href="index.php?url=product/create">Ajouter une annonce</a>
+			<a class="my-5 px-5 btn btn-success" id="btn-ajouter-annonce" href="index.php?url=product/create" title="Ajouter une annonce">Ajouter une annonce</a>
 		</div>
 	</div>
 
@@ -24,12 +24,12 @@
                     <p class="list-group-item"><b>Prénom : </b>  {{session.firstName}} </p>
                     <p class="list-group-item"><b>Téléphone : </b>  {{session.phone}} </p>
                     <p class="list-group-item"><b>Email : </b>  {{session.email}} </p>
-    		        <a class="btn btn-success" id="favourites" href="index.php?url=favourites"><i class="fa-regular fa-heart"></i> Accèder à mes favoris</a>
+    		        <a class="btn btn-success" id="favourites" href="index.php?url=favourites" title="Page des favoris"><i class="fa-regular fa-heart"></i> Accèder à mes favoris</a>
     		        <hr>
-    		        <a class="btn btn-danger" id="logout" href="index.php?url=logout">Déconnexion</a>
+    		        <a class="btn btn-danger" id="logout" href="index.php?url=logout" title="Se déconnecter">Déconnexion</a>
     		        <hr>
-                    <a class="btn btn-primary" id="updateAccount" href="index.php?url=account/update">Modifier mes informations personnelles</a>
-    		        <a class="btn btn-danger" id="updateAccount" href="index.php?url=account/delete"><i class="fa-solid fa-trash"></i> Supprimer mon compte</a>
+                    <a class="btn btn-primary" id="updateAccount" href="index.php?url=account/update" title="Modifier mes informations personnelles">Modifier mes informations personnelles</a>
+    		        <a class="btn btn-danger" id="updateAccount" href="index.php?url=account/delete" ><i class="fa-solid fa-trash"></i> Supprimer mon compte</a>
     		        <hr>
     		        <a class="btn btn-warning" id="panel-admin" href="index.php?url=admin/users" style="visibility:{{ session.role != 'admin' ? 'hidden' : 'visible' }}">
     		            <i class="fa-solid fa-lock"></i> Panel admin</a>
@@ -47,7 +47,7 @@
                                 </a>
                                 <div class="card-body">
                                     <h4 class="card-title">
-                                        <a href="index.php?url=product&id={{product.id}}">{{product.name}}</a>
+                                        <a href="index.php?url=product&id={{product.id}}" title="Page de {{product.name}}">{{product.name}}</a>
                                     </h4>
                                     <h5> Prix: {{product.price}} euros</h5>
                                     <p class="card-text">{{product.description}}</p>

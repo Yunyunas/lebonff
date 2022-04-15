@@ -48,7 +48,7 @@ class CategoryRepository extends AbstractRepository {
     }
     
     
-    public function  update(Category $category): bool
+    public function update(Category $category): bool
     {
         try {
             $query = $this->connexion->prepare("UPDATE category SET name = :name, 
@@ -64,7 +64,7 @@ class CategoryRepository extends AbstractRepository {
             return $result;
             
         } catch (Exception $e) {
-            $data = ['error' => $e->getMessage()];
+            return false;
         }
     }
     
@@ -81,7 +81,7 @@ class CategoryRepository extends AbstractRepository {
             return $result;
             
         } catch (Exception $e) {
-            $data = ['error' => $e->getMessage()];
+            return false;
         }
     }
     

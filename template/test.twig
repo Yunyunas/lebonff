@@ -3,55 +3,53 @@
 {% block title %} <title> Annonce {{product.name}} </title> {% endblock %}
 {% block content %}
 
-<body>
-    <div class="container">
-        <h1 class="cat-title">Catégories</h1>
+<div class="container">
+    <h1 class="cat-title">Catégories</h1>
+    
+    <div class="block-position">
+        <div class="block-left">
+            <div class="block-left-cat">
+                <a href="index.php?url=newProducts&paramName=Nouveautés" class=" {{paramName != 'Nouveautés' ? '' : 'active'}}">Nouveautés</a>
+                {% for category in categories %}
+                <a href="index.php?url=products&id={{category.id}}&paramName={{category.name}}" 
+                class="{{paramName != category.name ? '' : 'active'}}">{{category.name}}</a>
+                {% endfor %}
+            </div>
+            
+            <div class="block-left-user">
+                <div class="user-infos">
+                    <a href="#"><img src="./public/img/user2.png" alt="profile"></a>
+                    <a href="#">{{user.firstName}} {{user.lastName}}</a>
+                </div>
+                <p><i class="fa-solid fa-phone"></i> {{user.phone}}</p>
+                <p><i class="fa-regular fa-envelope"></i> {{user.email}}</p>
+            </div>
+        </div>
         
-        <div class="block-position">
-            <div class="block-left">
-                <div class="block-left-cat">
-                    <a href="index.php?url=newProducts&paramName=Nouveautés" class=" {{paramName != 'Nouveautés' ? '' : 'active'}}">Nouveautés</a>
-                    {% for category in categories %}
-                    <a href="index.php?url=products&id={{category.id}}&paramName={{category.name}}" 
-                    class="{{paramName != category.name ? '' : 'active'}}">{{category.name}}</a>
-                    {% endfor %}
+        <div class="detail-block">
+            <div class="detail-product">
+                <div class="detail-img">
+                    <img class="" src="./public/img/products/{{product.urlPicture}}" alt="Image de {{product.name}}">
                 </div>
                 
-                <div class="block-left-user">
-                    <div class="user-infos">
-                        <a href="#"><img src="./public/img/user2.png" alt="profile"></a>
-                        <a href="#">{{user.firstName}} {{user.lastName}}</a>
+                <div class="detail-product-infos">
+                    <div class="product-presentation">
+                        <p>Détail de l'annonce</p>
                     </div>
-                    <p><i class="fa-solid fa-phone"></i> {{user.phone}}</p>
-                    <p><i class="fa-regular fa-envelope"></i> {{user.email}}</p>
+                    <div class="product-infos">
+                        <h3 class="">{{product.name}}</h3>
+                        <h4>Prix : {{product.price}} euros</h4>
+                        <p class="text-description">{{product.description}}</p>
+                    </div>
                 </div>
             </div>
             
-            <div class="detail-block">
-                <div class="detail-product">
-                    <div class="detail-img">
-                        <img class="" src="./public/img/products/{{product.urlPicture}}" alt="Image de {{product.name}}">
-                    </div>
-                    
-                    <div class="detail-product-infos">
-                        <div class="product-presentation">
-                            <p>Détail de l'annonce</p>
-                        </div>
-                        <div class="product-infos">
-                            <h3 class="">{{product.name}}</h3>
-                            <h4>Prix : {{product.price}} euros</h4>
-                            <p class="text-description">{{product.description}}</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="detail-created">
-                    <p>Annonce créée le {{product.createdAt}}</p>
-                </div>
+            <div class="detail-created">
+                <p>Annonce créée le {{product.createdAt}}</p>
             </div>
         </div>
     </div>
-</body>
+</div>
 
 
 {% endblock %}

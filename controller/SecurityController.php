@@ -127,7 +127,9 @@ class SecurityController extends AbstractController {
      */
     public function securityLogin(): void
     {
-        if(!isset($_POST['email'], $_POST['password'])){
+        $email = $_POST['email'];
+        
+        if(!isset($email, $_POST['password'])){
             header('location: ./index.php?url=login');
             exit();
         }
@@ -160,12 +162,12 @@ class SecurityController extends AbstractController {
             exit();
             
             } else {
-                $this->displayTwig('login', [
-                    'message' => 'Adresse mail ou mot de passe incorrect']);
+                header('location: ./index.php?url=product/update&code=400&customCode=loginError');
+                exit();
             }
         } else {
-            $this->displayTwig('login', [
-                'message' => 'Adresse mail ou mot de passe incorrect']);
+            header('location: ./index.php?url=product/update&code=400&customCode=loginError');
+            exit();
         }
     }
     
