@@ -65,6 +65,11 @@ class CustomErrors {
                 $message = "Adresse email ou mot de passe incorrect.";
                 break;
             
+                            
+            case "passwordError":
+                $message = "Le mot de passe doit comporter 6 caractères minimum.";
+                break;
+            
             case "deleteAccountError":
                 $message = "Une erreur est survenue lors de la suppression du compte.";
                 break;
@@ -98,7 +103,7 @@ class CustomErrors {
                 break;
             
             case "401":
-                $message = "Une authentification est nécessaire pour accéder à cette ressource.";
+                $message = "Veuillez vous connecter pour accéder à votre compte.";
                 break;
             
             case "403":

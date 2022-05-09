@@ -11,7 +11,7 @@ class UserRepository extends AbstractRepository {
     }
     
     
-    public function fetchLogin($email)
+    public function fetchLogin($email): array
     {
         $data = null;
 
@@ -41,7 +41,7 @@ class UserRepository extends AbstractRepository {
         }
     }
     
-    public function fetchById($id)
+    public function fetchById($id): array
     {
         $data = null;
 
@@ -72,7 +72,7 @@ class UserRepository extends AbstractRepository {
     }
     
     
-    public function  insert(User $user)
+    public function  insert(User $user): bool
     {
         try {
             $query = $this->connexion->prepare("INSERT INTO user(last_name, first_name, phone, email, password, role) 
@@ -87,7 +87,7 @@ class UserRepository extends AbstractRepository {
             return $query->execute();
             
         } catch (Exception $e) {
-            $data = ['error' => $e->getMessage()];
+            return false;
         }
     }
     
@@ -107,7 +107,7 @@ class UserRepository extends AbstractRepository {
             return $query->execute();
             
         } catch (Exception $e) {
-            $data = ['error' => $e->getMessage()];
+            return false;
         }
     }
     
@@ -123,7 +123,7 @@ class UserRepository extends AbstractRepository {
             return $query->execute();
 
         } catch (Exception $e) {
-            $data = ['error' => $e->getMessage()];
+            return false;
         }
     }
     
@@ -138,11 +138,11 @@ class UserRepository extends AbstractRepository {
             return $query->execute();
             
         } catch (Exception $e) {
-            $data = ['error' => $e->getMessage()];
+            return false;
         }
     }
     
-    public function fetchQuery($data) 
+    public function fetchQuery($data): array 
     {
         $name = '%'.$data.'%';
         try {

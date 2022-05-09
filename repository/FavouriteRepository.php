@@ -10,7 +10,8 @@ class FavouriteRepository extends AbstractRepository {
         parent::__construct(self::TABLE);
     }
     
-    public function fetchOne(Favourite $favourite) {
+    public function fetchOne(Favourite $favourite): array 
+    {
         $query = $this->connexion->prepare("SELECT id FROM favourite WHERE user_id = :user_id AND product_id = :product_id");
         $data = null;
         $userId = $favourite->getUser()->getId();
@@ -73,8 +74,6 @@ class FavouriteRepository extends AbstractRepository {
                     $favourite->setUser($user);
                     $favourite->setProduct($product);
             }
-            
-            //var_dump($favourites); die();
             
             return $favourites;
             

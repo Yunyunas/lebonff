@@ -2,12 +2,8 @@
 
 class Validator {
     
-    
-    public function __construct(){
-        // Pour l'instant R 
-    }
-    
-    public function validateEmail($data)
+
+    public function validateEmail($data): bool
     {
         $filter = filter_var(htmlspecialchars($data), FILTER_VALIDATE_EMAIL);
         if(!$filter)
@@ -25,4 +21,7 @@ class Validator {
         return $filter;
     }
     
+    
+    // Modifier la class Validator voir la supprimer ? En parler comme idée mais ne pas l'utiliser (?)
+    // Sinon faire comme pour la class picture, à ma manière
 }

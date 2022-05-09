@@ -38,8 +38,8 @@ abstract class AbstractRepository
         return $data;
     }
     
-    private function constructConnexion(){
-        
+    private function constructConnexion()
+    {
         try {
             $this->connexion = new PDO("mysql:host=" . self::SERVER . ";dbname=" . self::BASE, self::USER, self::PASSWORD);
             $this->connexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

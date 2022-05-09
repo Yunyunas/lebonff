@@ -7,9 +7,10 @@ class HomeController extends AbstractController {
 
 
     /** 
-     * @Route ("index.php?url=home")
+     * Route ("index.php?url=home")
+     * Afficher la page "home"
      */
-    public function displayHome()
+    public function displayHome(): void
     {
         $productRepository = new ProductRepository();
         $products = $productRepository->fetchNewProducts();
@@ -19,28 +20,29 @@ class HomeController extends AbstractController {
     }
     
     /** 
-     * @Route ("index.php?url=test")
+     * Route ("index.php?url=error404")
+     * Afficher la page "error404"
      */
-    public function test()
+    public function displayError404(): void
     {
+        $message = "La page que vous avez demandé est introuvable";
 
-        $productRepository = new ProductRepository();
-        $query = "sh";
-        $datas = $productRepository->fetchQuery($query);
-        var_dump($datas); die();
+        $this->displayTwig('error', [
+                'message' => $message]);
     }
     
     /** 
-     * @Route ("index.php?url=error404")
-     * @Route par défault
+     * Route ("index.php?url=error")
+     * Afficher la page error avec un message personnalisé
      */
-    public function displayError404()
+    public function displayError(): void
     {
-        $this->displayTwig('error404');
+        $this->displayTwig('error');
     }
     
     /** 
-     * @Route ("index.php?url=search")
+     * Route ("index.php?url=search")
+     * Barre de recherche
      */
     public function search()
     {

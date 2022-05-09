@@ -24,18 +24,20 @@ class CategoryController extends AbstractController
     
     
     /** 
-     * @Route ("index.php?url=categories")
+     * Route ("index.php?url=categories")
+     * Afficher la page "categories"
      */
-    public function displayCategories()
+    public function displayCategories(): void
     {
         $this->displayTwig('categories');
     }
     
     
     /** 
-     * @Route ("index.php?url=admin/category/create")
+     * Route ("index.php?url=admin/category/create")
+     * Afficher la page "addCategoryForm"
      */
-    public function displayAddCategoryForm()
+    public function displayAddCategoryForm(): void
     {
        
         if ($this->role->isAdmin()) {
@@ -45,16 +47,17 @@ class CategoryController extends AbstractController
                 'csrf' => $_SESSION['csrf']]);
 
         } else {
-            header('location: ./index.php?url=home');
+            header('location: ./index.php?url=error&code=403');
             exit();
         }        
     }
     
     
     /** 
-     * @Route ("index.php?url=admin/category/update")
+     * Route ("index.php?url=admin/category/update")
+     * Afficher la page "updateCategoryForm"
      */
-    public function displayUpdateCategoryForm()
+    public function displayUpdateCategoryForm(): void
     {
         if ($this->role->isAdmin()) {
             $_SESSION['csrf'] = bin2hex(random_bytes(32));
@@ -72,9 +75,10 @@ class CategoryController extends AbstractController
     
     
     /** 
-     * @Route ("index.php?url=insertCategory")
+     * Route ("index.php?url=insertCategory")
+     * Ajouter une catégorie par l'admin
      */
-    public function insertCategory() 
+    public function insertCategory(): void 
     {
         if ($this->role->isAdmin()) {
             if(!$_SESSION['csrf'] || $_SESSION['csrf'] !== $_POST['csrf_token']){
@@ -114,9 +118,10 @@ class CategoryController extends AbstractController
     
     
     /** 
-     * @Route ("index.php?url=updateCategory")
+     * Route ("index.php?url=updateCategory")
+     * Modifier une catégorie par l'admin
      */
-    public function updateCategory()
+    public function updateCategory(): void
     {
         $id = $_GET['id'];
         
@@ -162,6 +167,9 @@ class CategoryController extends AbstractController
                 $category->setUrlPicture($img);
                 
                 $data = $this->repository->update($category);
+                
+                header('location: ./index.php?url=admin/categories');
+                exit();
             } 
                 
         } else {
@@ -174,8 +182,9 @@ class CategoryController extends AbstractController
     
     /** 
      * Route ("index.php?url=admin/category/delete")
+     * Supprimer une catégorie par l'admin
      */
-    public function deleteCategory()
+    public function deleteCategory(): void
     {
         if ($this->role->isAdmin()) {
             $category = new Category();

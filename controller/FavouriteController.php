@@ -18,21 +18,26 @@ class FavouriteController extends AbstractController
     
     
     /** 
-     * @Route ("index.php?url=favourites")
+     * Route ("index.php?url=favourites")
+     * Afficher la page "favourites"
      */
-    public function displayFavourites() 
+    public function displayFavourites(): void 
     {
         if ($_SESSION['user']) {
             $productRepository = new ProductRepository();
             $user = unserialize($_SESSION['user']);
             $datas = $this->repository->fetchByUser($user);
             
-            for ($i = 0; $i < count($datas); $i ++) {
+            if ($datas) {
+                for ($i = 0; $i < count($datas); $i ++) {
                 $favourites[] = $datas[$i];
+                }
+                
+                $this->displayTwig('favourites', [
+                    'favourites' => $favourites]);
+            } else {
+                $this->displayTwig('favourites');
             }
-            
-            $this->displayTwig('favourites', [
-                'favourites' => $favourites]);
                 
         } else {
             header('location: ./index.php?url=login');
@@ -41,34 +46,42 @@ class FavouriteController extends AbstractController
     }
     
     /** 
-     * @Route ("index.php?url=addFavourite")
+     * Route ("index.php?url=addFavourite")
+     * Ajouter un favoris
      */
-    public function addFavourite() 
+    public function addFavourite(): void 
     {
-        $user = unserialize($_SESSION['user']);
-        $product = new Product();
-        $product->setId($_GET['id']);
-        
-        $favourite = new Favourite();
-        $favourite->setUser($user);
-        $favourite->setProduct($product);
-        
-        $data = $this->repository->fetchOne($favourite);
-        
-
-        // A MODIFIER ET A RENDRE + DYNAMIQUE
-        if ($data) {
-            echo ("Ce produit est déjà dans vos coups de coeur.");
+        if (!empty($_SESSION['user'])) {
+            $user = unserialize($_SESSION['user']);
+            $product = new Product();
+            $product->setId($_GET['id']);
+            
+            $favourite = new Favourite();
+            $favourite->setUser($user);
+            $favourite->setProduct($product);
+            
+            $data = $this->repository->fetchOne($favourite);
+            
+    
+            // A MODIFIER ET A RENDRE + DYNAMIQUE
+            if ($data) {
+                echo ("Ce produit est déjà dans vos coups de coeur.");
+            } else {
+                $this->repository->insert($favourite);
+                echo ("Ce produit a bien été ajouté à vos coups de coeur.");
+            }
         } else {
-            $this->repository->insert($favourite);
-            echo ("Ce produit a bien été ajouté à vos coups de coeur.");
+            header('location: ./index.php?url=home');
+            exit();
         }
+        
     }
     
     /** 
-     * @Route ("index.php?url=deleteFavourite")
+     * Route ("index.php?url=deleteFavourite")
+     * Supprimer un favoris
      */
-    public function deleteFavourite() 
+    public function deleteFavourite(): void 
     {
         $favourite = new Favourite();
         $favourite->setId($_GET['id']);

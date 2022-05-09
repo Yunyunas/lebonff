@@ -19,8 +19,9 @@ class SecurityController extends AbstractController {
     
     /** 
      * Route ("index.php?url=register")
+     * Afficher la page "register"
      */
-    public function displayRegister() 
+    public function displayRegister(): void 
     {
         $_SESSION['csrf'] = bin2hex(random_bytes(32));
         
@@ -37,8 +38,9 @@ class SecurityController extends AbstractController {
     
     /** 
      * Route ("index.php?url=login")
+     * Afficher la page "login"
      */
-    public function displayLogin() 
+    public function displayLogin(): void 
     {
         
         $_SESSION['csrf'] = bin2hex(random_bytes(32));
@@ -59,19 +61,17 @@ class SecurityController extends AbstractController {
      */
     public function securityRegister(): void
     {
-        /*
+        
         if(strlen($_POST['password']) < 6){
-            header('location: ./index.php?url=register');
+            header('location: ./index.php?url=register&code=400&customCode=passwordError');
             exit();
-        } else {
-        */
+        } 
+        
         
         if(!$_SESSION['csrf'] || $_SESSION['csrf'] !== $_POST['csrf_token']){
             header('location: ./index.php?url=register');
             exit();
         }
-        
-        //$validator = new Validator();
         
         $passwordObscure = password_hash(htmlspecialchars($_POST['password']), PASSWORD_DEFAULT);
         
@@ -84,20 +84,11 @@ class SecurityController extends AbstractController {
         $user->setPassword(htmlspecialchars($passwordObscure));
         $user->setRole('user');
         
-        // Retourne la data ou retourne false si le filtre échoue (gérer l'erreur si false => class Validator)
-        
-        /*$test = $validator->validateEmail($_POST['email']);
-        var_dump($test); die();*/
-        
         $data = $this->repository->insert($user);
         
         if($data) {
             $currentData = $this->repository->fetchLogin($user->getEmail());
-            
-            // Je fais ça juste pour éviter que le password soit dans la session !
-            // SELECT SCOPE_IDENTITY() en SQL possible suite au INSERT mais peut potentiellement
-            // causer des pb si plusieurs user s'inscrivent en même temps
-            // ou ajouter une requête SQL au insert (même SELECT que pour fetch LOGIN)
+
             if ($currentData) {
                 $currentUser = new User();
                 $currentUser->setId($currentData->getId());
@@ -162,11 +153,11 @@ class SecurityController extends AbstractController {
             exit();
             
             } else {
-                header('location: ./index.php?url=product/update&code=400&customCode=loginError');
+                header('location: ./index.php?url=login&code=400&customCode=loginError');
                 exit();
             }
         } else {
-            header('location: ./index.php?url=product/update&code=400&customCode=loginError');
+            header('location: ./index.php?url=login&code=400&customCode=loginError');
             exit();
         }
     }
@@ -182,23 +173,4 @@ class SecurityController extends AbstractController {
         exit();
     }
     
-    
-    public function debug() {
-        echo ("Infos de la session : ");
-        var_dump ($_SESSION);
-        
-        echo("Infos Session[user]");
-        var_dump ($_SESSION['user']);
-
-        // Fonctionnerait écrit comme ça : var_dump(unserialize($_SESSION['user']);
-        echo("Infos Session[user] unserialize");
-        unserialize($_SESSION['user']);
-        var_dump ($_SESSION['user']);
-
-        echo("Infos user après unserialize");
-        $currentUser = unserialize($_SESSION['user']);
-        var_dump($currentUser);
-        
-        var_dump($user->getId());
-    } 
 }

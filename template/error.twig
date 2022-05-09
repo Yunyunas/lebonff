@@ -9,8 +9,14 @@
         <div class="col-sm-9 col-md-9 col-lg-9 mx-auto">
             <div class="card card-signin flex-row my-5">
                 <div class="card-body">
-                    <h3 class="card-title text-center">La page que vous avez demandé est introuvable.</h3>
+                    <h3 class="card-title text-center">{{ message }}</h3>
                     <div class="text-center">
+                        <a class="btn btn-lg btn-primary btn-block text-center my-4"
+                           title={{session.id != '' ? 'Page de mon compte' : 'Page se connecter'}} 
+                           href={{session.id != '' ? 'index.php?url=account' : 'index.php?url=login'}}>
+                               {{session.id != '' ? 'Accéder à mon compte' : 'Se connecter'}}
+                        </a>
+                        <h3>ou</h3>
                         <a href="index.php?url=home" class="btn btn-lg btn-success btn-block text-center my-4">Retour vers l'accueil</a>
                     </div>
                 </div>

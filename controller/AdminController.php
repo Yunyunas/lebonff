@@ -19,9 +19,10 @@ class AdminController extends AbstractController
     
     
     /** 
-     * @Route ("index.php?url=admin/users")
+     * Route ("index.php?url=admin/users")
+     * Afficher la page "adminUsers"
      */
-    public function displayAdmin() 
+    public function displayAdmin(): void 
     {
         if ($this->role->isAdmin()) {
             $users = $this->repository->fetchAll();
@@ -30,45 +31,51 @@ class AdminController extends AbstractController
                 'session' => unserialize($_SESSION['user']),
                 'users' => $users]);
         } else {
-            $this->displayTwig('home');
+            header('location: ./index.php?url=error&code=403');
+            exit();
         }        
     }
     
     
     /** 
-     * @Route ("index.php?url=admin/categories")
+     * Route ("index.php?url=admin/categories")
      */
-    public function displayAdminCategories() 
+    public function displayAdminCategories(): void 
     {
         if ($this->role->isAdmin()) {
             $this->displayTwig('admin/adminCategories', [
                 'session' => unserialize($_SESSION['user'])]);
         } else {
-            $this->displayTwig('home');
+            header('location: ./index.php?url=error&code=403');
+            exit();
         }        
     }
     
     
     /** 
-     * @Route ("index.php?url=admin/products")
+     * Route ("index.php?url=admin/products")
+     * Afficher la page "adminProducts"
      */
-    public function displayAdminProducts() 
+    public function displayAdminProducts(): void 
     {
         if ($this->role->isAdmin()) {
             $productRepository = new ProductRepository();
             $products = $productRepository->fetchAll();
             
+            
             $this->displayTwig('admin/adminProducts', [
                 'session' => unserialize($_SESSION['user']),
                 'products' => $products]);
         } else {
-            $this->displayTwig('home');
+            header('location: ./index.php?url=error&code=403');
+            exit();
         }        
     }
     
     
     /** 
-     * @Route ("index.php?url=admin/user/update")
+     * Route ("index.php?url=admin/user/update")
+     * Afficher la page "updateAccountAdmin"
      */
     public function displayUpdateUser(): void
     {
@@ -80,15 +87,17 @@ class AdminController extends AbstractController
                 'user' => $user,
                 'csrf' => $_SESSION['csrf']]);
         } else {
-            $this->displayTwig('home');
+            header('location: ./index.php?url=error&code=403');
+            exit();
         }        
     }
     
     
     /** 
-     * @Route ("index.php?url=updateAccount")
+     * Route ("index.php?url=updateAccount")
+     * Modifier le compte d'un user par l'admin
      */
-    public function updateAccount()
+    public function updateAccount(): void
     {
         if ($this->role->isAdmin()) {
             if(!$_SESSION['csrf'] || $_SESSION['csrf'] !== $_POST['csrf_token']){
@@ -96,12 +105,13 @@ class AdminController extends AbstractController
             exit();
             }
             
-            if($_POST['firstName'] || $_POST['lastName'] || $_POST['email']) {
+            if($_POST['firstName'] || $_POST['lastName'] || $_POST['email'] || $_POST['phone']) {
                 
                 $user = new User();
                 $user->setId($_GET['id']);
                 $user->setLastName(htmlspecialchars($_POST['lastName']));
                 $user->setFirstName(htmlspecialchars($_POST['firstName']));
+                $user->setPhone(htmlspecialchars($_POST['phone']));
                 $user->setEmail(htmlspecialchars($_POST['email']));
                 
                 $this->repository->updateProfil($user);
@@ -111,15 +121,17 @@ class AdminController extends AbstractController
             } 
             
         } else {
-            $this->displayTwig('home');
+            header('location: ./index.php?url=error&code=403');
+            exit();
         }
     }
     
     
     /** 
-     * @Route ("index.php?url=admin/account/delete")
+     * Route ("index.php?url=admin/account/delete")
+     * Supprimer le compte d'un user par l'admin
      */
-    public function deleteAccount()
+    public function deleteAccount(): void
     { 
         if ($this->role->isAdmin()) {
             $user = new User();
@@ -131,7 +143,8 @@ class AdminController extends AbstractController
             exit();
             
         } else {
-            $this->displayTwig('home');
+            header('location: ./index.php?url=error&code=403');
+            exit();
         }        
     }
     

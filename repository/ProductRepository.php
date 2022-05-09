@@ -57,7 +57,7 @@ class ProductRepository extends AbstractRepository {
     }
     
     
-    public function fetchProduct(Product $product)
+    public function fetchProduct(Product $product): array
     {
         $data = null;
         try {

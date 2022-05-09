@@ -16,9 +16,9 @@ class UserController extends AbstractController
     
     
     /** 
-     * @Route ("index.php?url=account")
+     * Route ("index.php?url=account")
      */
-    public function displayAccount() 
+    public function displayAccount(): void 
     {
         if ($_SESSION['user']) {
             $productRepository = new ProductRepository();
@@ -28,14 +28,14 @@ class UserController extends AbstractController
             $this->displayTwig('account', [
                 'products' => $products]);
         } else {
-            header('location: ./index.php?url=login&code=401');
+            header('location: ./index.php?url=error&code=401');
             exit();
         }
     }
     
     
     /** 
-     * @Route ("index.php?url=account/update")
+     * Route ("index.php?url=account/update")
      */
     public function displayUpdateMyAccount(): void
     {
@@ -46,14 +46,14 @@ class UserController extends AbstractController
             'session' => unserialize($_SESSION['user']),
             'csrf' => $_SESSION['csrf']]);
         } else {
-                header('location: ./index.php?url=login');
-                exit();
+            header('location: ./index.php?url=error&code=401');
+            exit();
         }
     }
     
     
     /** 
-     * @Route ("index.php?url=updateProfil")
+     * Route ("index.php?url=updateProfil")
      */
     public function updateProfil(): void
     {
@@ -82,7 +82,7 @@ class UserController extends AbstractController
     
     
     /** 
-     * @Route ("index.php?url=updatePassword")
+     * Route ("index.php?url=updatePassword")
      */
     public function updatePassword(): void
     {
@@ -116,14 +116,14 @@ class UserController extends AbstractController
             }
             
         } else {
-            header('location: ./index.php?url=error404');
+            header('location: ./index.php?url=error&code=401');
             exit();
         }   
     }
     
     
     /** 
-     * @Route ("index.php?url=account/delete")
+     * Route ("index.php?url=account/delete")
      */
     public function deleteMyAccount(): void 
     {

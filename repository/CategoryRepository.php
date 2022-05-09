@@ -10,7 +10,7 @@ class CategoryRepository extends AbstractRepository {
         parent::__construct(self::TABLE);
     }
 
-    public function fetchCategory($id) 
+    public function fetchCategory($id): array 
     {
         $data = null;
         try {

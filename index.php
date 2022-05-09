@@ -22,6 +22,11 @@ switch($url) {
         $homeController->displayHome();
         break;
     
+    case "error" :
+        $homeController = new HomeController();
+        $homeController->displayError();
+        break;
+    
     /** 
      * SECURITY
      */   
@@ -231,23 +236,13 @@ switch($url) {
         $adminController->deleteAccount();
         break;
         
-    // -------------------------- DEBUG / TEST ---------------------------------
-    
-    case "debug":
-        $securityController = new SecurityController();
-        $securityController->debug();
-        break;
-        
+    // -------------------------- SEARCH ---------------------------------------
+
     case "search":
         $homeController = new HomeController();
         $homeController->search();
         break;
-        
-    case "test":
-        $homeController = new HomeController();
-        $homeController->test();
-        break;
-    
+
     
     // ------------------------- PAGE ERROR 404 --------------------------------
     

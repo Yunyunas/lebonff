@@ -2,7 +2,7 @@
 
 class Admin {
     
-    public function isAdmin() 
+    public function isAdmin(): bool 
     {
         if (!empty($_SESSION['user'])) {
             $user = unserialize($_SESSION['user']);

@@ -27,9 +27,10 @@ class ProductController extends AbstractController
     
     
     /** 
-     * @Route ("index.php?url=products")
+     * Route ("index.php?url=products")
+     * Afficher la page "products"
      */
-    public function displayProducts()
+    public function displayProducts(): void
     {
         $category = new Category();
         $category->setId($_GET['id']);
@@ -44,9 +45,10 @@ class ProductController extends AbstractController
     
     
     /** 
-     * @Route ("index.php?url=products/new")
+     * Route ("index.php?url=products/new")
+     * Afficher la page "products" nouveautés
      */
-    public function displayNewProducts()
+    public function displayNewProducts(): void
     {
         $products = $this->repository->fetchNewProducts();
       
@@ -57,9 +59,10 @@ class ProductController extends AbstractController
     
     
     /** 
-     * @Route ("index.php?url=productDetail")
+     * Route ("index.php?url=productDetail")
+     * Afficher la page "productDetail"
      */
-    public function displayProductDetail()
+    public function displayProductDetail(): void
     {
         $product = new Product();
         $product->setId($_GET['id']);
@@ -75,9 +78,10 @@ class ProductController extends AbstractController
     }
 
     /** 
-     * @Route ("index.php?url=products/user")
+     * Route ("index.php?url=products/user")
+     * Afficher la page "productsByUser"
      */
-    public function displayProductsByUser()
+    public function displayProductsByUser(): void
     {
         $user = new User();
         $user->setId($_GET['id']);
@@ -85,15 +89,17 @@ class ProductController extends AbstractController
         $products = $this->repository->fetchByUser($user);
         $user = $products[0]->getUser();
         
+        // protéger if products et else
         $this->displayTwig('productsByUser', [
                 'products' => $products,
                 'user' => $user]);
     }
     
     /** 
-     * @Route ("index.php?url=product/create")
+     * Route ("index.php?url=product/create")
+     * Afficher la page "addProductForm"
      */    
-    public function displayAddProductForm()
+    public function displayAddProductForm(): void
     {
         $_SESSION['csrf'] = bin2hex(random_bytes(32));
         
@@ -103,9 +109,10 @@ class ProductController extends AbstractController
     
     
     /** 
-     * @Route ("index.php?url=product/update")
+     * Route ("index.php?url=product/update")
+     * Afficher la page "updateProductForm"
      */
-    public function displayUpdateProductForm()
+    public function displayUpdateProductForm(): void
     {
         $_SESSION['csrf'] = bin2hex(random_bytes(32));
         
@@ -122,20 +129,17 @@ class ProductController extends AbstractController
     
     
     /** 
-     * @Route ("index.php?url=insertProduct")
+     * Route ("index.php?url=insertProduct")
+     * Ajouter une annonce
      */
-    public function insertProduct()
+    public function insertProduct(): void
     {
         if(!$_SESSION['csrf'] || $_SESSION['csrf'] !== $_POST['csrf_token']){
             header('location: ./index.php?url=product/create');
             exit();
         }
         
-        $_SESSION['csrf'] = bin2hex(random_bytes(32));
-        
-        $currentUser = unserialize($_SESSION['user']);
-        $user = new User();
-        $user->setId($currentUser->getId());
+        $user = unserialize($_SESSION['user']);
 
         $category = new Category();
         $category->setId($_POST['category']);
@@ -173,9 +177,10 @@ class ProductController extends AbstractController
     
     
     /** 
-     * @Route ("index.php?url=updateProduct")
+     * Route ("index.php?url=updateProduct")
+     * Modifier une annonce
      */
-    public function updateProduct()
+    public function updateProduct(): void
     {
         
         if(!$_SESSION['csrf'] || $_SESSION['csrf'] !== $_POST['csrf_token']){
@@ -234,9 +239,10 @@ class ProductController extends AbstractController
     
     
     /** 
-     * @Route ("index.php?url=deleteProduct")
+     * Route ("index.php?url=deleteProduct")
+     * Supprimer une annonce
      */
-    public function deleteProduct()
+    public function deleteProduct(): void
     {
         $product = new Product();
         $product->setId($_GET['id']);

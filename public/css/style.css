@@ -390,7 +390,9 @@ h1, h2 {
 }
 
 @media (max-width: 500px) {
-    /* Faire un menu complet pour mobile y compris pour la nav des catégories */
+    #menu .items {
+        display: none;
+    }
     
     #footer {
         flex-wrap: wrap;
