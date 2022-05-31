@@ -60,6 +60,10 @@ class CustomErrors {
             case "favouriteError":
                 $message = "Cette annonce est déjà dans vos coups de coeur.";
                 break;
+            
+            case "favouriteConnexion":
+                $message = "Veuillez vous connecter pour ajouter une annonce dans vos coups de coeur.";
+                break;
                 
             case "loginError":
                 $message = "Adresse email ou mot de passe incorrect.";

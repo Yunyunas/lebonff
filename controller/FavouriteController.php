@@ -63,14 +63,15 @@ class FavouriteController extends AbstractController
             $data = $this->repository->fetchOne($favourite);
             
             if ($data) {
-                echo ("Ce produit est déjà dans vos coups de coeur.");
+                header('location: ./index.php?url=error&code=400&customCode=favouriteError');
+                exit();
             } else {
                 $this->repository->insert($favourite);
                 header('location: ./index.php?url=favourites');
                 exit();
             }
         } else {
-            header('location: ./index.php?url=home');
+            header('location: ./index.php?url=error&code=400&customCode=favouriteConnexion');
             exit();
         }
         
