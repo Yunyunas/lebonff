@@ -1,7 +1,10 @@
 <?php 
 
-class Admin {
+class AdminAuthenticator {
     
+    /**
+     * @return bool
+     */
     public function isAdmin(): bool 
     {
         if (!empty($_SESSION['user'])) {

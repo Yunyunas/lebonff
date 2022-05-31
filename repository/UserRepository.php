@@ -11,7 +11,7 @@ class UserRepository extends AbstractRepository {
     }
     
     
-    public function fetchLogin($email): array
+    public function fetchLogin($email)
     {
         $data = null;
 
@@ -41,7 +41,7 @@ class UserRepository extends AbstractRepository {
         }
     }
     
-    public function fetchById($id): array
+    public function fetchById($id)
     {
         $data = null;
 

@@ -1,6 +1,9 @@
 {% extends "layout.twig" %}
 
+{% block description %} <meta name="description" content="site petites annonces sur l'univers de final fantasy, annonces de la catégorie {{paramName}}"> {% endblock %}
+{% block keywords %} <meta name="keywords" content="final fantasy materia arme tifa cloud chimeres ffx ffviii ffix ffvii annonces de la catégorie {{paramName}}"> {% endblock %}
 {% block title %} <title>Annonces dans la catégorie {{paramName}}</title> {% endblock %}
+
 {% block content %}
 
 <div class="container">

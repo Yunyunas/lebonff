@@ -3,8 +3,8 @@
 
     <head>
     	<meta charset="utf-8">
-    	<meta name="description" content="site petites annonces sur l'univers de final fantasy">
-    	<meta name="keywords" content="final fantasy materia arme tifa cloud">
+    	{% block description %}{% endblock %}
+    	{% block keywords %}{% endblock %}
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="icon" href="./public/img/fav.png">
@@ -38,7 +38,7 @@
                     <div class="block-search">
                         <div class="search">
                             <i class="fa-solid fa-magnifying-glass"></i>
-                            <input id="search" name="q-search" type="text" placeholder="Rechercher">
+                            <input id="search" name="q-search" type="text" placeholder="Rechercher une annonce">
                         </div>
                         <ul id="list-search"></ul>
                     </div>

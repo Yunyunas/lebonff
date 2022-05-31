@@ -3,7 +3,6 @@
 require_once './controller/AbstractController.php';
 require_once './repository/UserRepository.php';
 require_once './model/User.php';
-//require_once './service/Validator.php';
 
 
 class SecurityController extends AbstractController {

@@ -12,7 +12,8 @@ class ProductRepository extends AbstractRepository {
         
     public function fetchNewProducts(): array
     {
-        $query = $this->connexion->prepare("SELECT * from product INNER JOIN user 
+        $query = $this->connexion->prepare("SELECT * 
+                                            FROM product INNER JOIN user 
                                             ON user.id = product.user_id INNER JOIN category
                                             ON category.id = product.category_id ORDER BY created_at DESC LIMIT 9");
         $data = null;
@@ -57,7 +58,7 @@ class ProductRepository extends AbstractRepository {
     }
     
     
-    public function fetchProduct(Product $product): array
+    public function fetchProduct(Product $product)
     {
         $data = null;
         try {
@@ -97,6 +98,7 @@ class ProductRepository extends AbstractRepository {
                 return $product;
             }
         } catch (Exception $e) {
+            // return $e;
             $data = ['error' => $e->getMessage()];
         }
 
@@ -202,8 +204,10 @@ class ProductRepository extends AbstractRepository {
     public function insert(Product $product): bool 
     {
         try {
-            $query = $this->connexion->prepare("INSERT INTO product(user_id, category_id, name, description, url_picture, price, created_at)
-                                                VALUES (:user_id, :category_id, :name, :description, :url_picture, :price, NOW())");
+            $query = $this->connexion->prepare("INSERT INTO product(user_id, category_id, name, 
+                                                    description, url_picture, price, created_at)
+                                                VALUES (:user_id, :category_id, :name, :description,
+                                                        :url_picture, :price, NOW())");
 
             $query->bindValue(':user_id', $product->getUser()->getId());
             $query->bindValue(':category_id', $product->getCategory()->getId());

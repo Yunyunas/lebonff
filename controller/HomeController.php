@@ -19,6 +19,7 @@ class HomeController extends AbstractController {
                 'products' => $products]);
     }
     
+    
     /** 
      * Route ("index.php?url=error404")
      * Afficher la page "error404"
@@ -31,6 +32,7 @@ class HomeController extends AbstractController {
                 'message' => $message]);
     }
     
+    
     /** 
      * Route ("index.php?url=error")
      * Afficher la page error avec un message personnalisé
@@ -39,6 +41,7 @@ class HomeController extends AbstractController {
     {
         $this->displayTwig('error');
     }
+    
     
     /** 
      * Route ("index.php?url=search")
@@ -51,11 +54,8 @@ class HomeController extends AbstractController {
         $productRepository = new ProductRepository();
         $datas = $productRepository->fetchQuery($query);
         
-        //$userRepository = new UserRepository();
-        //$users = $userRepository->fetchQuery($query);
-        
         echo json_encode($datas);
-        //echo json_encode($users);
+
     }
     
 }

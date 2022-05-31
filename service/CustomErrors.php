@@ -91,6 +91,7 @@ class CustomErrors {
         switch($this->code) {
             
             case "200":
+                // $message = $this->customMessage();
                 $message = "Requête traitée avec succès. La réponse dépendra de la méthode de requête utilisée. ";
                 break;
             

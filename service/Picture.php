@@ -5,7 +5,11 @@ class Picture {
     const MAXSIZE = 4000000;
     
     const EXTENSIONS = ['jpg', 'png', 'jpeg'];
-
+    
+    
+    /**
+     * @return string
+     */
     public function addPicture($files, $folder): string 
     {
         $tabExtension = explode('.', $files['name']);
@@ -23,7 +27,9 @@ class Picture {
         return false;
     }
     
-    
+    /**
+     * @return bool
+     */
     public function deletePicture($currentPicture, $folder): bool 
     {
         if (file_exists('./public/img/'.$folder.'/'.$currentPicture)) {

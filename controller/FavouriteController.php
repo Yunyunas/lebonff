@@ -62,13 +62,12 @@ class FavouriteController extends AbstractController
             
             $data = $this->repository->fetchOne($favourite);
             
-    
-            // A MODIFIER ET A RENDRE + DYNAMIQUE
             if ($data) {
                 echo ("Ce produit est déjà dans vos coups de coeur.");
             } else {
                 $this->repository->insert($favourite);
-                echo ("Ce produit a bien été ajouté à vos coups de coeur.");
+                header('location: ./index.php?url=favourites');
+                exit();
             }
         } else {
             header('location: ./index.php?url=home');

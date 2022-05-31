@@ -36,7 +36,7 @@ class ProductController extends AbstractController
         $category->setId($_GET['id']);
         
         $products = $this->repository->fetchByCategory($category);
-        
+            
         
         $this->displayTwig('products', [
             'products' => $products,
@@ -87,12 +87,19 @@ class ProductController extends AbstractController
         $user->setId($_GET['id']);
         
         $products = $this->repository->fetchByUser($user);
-        $user = $products[0]->getUser();
         
-        // protéger if products et else
-        $this->displayTwig('productsByUser', [
+        if ($products) {
+            
+            $user = $products[0]->getUser();
+            
+            $this->displayTwig('productsByUser', [
                 'products' => $products,
                 'user' => $user]);
+        } else {
+            header('location: ./index.php?url=home');
+            exit();
+        }
+
     }
     
     /** 

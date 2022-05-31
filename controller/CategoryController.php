@@ -19,7 +19,7 @@ class CategoryController extends AbstractController
     {
         $this->repository = new CategoryRepository();
         $this->picture = new Picture();
-        $this->role = new Admin();
+        $this->role = new AdminAuthenticator();
     }
     
     

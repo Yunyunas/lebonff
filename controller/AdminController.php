@@ -14,7 +14,7 @@ class AdminController extends AbstractController
     public function __construct()
     {
         $this->repository = new UserRepository();
-        $this->role = new Admin();
+        $this->role = new AdminAuthenticator();
     }
     
     

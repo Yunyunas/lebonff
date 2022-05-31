@@ -10,7 +10,7 @@ class FavouriteRepository extends AbstractRepository {
         parent::__construct(self::TABLE);
     }
     
-    public function fetchOne(Favourite $favourite): array 
+    public function fetchOne(Favourite $favourite)
     {
         $query = $this->connexion->prepare("SELECT id FROM favourite WHERE user_id = :user_id AND product_id = :product_id");
         $data = null;
@@ -114,6 +114,8 @@ class FavouriteRepository extends AbstractRepository {
         }
     }
     
+    
+    // VERIFIER SI NECESSAIRE --------------------------------------------------
     // DANS LE CAS OU UN USER SUPPRIME SON COMPTE ALORS SUPPRIMER TOUS LES COUPS DE COEURS LIES A LUI
     public function deleteAllByUser(Favourite $favourite): bool
     {

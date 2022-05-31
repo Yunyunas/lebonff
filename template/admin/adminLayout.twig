@@ -3,8 +3,8 @@
 
     <head>
     	<meta charset="utf-8">
-    	<meta name="description" content="site petites annonces sur l'univers de final fantasy">
-    	<meta name="keywords" content="final fantasy materia arme tifa cloud">
+    	<meta name="description" content="Panel admin du site Le Bon Final Fantasy, site de petites annonces sur l'univers de final fantasy">
+    	<meta name="keywords" content="final fantasy materia arme tifa cloud admin">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="icon" href="./public/img/fav.png">
@@ -44,9 +44,9 @@
                     <div>
                         <i id="admin-menu-btn" class="fa-solid fa-bars"></i>
                     </div>
-                    <div class="admin-search">
+                    <div class="admin-search" style="visibility:hidden">
                         <i class="fa-solid fa-magnifying-glass"></i>
-                        <input type="text" placeholder="Rechercher">
+                        <input id="search" name="q-search" type="text" placeholder="Rechercher un produit">
                     </div>
                 </div>
                 
@@ -91,12 +91,6 @@
         
         {% block content %}{% endblock %}
         
-    <script type="text/javascript">
-        $('#admin-menu-btn').click(function() {
-            $('#admin-menu').toggleClass("admin-active");
-            $('#admin-interface').toggleClass("admin-active");
-        })
-    </script>
-    
+    <script src="./public/js/admin.js"></script>
     </body>
 </html>

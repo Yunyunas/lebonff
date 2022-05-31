@@ -17,6 +17,7 @@ class UserController extends AbstractController
     
     /** 
      * Route ("index.php?url=account")
+     * Afficher la page "account"
      */
     public function displayAccount(): void 
     {
@@ -36,15 +37,16 @@ class UserController extends AbstractController
     
     /** 
      * Route ("index.php?url=account/update")
+     * Afficher la page "updateAccountForm"
      */
     public function displayUpdateMyAccount(): void
     {
         $_SESSION['csrf'] = bin2hex(random_bytes(32));
         
         if ($_SESSION['user']) {
-        $this->displayTwig('updateAccountForm', [
-            'session' => unserialize($_SESSION['user']),
-            'csrf' => $_SESSION['csrf']]);
+            $this->displayTwig('updateAccountForm', [
+                'session' => unserialize($_SESSION['user']),
+                'csrf' => $_SESSION['csrf']]);
         } else {
             header('location: ./index.php?url=error&code=401');
             exit();
@@ -54,6 +56,7 @@ class UserController extends AbstractController
     
     /** 
      * Route ("index.php?url=updateProfil")
+     * Modifier les informations personnelles
      */
     public function updateProfil(): void
     {
@@ -83,6 +86,7 @@ class UserController extends AbstractController
     
     /** 
      * Route ("index.php?url=updatePassword")
+     * Modifier le mot de passe
      */
     public function updatePassword(): void
     {
@@ -124,6 +128,7 @@ class UserController extends AbstractController
     
     /** 
      * Route ("index.php?url=account/delete")
+     * Supprimer son compte
      */
     public function deleteMyAccount(): void 
     {
